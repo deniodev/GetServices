@@ -14,6 +14,7 @@ import {
   deleteUserFailure,
   deleteUserStart,
   deleteUserSuccess,
+  signOutUserStart,
 } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 export default function Profile() {
@@ -29,7 +30,7 @@ export default function Profile() {
   // firebase storage
   // allow read;
   // allow write: if
-  // request.resource.size < 4 * 1024 * 1024 &&
+  // request.resource.size < 2 * 1024 * 1024 &&
   // request.resource.contentType.matches('image/.*')
 
   useEffect(() => {
@@ -101,9 +102,25 @@ export default function Profile() {
         dispatch(deleteUserFailure(data.message));
         return;
       }
-        dispatch(deleteUserSuccess(data));
+      dispatch(deleteUserSuccess(data));
     } catch (error) {
-        dispatch(deleteUserFailure(error.message))
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
+
+  const handleSignOut = async () => {
+
+    try {
+      dispatch(signOutUserStart())
+      const res = await fetch('/api/auth/signout');
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(data.message));
     }
   }
   return (
@@ -126,7 +143,7 @@ export default function Profile() {
         <p className='text-sm self-center'>
           {fileUploadError ? (
             <span className='text-red-700'>
-              Error Image upload (image must be less than 4 mb)
+              Error Image upload (image must be less than 2 mb)
             </span>
           ) : filePerc > 0 && filePerc < 100 ? (
             <span className='text-slate-700'>{`Uploading ${filePerc}%`}</span>
@@ -167,8 +184,13 @@ export default function Profile() {
         </button>
       </form>
       <div className='flex justify-between mt-5'>
-        <span onClick={handleDeleteUser} className='text-red-700 cursor-pointer'>Delete account</span>
-        <span className='text-red-700 cursor-pointer'>Sign out</span>
+        <span
+          onClick={handleDeleteUser}
+          className='text-red-700 cursor-pointer'
+        >
+          Delete account
+        </span>
+        <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>Sign out</span>
       </div>
 
       <p className='text-red-700 mt-5'>{error ? error : ''}</p>
