@@ -1,6 +1,7 @@
 import bcryptjs from "bcryptjs";
 import User from "../models/user.model.js";
 import { errorHandler } from "../utils/error.js";
+import Service from "../models/service.model.js";
 
 export const test = (req, res) => {
   res.json({
@@ -39,12 +40,25 @@ export const updateUser = async (req, res, next) => {
 
 export const deleteUser = async (req, res, next) => {
   if (req.user.id !== req.params.id)
-    return next(errorHandler(401, 'You can only delete your own account!'));
+    return next(errorHandler(401, "You can only delete your own account!"));
   try {
     await User.findByIdAndDelete(req.params.id);
-    res.clearCookie('access_token');
-    res.status(200).json('User has been deleted!');
+    res.clearCookie("access_token");
+    res.status(200).json("User has been deleted!");
   } catch (error) {
     next(error);
+  }
+};
+
+export const getUserServices = async (req, res, next) => {
+  if (req.user.id === req.params.id) {
+    try {
+      const services = await Service.find({ userRef: req.params.id });
+      res.status(200).json(services);
+    } catch (error) {
+      next(error);
+    }
+  } else {
+    return next(errorHandler(401, "You can only iew your own services!"));
   }
 };
