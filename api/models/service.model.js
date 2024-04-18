@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const proSchema = new mongoose.Schema(
+const serviceSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -58,6 +58,6 @@ const proSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Pro = mongoose.model('Pro', proSchema);
+const Service = mongoose.model('Service', serviceSchema);
 
-export default Pro;
+export default Service;
