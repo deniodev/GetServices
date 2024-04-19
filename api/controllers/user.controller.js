@@ -59,6 +59,6 @@ export const getUserServices = async (req, res, next) => {
       next(error);
     }
   } else {
-    return next(errorHandler(401, "You can only iew your own services!"));
+    return next(errorHandler(401, "You can only view your own services!"));
   }
 };
