@@ -2,17 +2,18 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
+import {useSelector} from 'react-redux';
 import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
 import {
   FaBath,
   FaBed,
   FaChair,
-  FaMapMarkedAlt,
   FaMapMarkerAlt,
   FaParking,
   FaShare,
 } from "react-icons/fa";
+import Booking from "../components/Booking";
 
 // https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
 
@@ -22,7 +23,11 @@ export default function Service() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [booking, setBooking] = useState(false);
   const params = useParams();
+  const {currentUser} = useSelector((state) => state.user);
+
+
   useEffect(() => {
     const fetchservice = async () => {
       try {
@@ -131,6 +136,14 @@ export default function Service() {
                 {service.furnished ? "Furnished" : "Unfurnished"}
               </li>
             </ul>
+            {currentUser && service.userRef !== currentUser._id &&  !booking && (
+                  <button 
+                  onClick={()=>setBooking(true)}
+                  className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3">
+                      Book Appointment
+                  </button>
+            )}
+            {booking && <Booking service={service}/>}          
           </div>
         </div>
       )}
