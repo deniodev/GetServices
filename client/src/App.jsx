@@ -7,6 +7,8 @@ import Profile from "./pages/Profile";
 import Header from "./components/Header";
 import PrivateRoute from "./components/PrivateRoute";
 import CreateService from "./pages/CreateService";
+import UpdateService from "./pages/UpdateService";
+import Service from "./pages/Service";
 
 const App = () => {
   return (
@@ -17,9 +19,11 @@ const App = () => {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/about" element={<About />} />
+        <Route path="/service/:serviceId" element={<Service/>}/>
         <Route element={<PrivateRoute/>}>
         <Route path="/profile" element={<Profile />} />
         <Route path="/create-service" element={<CreateService/>} />
+        <Route path="/update-service/:serviceId" element={<UpdateService/>} /> 
         </Route>
       </Routes>
     </BrowserRouter>

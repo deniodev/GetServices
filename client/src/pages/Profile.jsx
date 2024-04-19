@@ -141,6 +141,24 @@ export default function Profile() {
       showServicesError(true);
     }
   };
+
+  const handleServiceDelete = async (serviceId)  => {
+    try {
+      const res = await fetch(`/api/service/delete/${serviceId}`, {
+        method: 'DELETE',
+      })
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+      setUserServices((prev) => 
+      prev.filter((service) => service._id !== serviceId))
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
@@ -252,8 +270,10 @@ export default function Profile() {
             </Link>
 
             <div className="flex flex-col items-center">
-              <button className="text-red-700 uppercase">Delete</button>
+              <button onClick={()=> handleServiceDelete(service._id)} className="text-red-700 uppercase">Delete</button>
+              <Link to={`/update-service/${service._id}`}>
               <button className="text-green-700 uppercase">Edit</button>
+              </Link>              
             </div>
           </div>
         ))}
