@@ -51,3 +51,15 @@ export const updateService = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getService = async (req, res, next) => {
+  try {
+    const service = await Service.findById(req.params.id);
+    if (!service) {
+      return next(errorHandler(404, 'Service not found!'))
+    }
+    res.status(200).json(service);
+  } catch (error) {
+    next(error)
+  }
+}
