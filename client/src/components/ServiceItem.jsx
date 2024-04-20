@@ -17,33 +17,14 @@ const ServiceItem = ({ service }) => {
         <p className='truncate text-lg font-semibold text-slate-700'>
           {service.name}
         </p>
+        <p className='text-sm text-gray-600 line-clamp-2'>
+          {service.description}
+        </p>
         <div className='flex items-center gap-1'>
           <MdLocationOn className='h-4 w-4 text-green-700' />
           <p className='text-sm text-gray-600 truncate w-full'>
             {service.address}
           </p>
-        </div>
-        <p className='text-sm text-gray-600 line-clamp-2'>
-          {service.description}
-        </p>
-        <p className='text-slate-500 mt-2 font-semibold '>
-          $
-          {service.offer
-            ? service.discountPrice.toLocaleString('en-US')
-            : service.regularPrice.toLocaleString('en-US')}
-          {service.type === 'rent' && ' / month'}
-        </p>
-        <div className='text-slate-700 flex gap-4'>
-          <div className='font-bold text-xs'>
-            {service.bedrooms > 1
-              ? `${service.bedrooms} beds `
-              : `${service.bedrooms} bed `}
-          </div>
-          <div className='font-bold text-xs'>
-            {service.bathrooms > 1
-              ? `${service.bathrooms} baths `
-              : `${service.bathrooms} bath `}
-          </div>
         </div>
       </div>
     </Link>
