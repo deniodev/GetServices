@@ -14,45 +14,35 @@ const serviceSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    regularPrice: {
-      type: Number,
-      required: true,
-    },
-    discountPrice: {
-      type: Number,
-      required: true,
-    },
-    bathrooms: {
-      type: Number,
-      required: true,
-    },
-    bedrooms: {
-      type: Number,
-      required: true,
-    },
-    furnished: {
-      type: Boolean,
-      required: true,
-    },
-    parking: {
-      type: Boolean,
-      required: true,
-    },
-    type: {
+    phone: {
       type: String,
-      required: true,
-    },
-    offer: {
-      type: Boolean,
       required: true,
     },
     imageUrls: {
       type: Array,
       required: true,
     },
+    coverImg: {
+      type: String,
+      required: true,
+    },
     userRef: {
       type: String,
       required: true,
+    },
+    reviews: [{ type: mongoose.Types.ObjectId, ref: "Review" }],
+    averageRating: {
+      type: Number,
+      default: 0,
+    },
+    totalRating: {
+      type: Number,
+      default: 0,
+    },
+    isApproved: {
+      type: String,
+      enum: ["pending", "approved", "cancelled"],
+      default: "pending",
     },
   },
   { timestamps: true }
