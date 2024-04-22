@@ -5,14 +5,7 @@ import SwiperCore from "swiper";
 import {useSelector} from 'react-redux';
 import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
-import {
-  FaBath,
-  FaBed,
-  FaChair,
-  FaMapMarkerAlt,
-  FaParking,
-  FaShare,
-} from "react-icons/fa";
+import { FaShare } from "react-icons/fa";
 import Booking from "../components/Booking";
 
 // https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
@@ -26,6 +19,7 @@ export default function Service() {
   const [booking, setBooking] = useState(false);
   const params = useParams();
   const {currentUser} = useSelector((state) => state.user);
+  const [appointment, setAppointment] = useState(null);
 
 
   useEffect(() => {
@@ -48,7 +42,21 @@ export default function Service() {
       }
     };
     fetchservice();
+
   }, [params.serviceId]);
+
+  useEffect(() => {
+    const fetchAppointment = async () => {
+      try {
+        const res = await fetch(`/api/user/${service.userRef}`);
+        const data = await res.json();
+        setAppointment(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAppointment();
+  }, [service]);
 
   return (
     <main>
@@ -56,6 +64,18 @@ export default function Service() {
       {error && (
         <p className="text-center my-7 text-2xl">Something went wrong!</p>
       )}
+      {appointment && (
+            <div className="flex items-center gap-5 mb-4">
+              <img
+              src={
+                appointment.avatar ||
+                "https://i0.wp.com/florrycreativecare.com/wp-content/uploads/2020/08/blank-profile-picture-mystery-man-avatar-973460.jpg?ssl=1"
+              }
+              alt="service cover"
+              className="w-[200px] h-[200px]"
+            />
+            </div>            
+          )}
       {service && !loading && !error && (
         <div>
           <Swiper navigation>
@@ -89,53 +109,11 @@ export default function Service() {
             </p>
           )}
           <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4">
-            <p className="text-2xl font-semibold">
-              {service.name} - ${" "}
-              {service.offer
-                ? service.discountPrice.toLocaleString("en-US")
-                : service.regularPrice.toLocaleString("en-US")}
-              {service.type === "rent" && " / month"}
-            </p>
-            <p className="flex items-center mt-6 gap-2 text-slate-600  text-sm">
-              <FaMapMarkerAlt className="text-green-700" />
-              {service.address}
-            </p>
-            <div className="flex gap-4">
-              <p className="bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
-                {service.type === "rent" ? "For Rent" : "For Sale"}
-              </p>
-              {service.offer && (
-                <p className="bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
-                  ${+service.regularPrice - +service.discountPrice}
-                </p>
-              )}
-            </div>
-            <p className="text-slate-800 ">
+             <p className="text-slate-800 ">
               <span className="font-semibold text-black">Description - </span>
               {service.description}
             </p>
-            <ul className="text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6">
-              <li className="flex items-center gap-1 whitespace-nowrap ">
-                <FaBed className="text-lg" />
-                {service.bedrooms > 1
-                  ? `${service.bedrooms} beds `
-                  : `${service.bedrooms} bed `}
-              </li>
-              <li className="flex items-center gap-1 whitespace-nowrap ">
-                <FaBath className="text-lg" />
-                {service.bathrooms > 1
-                  ? `${service.bathrooms} baths `
-                  : `${service.bathrooms} bath `}
-              </li>
-              <li className="flex items-center gap-1 whitespace-nowrap ">
-                <FaParking className="text-lg" />
-                {service.parking ? "Parking spot" : "No Parking"}
-              </li>
-              <li className="flex items-center gap-1 whitespace-nowrap ">
-                <FaChair className="text-lg" />
-                {service.furnished ? "Furnished" : "Unfurnished"}
-              </li>
-            </ul>
+            
             {currentUser && service.userRef !== currentUser._id &&  !booking && (
                   <button 
                   onClick={()=>setBooking(true)}
