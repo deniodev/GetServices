@@ -1,83 +1,107 @@
-import { FaSearch } from "react-icons/fa";
+import { Menu, Search, LogIn } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-
 import ModeToggle from "./mode-toggle";
 
-const Header = () => {
+export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set('searchTerm', searchTerm);
+    urlParams.set("searchTerm", searchTerm);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
-  }
+  };
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    const searchTermFromUrl = urlParams.get('searchTerm');
+    const searchTermFromUrl = urlParams.get("searchTerm");
     if (searchTermFromUrl) {
-      setSearchTerm(searchTermFromUrl)
+      setSearchTerm(searchTermFromUrl);
     }
-  }, [location.search])
+  }, [location.search]);
 
   return (
-    <header className="bg-slate-200 shadow-md">
-      <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
-        <Link to="/">
-          <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
+    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+        <Link
+          to="/"
+          className="flex items-center gap-2 text-lg font-semibold md:text-base"
+        >
+          <h1>
             <span className="text-slate-500">Home</span>
             <span className="text-slate-700">Services</span>
           </h1>
         </Link>
-        <form onSubmit={handleSubmit} className="bg-slate-100 p-3 rounded-lg flex items-center">
-          <input
-            type="text"
-            placeholder="Search"
-            className="bg-transparent focus:outline-none w-24 sm:w-64"
-            value={searchTerm}
-            onChange={(e)=> setSearchTerm(e.target.value)}
-          />
-          <button>
-          <FaSearch className="text-slate-600" />
-          </button>
-          
-        </form>
-        <ul className="flex gap-4">
-          <Link to="/">
-            <li className="hidden sm:inline text-slate-700 hover:underline cursor-pointer">
+        <Link to="/" className="text-muted-foreground hover:text-foreground">Home</Link>
+        <Link to="/about" className="text-muted-foreground hover:text-foreground">About</Link>
+        <Link to="/services" className="text-muted-foreground hover:text-foreground">Services</Link>
+        <Link to="/contact" className="text-muted-foreground hover:text-foreground">Contact</Link>
+      </nav>
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button variant="outline" size="icon" className="shrink-0 md:hidden">
+            <Menu className="h-5 w-5" />
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="left">
+          <nav className="grid gap-6 text-lg font-medium">
+            <Link
+              href="#"
+              className="flex items-center gap-2 text-lg font-semibold"
+            >
+              <h1 className="">
+                <span className="text-slate-500">Home</span>
+                <span className="text-slate-700">Services</span>
+              </h1>
+            </Link>
+            <Link to="/">
               Home
-            </li>
-          </Link>
-          <Link to="/about">
-            <li className="hidden sm:inline text-slate-700 hover:underline cursor-pointer">
-              About
-            </li>
-          </Link>
-          <Link to="/profile">
-            {currentUser ? (
-              <img
-                className="rounded-full h-7 w-7 object-cover"
-                src={currentUser.avatar}
-                alt="profile picture"
-              />
-            ) : (
-              <li className="text-slate-700 hover:underline cursor-pointer">
-                Sign In
-              </li>
-            )}
-          </Link>
-          <li>
-            <ModeToggle/>
-          </li>
-        </ul>
+            </Link>
+            <Link to="/about">About</Link>
+            <Link to="/services">Services</Link>
+            <Link to="/contact">Contact</Link>
+          </nav>
+        </SheetContent>
+      </Sheet>
+      <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+        <form
+          onSubmit={handleSubmit}
+          className="ml-auto flex-1 sm:flex-initial"
+        >
+          <div className="relative">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              type="text"
+              placeholder="Search"
+              className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+        </form>
+        <ModeToggle />
+        <Link to="/profile">
+          {currentUser ? (
+            <img
+              className="rounded-full h-7 w-7 object-cover"
+              src={currentUser.avatar}
+              alt="profile picture"
+            />
+          ) : (
+            <Button variant="outline" size="icon">
+              <LogIn className="h-5 w-5" />
+            </Button>
+          )}
+        </Link>
       </div>
     </header>
   );
-};
-
-export default Header;
+}
