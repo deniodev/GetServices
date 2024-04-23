@@ -10,11 +10,14 @@ import UpdateService from "./pages/UpdateService";
 import Service from "./pages/Service";
 import Search from "./pages/Search";
 import SignIn from "./pages/SignIn";
-
+import { ThemeProvider } from "./components/theme-provider";
 const App = () => {
   return (
+    
     <BrowserRouter>
-      <Header />
+    
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sign-in" element={<SignIn/>} />
@@ -28,6 +31,8 @@ const App = () => {
         <Route path="/update-service/:serviceId" element={<UpdateService/>} /> 
         </Route>
       </Routes>
+    </ThemeProvider>
+
     </BrowserRouter>
   );
 };

@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
+import ModeToggle from "./mode-toggle";
+
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [searchTerm, setSearchTerm] = useState('');
@@ -69,6 +71,9 @@ const Header = () => {
               </li>
             )}
           </Link>
+          <li>
+            <ModeToggle/>
+          </li>
         </ul>
       </div>
     </header>
