@@ -1,16 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import SwiperCore from 'swiper';
-import 'swiper/css/bundle';
 import ServiceItem from '../components/ServiceItem';
+import { Button } from '@/components/ui/button';
+
+
 
 const Home = () => {
   const [offerServices, setOfferServices] = useState([]);
   const [saleServices, setSaleServices] = useState([]);
   const [rentServices, setRentServices] = useState([]);
-  SwiperCore.use([Navigation]);
   console.log(offerServices);
   useEffect(() => {
     const fetchOfferServices = async () => {
@@ -57,30 +55,12 @@ const Home = () => {
           <br />
           We have a wide range of services for your needs.
         </div>
-        <Link to={"/search"} className='text-xs sm:text-sm text-blue-800 font-bold hover:underline'>
-          Let's get started...
+        <div>          
+        </div>
+        <Link to={"/search"}>
+          <Button>Let's get started...</Button>
         </Link>
       </div>
-
-      {/* swiper */}
-      <Swiper navigation>
-        {offerServices &&
-          offerServices.length > 0 &&
-          offerServices.map((service) => (
-            <SwiperSlide>
-              <div
-                style={{
-                  background: `url(${service.imageUrls[0]}) center no-repeat`,
-                  backgroundSize: 'cover',
-                }}
-                className='h-[500px]'
-                key={service._id}
-              ></div>
-            </SwiperSlide>
-          ))}
-      </Swiper>
-
-      {/* service results for offer, sale and rent */}
 
       <div className='max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10'>
         {offerServices && offerServices.length > 0 && (

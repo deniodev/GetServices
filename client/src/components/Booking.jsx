@@ -26,22 +26,22 @@ const Booking = ({ service }) => {
       {appointment && (
         <div className="flex flex-col gap-2">
           <p className="">
-            Contact <span className="font-semibold">{appointment.username}</span> for{" "}
+            Contact{" "}
             <span className="font-semibold">{service.name.toLowerCase()}</span>
           </p>
-          <textarea 
-          name="message" 
-          id="message"  
-          rows="2"
-          value={message}
-          onChange={onChange}
-          placeholder="Enter your message here"
-          className="w-full border p-3 rounded-lg mt-2"
-          >
-          </textarea>
+          <textarea
+            name="message"
+            id="message"
+            rows="2"
+            value={message}
+            onChange={onChange}
+            placeholder="Enter your message here"
+            className="w-full border p-3 rounded-lg mt-2"
+          ></textarea>
 
-          <Link to={`mailto:${appointment.email}?subject=Regarding ${service.name}&body=${message}`}
-          className="bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95"
+          <Link
+            to={`whatsapp://send?phone=${service.phone}&text=${encodeURIComponent(message)}`}
+            className="bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95"
           >
             Send Message
           </Link>
