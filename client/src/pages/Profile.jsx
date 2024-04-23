@@ -1,3 +1,9 @@
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useRef, useState, useEffect } from "react";
 import {
@@ -17,9 +23,8 @@ import {
   signOutUserStart,
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 
-export default function Profile() {
+const Profile = () => {
   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [file, setFile] = useState(undefined);
@@ -85,13 +90,16 @@ export default function Profile() {
       const data = await res.json();
       if (data.success === false) {
         dispatch(updateUserFailure(data.message));
+        toast.error(data.message);
         return;
       }
 
       dispatch(updateUserSuccess(data));
       setUpdateSuccess(true);
+      toast.success("Profile Updated!");
     } catch (error) {
       dispatch(updateUserFailure(error.message));
+      toast.error(data.message);
     }
   };
 
@@ -104,11 +112,14 @@ export default function Profile() {
       const data = await res.json();
       if (data.success === false) {
         dispatch(deleteUserFailure(data.message));
+        toast.error(data.message);
         return;
       }
       dispatch(deleteUserSuccess(data));
+      toast.success("User deleted");
     } catch (error) {
       dispatch(deleteUserFailure(error.message));
+      toast.error(data.message);
     }
   };
 
@@ -119,9 +130,11 @@ export default function Profile() {
       const data = await res.json();
       if (data.success === false) {
         dispatch(deleteUserFailure(data.message));
+        toast.error(data.message);
         return;
       }
       dispatch(deleteUserSuccess(data));
+      toast.success("Sign Out");
     } catch (error) {
       dispatch(deleteUserFailure(data.message));
     }
@@ -142,141 +155,165 @@ export default function Profile() {
     }
   };
 
-  const handleServiceDelete = async (serviceId)  => {
+  const handleServiceDelete = async (serviceId) => {
     try {
       const res = await fetch(`/api/service/delete/${serviceId}`, {
-        method: 'DELETE',
-      })
+        method: "DELETE",
+      });
       const data = await res.json();
       if (data.success === false) {
         console.log(data.message);
+        toast.error(data.message);
         return;
       }
-      setUserServices((prev) => 
-      prev.filter((service) => service._id !== serviceId))
+      setUserServices((prev) =>
+        prev.filter((service) => service._id !== serviceId)
+      );
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-  }
+  };
 
   return (
-    <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input
-          onChange={(e) => setFile(e.target.files[0])}
-          type="file"
-          ref={fileRef}
-          hidden
-          accept="image/*"
-        />
-        <img
-          onClick={() => fileRef.current.click()}
-          src={formData.avatar || currentUser.avatar}
-          alt="profile"
-          className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2"
-        />
-        <p className="text-sm self-center">
-          {fileUploadError ? (
-            <span className="text-red-700">
-              Error Image upload (image must be less than 2 mb)
-            </span>
-          ) : filePerc > 0 && filePerc < 100 ? (
-            <span className="text-slate-700">{`Uploading ${filePerc}%`}</span>
-          ) : filePerc === 100 ? (
-            <span className="text-green-700">Image successfully uploaded!</span>
-          ) : (
-            ""
-          )}
-        </p>
-        <input
-          type="text"
-          placeholder="username"
-          defaultValue={currentUser.username}
-          id="username"
-          className="border p-3 rounded-lg"
-          onChange={handleChange}
-        />
-        <input
-          type="email"
-          placeholder="email"
-          id="email"
-          defaultValue={currentUser.email}
-          className="border p-3 rounded-lg"
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          onChange={handleChange}
-          id="password"
-          className="border p-3 rounded-lg"
-        />
-        <button
-          disabled={loading}
-          className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80"
-        >
-          {loading ? "Loading..." : "Update"}
-        </button>
-        <Link
-          className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
-          to={"/create-service"}
-        >
-          Become a Pro
-        </Link>
-      </form>
-      <div className="flex justify-between mt-5">
-        <span
-          onClick={handleDeleteUser}
-          className="text-red-700 cursor-pointer"
-        >
-          Delete account
-        </span>
-        <span onClick={handleSignOut} className="text-red-700 cursor-pointer">
-          Sign out
-        </span>
-      </div>
+    <div className="p-3 max-w-lg mx-auto ">
+      <form onSubmit={handleSubmit}>
+        <Card className="mx-auto max-w-sm">
+          <CardHeader>
+            <input
+              onChange={(e) => setFile(e.target.files[0])}
+              type="file"
+              ref={fileRef}
+              hidden
+              accept="image/*"
+            />
+            <img
+              onClick={() => fileRef.current.click()}
+              src={formData.avatar || currentUser.avatar}
+              alt="profile"
+              className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2"
+            />
+            <p className="text-sm self-center">
+              {fileUploadError ? (
+                <span className="text-red-700">
+                  Error Image upload (image must be less than 2 mb)
+                </span>
+              ) : filePerc > 0 && filePerc < 100 ? (
+                <span className="text-slate-700">{`Uploading ${filePerc}%`}</span>
+              ) : filePerc === 100 ? (
+                <span className="text-green-700">
+                  Image successfully uploaded!
+                </span>
+              ) : (
+                ""
+              )}
+            </p>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="username">Username</Label>
+                <Input
+                  id="username"
+                  type="text"
+                  placeholder="username"
+                  required
+                  defaultValue={currentUser.username}
+                  onChange={handleChange}
+                />
+              </div>
 
-      <p className="text-red-700 mt-5">{error ? error : ""}</p>
-      <p className="text-green-700 mt-5">
-        {updateSuccess ? "User is updated successfully!" : ""}
-      </p>
-      <button onClick={handleShowServices} className="text-green-700 w-full">
-        Show Services
-      </button>
-      <p className="text-red-700 mt-5">
-        {showServicesError ? "Error showing services" : ""}
-      </p>
-
-      {userServices &&
-        userServices.length > 0 &&
-        userServices.map((service) => (
-          <div
-            key={service._id}
-            className="border rounded-lg p-3 flex justify-between items-center gap-4"
-          >
-            <Link to={`/service/${service._id}`}>
-              <img
-                className="h-16 w-16 object-contain"
-                src={service.imageUrls[0]}
-                alt="services cover"
-              />
-            </Link>
-            <Link
-              className="flex-1 text-slate-700 font-semibold hover:underline truncate"
-              to={`/service/${service._id}`}
-            >
-              <p>{service.name}</p>
-            </Link>
-
-            <div className="flex flex-col items-center">
-              <button onClick={()=> handleServiceDelete(service._id)} className="text-red-700 uppercase">Delete</button>
-              <Link to={`/update-service/${service._id}`}>
-              <button className="text-green-700 uppercase">Edit</button>
-              </Link>              
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="m@example.com"
+                  required
+                  defaultValue={currentUser.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="password"
+                  onChange={handleChange}
+                />
+              </div>
+              <Button type="submit" variant="" className="w-full">
+                Update Profile
+              </Button>
+              <Link to={"/create-service"}>
+                <Button className="w-full">Create Service</Button>
+              </Link>
+              <div className="flex gap-4">
+                <Button
+                  type="submit"
+                  variant="destructive"
+                  className="w-full"
+                  onClick={handleDeleteUser}
+                >
+                  Delete Account
+                </Button>
+                <Button
+                  type="submit"
+                  variant="destructive"
+                  className="w-full"
+                  onClick={handleSignOut}
+                >
+                  Sign Out
+                </Button>
+              </div>
             </div>
-          </div>
-        ))}
+          </CardContent>
+        </Card>
+      </form>
+
+      <div className="text-center">
+        <Button onClick={handleShowServices} variant="link" className="">
+          Show Services
+        </Button>
+
+        {userServices &&
+          userServices.length > 0 &&
+          userServices.map((service) => (
+            <div
+              key={service._id}
+              className="border rounded-lg p-3 flex justify-between items-center gap-4"
+            >
+              <Link to={`/service/${service._id}`}>
+                <img
+                  className="h-16 w-16 object-contain"
+                  src={service.imageUrls[0]}
+                  alt="services cover"
+                />
+              </Link>
+              <Link
+                className="flex-1 text-slate-700 font-semibold hover:underline truncate"
+                to={`/service/${service._id}`}
+              >
+                <p>{service.name}</p>
+              </Link>
+
+              <div className="flex flex-col items-center">
+                <Button
+                  onClick={() => handleServiceDelete(service._id)}
+                  variant="link"
+                >
+                  Delete
+                </Button>
+
+                <Link to={`/update-service/${service._id}`}>
+                  <Button variant="link">Edit</Button>
+                </Link>
+              </div>
+            </div>
+          ))}
+      </div>
     </div>
   );
-}
+};
+
+export default Profile;
