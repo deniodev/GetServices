@@ -1,12 +1,19 @@
-import { Menu, Search, LogIn } from "lucide-react";
+import { Menu, Search, LogIn, Languages } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ModeToggle from "./mode-toggle";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
@@ -37,13 +44,30 @@ export default function Header() {
         >
           <h1>
             <span className="text-slate-500">Home</span>
-            <span className="text-slate-700">Services</span>
+            <span className="text-slate-300">Services</span>
           </h1>
         </Link>
-        <Link to="/" className="text-muted-foreground hover:text-foreground">Home</Link>
-        <Link to="/about" className="text-muted-foreground hover:text-foreground">About</Link>
-        <Link to="/services" className="text-muted-foreground hover:text-foreground">Services</Link>
-        <Link to="/contact" className="text-muted-foreground hover:text-foreground">Contact</Link>
+        <Link to="/" className="text-muted-foreground hover:text-foreground">
+          Home
+        </Link>
+        <Link
+          to="/about"
+          className="text-muted-foreground hover:text-foreground"
+        >
+          About
+        </Link>
+        <Link
+          to="/services"
+          className="text-muted-foreground hover:text-foreground"
+        >
+          Services
+        </Link>
+        <Link
+          to="/contact"
+          className="text-muted-foreground hover:text-foreground"
+        >
+          Contact
+        </Link>
       </nav>
       <Sheet>
         <SheetTrigger asChild>
@@ -62,9 +86,7 @@ export default function Header() {
                 <span className="text-slate-700">Services</span>
               </h1>
             </Link>
-            <Link to="/">
-              Home
-            </Link>
+            <Link to="/">Home</Link>
             <Link to="/about">About</Link>
             <Link to="/services">Services</Link>
             <Link to="/contact">Contact</Link>
@@ -87,6 +109,19 @@ export default function Header() {
             />
           </div>
         </form>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="icon">
+              <Languages />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-30">
+            <DropdownMenuGroup>
+              <DropdownMenuItem>English</DropdownMenuItem>
+              <DropdownMenuItem>Portuguese</DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
         <ModeToggle />
         <Link to="/profile">
           {currentUser ? (
