@@ -10,7 +10,7 @@ const serviceSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    address: {
+    city: {
       type: String,
       required: true,
     },
@@ -43,6 +43,10 @@ const serviceSchema = new mongoose.Schema(
       type: String,
       enum: ["pending", "approved", "cancelled"],
       default: "pending",
+    },
+    title: {
+      type: String,
+      required: true
     },
   },
   { timestamps: true }

@@ -19,7 +19,6 @@ export default function Service() {
   const [booking, setBooking] = useState(false);
   const params = useParams();
   const {currentUser} = useSelector((state) => state.user);
-  const [appointment, setAppointment] = useState(null);
 
 
   useEffect(() => {
@@ -45,37 +44,12 @@ export default function Service() {
 
   }, [params.serviceId]);
 
-  useEffect(() => {
-    const fetchAppointment = async () => {
-      try {
-        const res = await fetch(`/api/user/${service.userRef}`);
-        const data = await res.json();
-        setAppointment(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchAppointment();
-  }, [service]);
-
   return (
     <main>
       {loading && <p className="text-center my-7 text-2xl">Loading...</p>}
       {error && (
         <p className="text-center my-7 text-2xl">Something went wrong!</p>
       )}
-      {appointment && (
-            <div className="flex items-center gap-5 mb-4">
-              <img
-              src={
-                appointment.avatar ||
-                "https://i0.wp.com/florrycreativecare.com/wp-content/uploads/2020/08/blank-profile-picture-mystery-man-avatar-973460.jpg?ssl=1"
-              }
-              alt="service cover"
-              className="w-[200px] h-[200px]"
-            />
-            </div>            
-          )}
       {service && !loading && !error && (
         <div>
           <Swiper navigation>
