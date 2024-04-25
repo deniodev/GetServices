@@ -269,7 +269,7 @@ const createService = () => {
                 <img
                   src={formData.coverImg}
                   alt="cover image"
-                  className="w-20 h-20 object-contain rounded-lg"
+                  className="w-20 h-20 object-contain"
                 />
                 <Button
                   type="button"
@@ -317,7 +317,7 @@ const createService = () => {
                   <img
                     src={url}
                     alt="service images"
-                    className="w-20 h-20 object-contain rounded-lg"
+                    className="w-20 h-20 object-contain"
                   />
                   <Button
                     type="button"
