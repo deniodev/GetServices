@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
+import { Textarea } from "./ui/textarea";
 
 const Booking = ({ service }) => {
   const [appointment, setAppointment] = useState(null);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const onChange = (e) => {
     setMessage(e.target.value);
   };
@@ -29,21 +31,21 @@ const Booking = ({ service }) => {
             Contact{" "}
             <span className="font-semibold">{service.name.toLowerCase()}</span>
           </p>
-          <textarea
+          <Textarea
             name="message"
             id="message"
             rows="2"
             value={message}
             onChange={onChange}
             placeholder="Enter your message here"
-            className="w-full border p-3 rounded-lg mt-2"
-          ></textarea>
+          ></Textarea>
 
           <Link
-            to={`whatsapp://send?phone=${service.phone}&text=${encodeURIComponent(message)}`}
-            className="bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95"
+            to={`whatsapp://send?phone=${
+              service.phone
+            }&text=${encodeURIComponent(message)}`}
           >
-            Send Message
+            <Button className="w-full">Send Message</Button>
           </Link>
         </div>
       )}

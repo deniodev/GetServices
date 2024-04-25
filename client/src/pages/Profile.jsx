@@ -281,7 +281,7 @@ const Profile = () => {
           userServices.map((service) => (
             <div
               key={service._id}
-              className="border rounded-lg p-3 flex justify-between items-center gap-4"
+              className="border rounded-lg p-3 flex justify-between items-center gap-4 mb-2"
             >
               <Link to={`/service/${service._id}`}>
                 <img
