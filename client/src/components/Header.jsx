@@ -40,11 +40,11 @@ export default function Header() {
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         <Link
           to="/"
-          className="flex items-center gap-2 text-lg font-semibold md:text-base"
+          className="flex items-center gap-2 text-lg font-bold md:text-base"
         >
           <h1>
-            <span className="text-slate-500">Home</span>
-            <span className="text-slate-300">Services</span>
+            <span className="text-slate-700 dark:text-slate-500">Home</span>
+            <span className="text-slate-500 dark:text-slate-100">Services</span>
           </h1>
         </Link>
         <Link to="/" className="text-muted-foreground hover:text-foreground">
