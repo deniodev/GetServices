@@ -11,6 +11,7 @@ import Service from "./pages/Service";
 import Search from "./pages/Search";
 import SignIn from "./pages/SignIn";
 import { ThemeProvider } from "./components/theme-provider";
+import Footer from "./components/Footer";
 const App = () => {
   return (
     
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/update-service/:serviceId" element={<UpdateService/>} /> 
         </Route>
       </Routes>
+      <Footer/>
     </ThemeProvider>
 
     </BrowserRouter>
