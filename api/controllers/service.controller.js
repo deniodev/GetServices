@@ -43,7 +43,7 @@ export const updateService = async (req, res, next) => {
   try {
     const updatedService = await Service.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      {$set:req.body},
       { new: true }
     );
     res.status(200).json(updatedService);
@@ -54,7 +54,8 @@ export const updateService = async (req, res, next) => {
 
 export const getService = async (req, res, next) => {
   try {
-    const service = await Service.findById(req.params.id);
+    const service = await Service.findById(req.params.id)
+    .populate("reviews");
     if (!service) {
       return next(errorHandler(404, "Service not found!"));
     }

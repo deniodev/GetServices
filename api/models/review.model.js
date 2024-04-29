@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Service from "./service.model.js";
+import Service from "./service.model.js"
 
 const reviewSchema = new mongoose.Schema(
     {
@@ -29,15 +29,15 @@ const reviewSchema = new mongoose.Schema(
   reviewSchema.pre(/^find/, function(next){
   
     this.populate({
-      path:'user',
-      select: 'name photo',
+      path:"user",
+      select: "username avatar",
     });
   
     next();
   });
   
   reviewSchema.statics.calcAverageRatings = async function(serviceId){
-  
+
     //this points the current review
     const stats = await this.aggregate([
       {
@@ -59,7 +59,7 @@ const reviewSchema = new mongoose.Schema(
       }
     ]);
   
-  await Service.findByIdAndUpdate(serviceIdId, {
+  await Service.findByIdAndUpdate(serviceId, {
     totalRating: stats[0].numOfRating,
     averageRating:stats[0].avgRating,
   });
