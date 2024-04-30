@@ -36,8 +36,9 @@ export default function Header() {
   }, [location.search]);
 
   return (
-    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+    <section className="border-b sticky top-0 bg-background">
+         <header className="flex h-16 items-center gap-4  bg-background max-w-6xl mx-auto p-3">
+      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 ">
         <Link
           to="/"
           className="flex items-center gap-2 text-lg font-bold md:text-base"
@@ -47,9 +48,6 @@ export default function Header() {
             <span className="text-slate-500 dark:text-slate-100">Services</span>
           </h1>
         </Link>
-        <Link to="/" className="text-muted-foreground hover:text-foreground">
-          Home
-        </Link>
         <Link
           to="/about"
           className="text-muted-foreground hover:text-foreground"
@@ -57,10 +55,10 @@ export default function Header() {
           About
         </Link>
         <Link
-          to="/services"
+          to="/faq"
           className="text-muted-foreground hover:text-foreground"
         >
-          Services
+          FAQ
         </Link>
         <Link
           to="/contact"
@@ -138,5 +136,7 @@ export default function Header() {
         </Link>
       </div>
     </header>
+    </section>
+ 
   );
 }

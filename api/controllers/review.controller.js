@@ -18,8 +18,8 @@ export const getAllReviews = async (req, res) => {
 //create review
 export const createReview = async(req,res) => {
 
-    if(!req.body.service) req.body.service = req.params.proId
-    if(!req.body.user) req.body.user = req.userId
+    if(!req.body.service) req.body.service = req.params.serviceId
+    if(!req.body.user) req.body.user = req.user.id
 
     const newReview = new Review(req.body)
 

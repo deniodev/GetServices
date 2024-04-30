@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { MapPin, Star } from "lucide-react";
+import { AiFillStar } from "react-icons/ai";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 const ServiceItem = ({ service }) => {
   return (
@@ -20,12 +21,12 @@ const ServiceItem = ({ service }) => {
             <div className="flex items-center justify-between">
             <p className="text-sm  font-semibold">{service.title}</p>
             <div className="flex items-center gap-[6px]">
-            <Star size={15}/> <span className="font-semibold">3.5</span>
+            <AiFillStar size={15}/> <span className="font-semibold">{service.averageRating}</span>
             </div>
              
             </div>
             <div className="flex items-center gap-1">
-              <MapPin size={15} />
+              <FaMapMarkerAlt  size={12} />
               <p className="text-sm truncate w-full">{service.city}</p>
             </div>
           </div>

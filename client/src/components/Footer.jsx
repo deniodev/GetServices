@@ -4,7 +4,7 @@ import { BsTwitterX, BsYoutube, BsGithub, BsFacebook  } from "react-icons/bs";
 export default function Footer() {
     const year = new Date().getFullYear();
   return (
-    <div className="pb-4  border-top">
+    <div className="pb-4  border">
       <div className="text-center mt-4 text-sm pb-2 ">
         Want to contribute? Find it on <Link to='https://github.com/deniodev/home-services' target="_blank"><span className=" hover:underline font-semibold">GitHub</span></Link>
       </div>

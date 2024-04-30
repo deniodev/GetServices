@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ServiceItem from '../components/ServiceItem';
 import { Button } from '@/components/ui/button';
-
+import { FaTools, FaHome  } from "react-icons/fa";
+import { GiTeacher } from "react-icons/gi";
+import { RiPaintBrushFill } from "react-icons/ri";
+import Footer from '@/components/Footer';
 
 
 const Home = () => {
@@ -44,21 +47,20 @@ const Home = () => {
     fetchOfferServices();
   }, []);
   return (
-    <div>
-      <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
-        <h1 className='text-slate-700 font-bold text-3xl lg:text-6xl'>Find Home {" "} 
-        <span className='text-slate-500'>Service/Repair</span> 
-        <br /> Near You
+    <><div>
+      <div className="flex flex-col gap-6 p-10 px-3 max-w-6xl mx-auto">
+        <h1 className='font-bold text-4xl lg:text-6x '>
+          Discover Premier <br /> Home Services and Repairs in Your Area
         </h1>
-        <div className="text-gray-400 text-xs sm:text-sm">
-          Home Services is the best place to explore for the best home service and repair.
+        <div className=" text-xl ">
+          Unlock a world of top-tier home services tailored to your needs.
           <br />
-          We have a wide range of services for your needs.
+          From repairs to renovations, we've got you covered.
         </div>
-        <div>          
+        <div>
         </div>
         <Link to={"/search"}>
-          <Button>Let's get started...</Button>
+          <Button>Get Started</Button>
         </Link>
       </div>
 
@@ -66,8 +68,12 @@ const Home = () => {
         {offerServices && offerServices.length > 0 && (
           <div className=''>
             <div className='my-3'>
-              <h2 className='text-2xl font-semibold text-slate-600'>Recent offers</h2>
-              <Link className='text-sm text-blue-800 hover:underline' to={'/search?offer=true'}>Show more offers</Link>
+
+              <h2 className='text-3xl font-semibold flex gap-2'><FaTools size={35} />Assistência Técnica</h2>
+              <Button variant="link" className="p-0">
+                <Link className='' to={'/search?offer=true'}>Show more...</Link>
+              </Button>
+
             </div>
             <div className='flex flex-wrap gap-4'>
               {offerServices.map((service) => (
@@ -79,8 +85,11 @@ const Home = () => {
         {rentServices && rentServices.length > 0 && (
           <div className=''>
             <div className='my-3'>
-              <h2 className='text-2xl font-semibold text-slate-600'>Recent places for rent</h2>
-              <Link className='text-sm text-blue-800 hover:underline' to={'/search?type=rent'}>Show more places for rent</Link>
+              <h2 className='text-3xl font-semibold flex gap-2'><FaHome size={35} />Servicos Domésticos</h2>
+              <Button variant="link" className="p-0">
+                <Link className='' to={'/search?type=rent'}>Show more...</Link>
+              </Button>
+
             </div>
             <div className='flex flex-wrap gap-4'>
               {rentServices.map((service) => (
@@ -92,8 +101,10 @@ const Home = () => {
         {saleServices && saleServices.length > 0 && (
           <div className=''>
             <div className='my-3'>
-              <h2 className='text-2xl font-semibold text-slate-600'>Recent places for sale</h2>
-              <Link className='text-sm text-blue-800 hover:underline' to={'/search?type=sale'}>Show more places for sale</Link>
+              <h2 className='text-3xl font-semibold flex gap-2'><RiPaintBrushFill size={35} />Reformas</h2>
+              <Button variant="link" className="p-0">
+                <Link className='' to={'/search?type=sale'}>Show more...</Link>
+              </Button>
             </div>
             <div className='flex flex-wrap gap-4'>
               {saleServices.map((service) => (
@@ -102,8 +113,25 @@ const Home = () => {
             </div>
           </div>
         )}
+        {saleServices && saleServices.length > 0 && (
+          <div className=''>
+            <div className='my-3'>
+              <h2 className='text-3xl font-semibold flex gap-2'><GiTeacher size={35} />Aulas</h2>
+              <Button variant="link" className="p-0">
+                <Link className='' to={'/search?type=sale'}>Show more...</Link>
+              </Button>
+            </div>
+            <div className='flex flex-wrap gap-4'>
+              {saleServices.map((service) => (
+                <ServiceItem service={service} key={service._id} />
+              ))}
+            </div>
+          </div>
+        )}
+
+
       </div>
-    </div>
+    </div><Footer /></>
   );
 
 
