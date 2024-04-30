@@ -16,6 +16,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { AvatarImage, Avatar } from "@/components/ui/avatar";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { AiFillStar } from "react-icons/ai";
+import { formateDate } from "@/utils/formateDate";
+import toast from "react-hot-toast";
 
 // https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
 
@@ -28,6 +34,11 @@ export default function Service() {
   const [booking, setBooking] = useState(false);
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+  const [reviewText, setReviewText] = useState("");
+
+  const { serviceId } = useParams();
 
   useEffect(() => {
     const fetchservice = async () => {
@@ -50,6 +61,38 @@ export default function Service() {
     };
     fetchservice();
   }, [params.serviceId]);
+
+  const handleSubmitReview = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      if (!rating || !reviewText) {
+        setLoading(false);
+        return toast.error("Rating & Review Fields are required");
+      }
+
+      const res = await fetch(`/api/service/${serviceId}/reviews`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ rating, reviewText }),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.message);
+      }
+
+      setLoading(false);
+      toast.success(result.message);
+    } catch (err) {
+      setLoading(false);
+      toast.error(err.message);
+    }
+  };
 
   return (
     <main>
@@ -80,13 +123,13 @@ export default function Service() {
                       className="flex items-center gap-[6px] text-headingColor text-[14px]
                               leading-5 lg:text-[16px] lg:leading-6 font-semibold"
                     >
-                      ⭐ 3.6
+                      <AiFillStar /> {service.averageRating}
                     </span>
                     <span
                       className="text-textColor text-[14px]
                               leading-5 lg:text-[16px] lg:leading-6 font-semibold"
                     >
-                      10
+                      ({service.totalRating})
                     </span>
                   </div>
 
@@ -111,8 +154,8 @@ export default function Service() {
               )}
 
               {tab === "gallery" && (
-                <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4">
-                  <Carousel className="w-full ">
+                <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4 items-center">
+                  <Carousel className="w-full max-w-xl ">
                     <CarouselContent>
                       {service.imageUrls.map((url, index) => (
                         <CarouselItem key={index}>
@@ -138,7 +181,108 @@ export default function Service() {
 
               {tab === "reviews" && (
                 <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4">
-                  <h1>Reviews</h1>
+                  <div>
+                    <div className="space-y-8">
+                      <div>
+                        <h1 className="text-3xl font-bold">
+                          All Reviews ({service.totalRating})
+                        </h1>
+
+                        {service.reviews?.map((review, index) => (
+                          <div
+                            key={index}
+                            className="flex justify-between gap-10 mb-[30px] mt-4"
+                          >
+                            <div className="flex gap-3">
+                              <Avatar className="w-10 h-10 border">
+                                <AvatarImage
+                                  alt="user image"
+                                  src={review?.user?.avatar}
+                                />
+                              </Avatar>
+
+                              <div className="">
+                                <h5 className="text-[16px] leading-6 text-primaryColor font-bold">
+                                  {review?.user?.username}
+                                </h5>
+                                <p className="text-[14px] leadding-6 text-textColor">
+                                  {formateDate(review?.createdAt)}
+                                </p>
+                                <p className="text-sm leading-loose text-gray-500 dark:text-gray-400">
+                                  {review.reviewText}
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="flex gap-1">
+                              {[...Array(review?.rating).keys()].map(
+                                (_, index) => (
+                                  <AiFillStar key={index} />
+                                )
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div>
+                        <h2 className="text-2xl font-bold">Leave a Review</h2>
+                        <p className="text-gray-500 dark:text-gray-400">
+                          Share your experience with the service.
+                        </p>
+                        <form className="mt-6 space-y-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="rating">Rating</Label>
+
+                            <div>
+                              {[...Array(5).keys()].map((_, index) => {
+                                index += 1;
+
+                                return (
+                                  <button
+                                    key={index}
+                                    type="button"
+                                    className={`${
+                                      index <= ((rating && hover) || hover)
+                                        ? "text-yellowColor"
+                                        : "text-gray-400"
+                                    } bg-transparent border-none outline-none text-[22px] cursor-pointer`}
+                                    onClick={() => setRating(index)}
+                                    onMouseEnter={() => setHover(index)}
+                                    onMouseLeave={() => setHover(rating)}
+                                    onDoubleClick={() => {
+                                      setHover(0);
+                                      setRating(0);
+                                    }}
+                                  >
+                                    <span>
+                                      <AiFillStar />
+                                    </span>
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="review">Review</Label>
+                            <Textarea
+                              id="review"
+                              placeholder="Enter your review"
+                              onChange={(e) => setReviewText(e.target.value)}
+                              required
+                            />
+                          </div>
+                          <Button
+                            className=""
+                            type="submit"
+                            onClick={handleSubmitReview}
+                          >
+                            Submit Review
+                          </Button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>

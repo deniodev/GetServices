@@ -10,8 +10,10 @@ import UpdateService from "./pages/UpdateService";
 import Service from "./pages/Service";
 import Search from "./pages/Search";
 import SignIn from "./pages/SignIn";
+import FaqList from "./pages/FaqList";
+import Contact from "./pages/Contact";
 import { ThemeProvider } from "./components/theme-provider";
-import Footer from "./components/Footer";
+
 const App = () => {
   return (
     
@@ -25,6 +27,8 @@ const App = () => {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/about" element={<About />} />
         <Route path="/search" element={<Search/>}/>
+        <Route path="/faq" element={<FaqList/>}/>
+        <Route path="/contact" element={<Contact/>}/>
         <Route path="/service/:serviceId" element={<Service/>}/>
         <Route element={<PrivateRoute/>}>
         <Route path="/profile" element={<Profile/>} />
@@ -32,7 +36,6 @@ const App = () => {
         <Route path="/update-service/:serviceId" element={<UpdateService/>} /> 
         </Route>
       </Routes>
-      <Footer/>
     </ThemeProvider>
 
     </BrowserRouter>

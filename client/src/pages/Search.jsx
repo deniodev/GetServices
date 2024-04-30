@@ -1,6 +1,19 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ServiceItem from "../components/ServiceItem";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { UserSearch } from "lucide-react";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -118,7 +131,7 @@ const Search = () => {
     const numberOfservices = services.length;
     const startIndex = numberOfservices;
     const urlParams = new URLSearchParams(location.search);
-    urlParams.set('startIndex', startIndex);
+    urlParams.set("startIndex", startIndex);
     const searchQuery = urlParams.toString();
     const res = await fetch(`/api/listing/get?${searchQuery}`);
     const data = await res.json();
@@ -129,23 +142,21 @@ const Search = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row ">
       <div className="p-7  border-b-2 md:border-r-2 md:min-h-screen">
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-          <div className="flex items-center gap-2">
-            <label className="whitespace-nowrap font-semibold">
-              Search Term:
-            </label>
-            <input
+          <div className="relative">
+            <UserSearch className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
               type="text"
+              placeholder="Search"
               id="searchTerm"
-              placeholder="Search..."
-              className="border rounded-lg p-3 w-full"
+              className="pl-8 "
               value={sidebardata.searchTerm}
               onChange={handleChange}
             />
           </div>
-          <div className="flex gap-2 flex-wrap items-center">
+          {/* <div className="flex gap-2 flex-wrap items-center">
             <label className="font-semibold">Type:</label>
             <div className="flex gap-2">
               <input
@@ -187,8 +198,8 @@ const Search = () => {
               />
               <span>Offer</span>
             </div>
-          </div>
-          <div className="flex gap-2 flex-wrap items-center">
+          </div> */}
+          {/* <div className="flex gap-2 flex-wrap items-center">
             <label className="font-semibold">Amenities:</label>
             <div className="flex gap-2">
               <input
@@ -210,28 +221,70 @@ const Search = () => {
               />
               <span>Furnished</span>
             </div>
-          </div>
-          <div className="flex items-center gap-2">
+          </div> */}
+          {/* <div className="flex items-center gap-2">
             <label className="font-semibold">Sort:</label>
             <select
               onChange={handleChange}
               defaultValue={"created_at_desc"}
               id="sort_order"
-              className="border rounded-lg p-3"
+              className="border rounded-lg p-1 bg-white dark:bg-black  appearance-none"
+              // select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+          
             >
               <option value="regularPrice_desc">Price high to low</option>
               <option value="regularPrice_asc">Price low to hight</option>
               <option value="createdAt_desc">Latest</option>
               <option value="createdAt_asc">Oldest</option>
             </select>
+          </div> */}
+          <div className="flex justify-between gap-2">
+            <Select>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Sort" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="regularPrice_desc">
+                    Rate high to low
+                  </SelectItem>
+                  <SelectItem value="regularPrice_asc">
+                    Rate low to hight
+                  </SelectItem>
+                  <SelectItem value="createdAt_desc">Latest</SelectItem>
+                  <SelectItem value="createdAt_asc">Oldest</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+
+            <Select>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="Assistência Técnica">
+                    Assistência Técnica
+                  </SelectItem>
+                  <SelectItem value="Aulas">Aulas</SelectItem>
+                  <SelectItem value="Design e Tecnologia">
+                    Design e Tecnologia
+                  </SelectItem>
+                  <SelectItem value="Eventos">Eventos</SelectItem>
+                  <SelectItem value="Reformas">Reformas</SelectItem>
+                  <SelectItem value="Serviços Domésticos">
+                    Serviços Domésticos
+                  </SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
-          <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95">
-            Search
-          </button>
+
+          <Button className="uppercase ">Search</Button>
         </form>
       </div>
       <div className="flex-1">
-        <h1 className="text-3xl font-semibold border-b p-3 text-slate-700 mt-5">
+        <h1 className="text-3xl font-bold border-b p-3 mt-5">
           Service results:
         </h1>
         <div className="p-7 flex flex-wrap gap-4">
@@ -244,20 +297,16 @@ const Search = () => {
             </p>
           )}
           {!loading &&
-           services &&
-           services.map((service) => (
-           <ServiceItem key={service._id} service={service}/>
-        ))}
+            services &&
+            services.map((service) => (
+              <ServiceItem key={service._id} service={service} />
+            ))}
 
-            {showMore && (
-            <button
-              onClick={onShowMoreClick}
-              className='text-green-700 hover:underline p-7 text-center w-full'
-            >
+          {showMore && (
+            <Button variant="link" onClick={onShowMoreClick}>
               Show more
-            </button>
+            </Button>
           )}
-
         </div>
       </div>
     </div>
