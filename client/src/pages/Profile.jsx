@@ -286,7 +286,7 @@ const Profile = () => {
               <Link to={`/service/${service._id}`}>
                 <img
                   className="h-16 w-16 object-contain"
-                  src={service.imageUrls[0]}
+                  src={service.coverImg}
                   alt="services cover"
                 />
               </Link>
