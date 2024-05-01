@@ -26,6 +26,7 @@ const updateService = () => {
     phone: "",
     coverImg: "",
     title: "",
+    category: "",
   });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -202,14 +203,31 @@ const updateService = () => {
             <Label htmlFor="select" className="ml-1">
               City
             </Label>
-            <Input
-              type="city"
-              placeholder="Type your city"
+            <select
               id="city"
-              required
+              name="city"
               onChange={handleChange}
               value={formData.city}
-            />
+              required
+              className="flex h-9 w-full rounded-md border border-input  px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <option value="All">All</option>
+              <option value="Pemba">Pemba</option>
+              <option value="Lichinga">Lichinga</option>
+              <option value="Nampula">Nampula</option>
+              <option value="Nacala">Nacala</option>
+              <option value="Quelimane">Quelimane</option>
+              <option value="Tete">Tete</option>
+              <option value="Moatize">Moatize</option>
+              <option value="Chimoio">Chimoio</option>
+              <option value="Beira">Beira</option>
+              <option value="Dondo">Dondo</option>
+              <option value="Maxixe">Maxixe</option>
+              <option value="Inhambane">Inhambane</option>
+              <option value="Xai-Xai">Xai-Xai</option>
+              <option value="Maputo">Maputo</option>
+              <option value="Matola">Matola</option>
+            </select>
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="phone" className="ml-1">
@@ -233,6 +251,7 @@ const updateService = () => {
               type="text"
               placeholder="Add description of your service."
               id="description"
+              rows="6"
               required
               onChange={handleChange}
               value={formData.description}
@@ -253,6 +272,27 @@ const updateService = () => {
               onChange={handleChange}
               value={formData.title}
             />
+          </div>
+
+          <div className="grid w-full max-w-sm items-center gap-1.5">
+            <Label htmlFor="category" className="ml-1">
+              Category
+            </Label>
+            <select
+              id="category"
+              name="category"
+              onChange={handleChange}
+              value={formData.category}
+              className="flex h-9 w-full rounded-md border border-input  px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <option value="All">All</option>
+              <option value="Assistência Técnica">Assistência Técnica</option>
+              <option value="Aulas">Aulas</option>
+              <option value="Design e Tecnologia">Design e Tecnologia</option>
+              <option value="Eventos">Eventos</option>
+              <option value="Reformas">Reformas</option>
+              <option value="Serviços Domésticos">Serviços Domésticos</option>
+            </select>
           </div>
 
           <div className="grid w-full max-w-sm items-center gap-1.5">
