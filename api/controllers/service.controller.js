@@ -43,7 +43,7 @@ export const updateService = async (req, res, next) => {
   try {
     const updatedService = await Service.findByIdAndUpdate(
       req.params.id,
-      {$set:req.body},
+      { $set: req.body },
       { new: true }
     );
     res.status(200).json(updatedService);
@@ -54,8 +54,7 @@ export const updateService = async (req, res, next) => {
 
 export const getService = async (req, res, next) => {
   try {
-    const service = await Service.findById(req.params.id)
-    .populate("reviews");
+    const service = await Service.findById(req.params.id).populate("reviews");
     if (!service) {
       return next(errorHandler(404, "Service not found!"));
     }
@@ -69,16 +68,24 @@ export const getServices = async (req, res, next) => {
   try {
     const limit = parseInt(req.query.limit) || 9;
     const startIndex = parseInt(req.query.startIndex) || 0;
-
     const searchTerm = req.query.searchTerm || "";
-
     const sort = req.query.sort || "createdAt";
-
     const order = req.query.order || "desc";
+    const city = req.query.city || "";
+    const category = req.query.category || "";
 
-    const services = await Service.find({
-      name: { $regex: searchTerm, $options: "i" }
-    })
+    const filter = {
+      name: { $regex: searchTerm, $options: "i" },
+    };
+
+    if (city) {
+      filter.city = city;
+    }
+    if (category) {
+      filter.category = category;
+    }
+
+    const services = await Service.find(filter)
       .sort({ [sort]: order })
       .limit(limit)
       .skip(startIndex);
