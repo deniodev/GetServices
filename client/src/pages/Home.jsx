@@ -6,6 +6,7 @@ import { FaTools, FaHome, FaLaptopCode } from "react-icons/fa";
 import { GiTeacher, GiPartyPopper } from "react-icons/gi";
 import { RiPaintBrushFill } from "react-icons/ri";
 import Footer from "@/components/Footer";
+import Hero from "./Hero";
 
 const Home = () => {
   const [assistenciaServices, setAssistenciaServices] = useState([]);
@@ -91,7 +92,7 @@ const Home = () => {
   return (
     <>
       <div>
-        <div className="flex flex-col gap-6 p-10 px-3 max-w-6xl mx-auto">
+        {/* <div className="flex flex-col gap-6 p-10 px-3 max-w-screen-xl mx-auto">
           <h1 className="font-bold text-4xl lg:text-6x ">
             Discover Premier <br /> Home Services and Repairs in Your Area
           </h1>
@@ -104,9 +105,10 @@ const Home = () => {
           <Link to={"/search"}>
             <Button>Get Started</Button>
           </Link>
-        </div>
+        </div> */}
+        <Hero/>
 
-        <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10">
+        <div className="max-w-screen-xl mx-auto p-3 flex flex-col gap-8 my-10">
           {assistenciaServices && assistenciaServices.length > 0 && (
             <div className="">
               <div className="my-3">

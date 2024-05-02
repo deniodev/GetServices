@@ -5,7 +5,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 const ServiceItem = ({ service }) => {
   return (
     <>
-      <div className="border shadow-md hover:shadow-2xl dark:hover:shadow-[1px_1px_1px_1px_white] transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px]">
+      <div className="border-solid border-2  shadow-md hover:shadow-2xl dark:hover:shadow-[0px_0px_5px_2px_#fff] transition-shadow overflow-hidden rounded-lg w-full sm:w-[302px]">
         <Link to={`/service/${service._id}`}>
           <img
             src={
@@ -19,14 +19,14 @@ const ServiceItem = ({ service }) => {
           <div className="p-3 flex flex-col gap-2 w-full">
             <p className="truncate text-lg font-bold">{service.name}</p>
             <div className="flex items-center justify-between">
-              <p className="text-sm  font-semibold">{service.title}</p>
-              <div className="flex items-center gap-[6px]">
-                <AiFillStar size={15} />{" "}
-                <span className="font-semibold">{service.averageRating}</span>
-              </div>
+            <p className="text-sm  font-semibold">{service.title}</p>
+            <div className="flex items-center gap-[6px]">
+            <AiFillStar size={15}/> <span className="font-semibold">{service.averageRating}</span>
+            </div>
+             
             </div>
             <div className="flex items-center gap-1">
-              <FaMapMarkerAlt size={12} />
+              <FaMapMarkerAlt  size={12} />
               <p className="text-sm truncate w-full">{service.city}</p>
             </div>
           </div>
