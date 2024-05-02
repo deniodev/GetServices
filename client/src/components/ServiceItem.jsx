@@ -5,7 +5,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 const ServiceItem = ({ service }) => {
   return (
     <>
-      <div className="border-solid border-2  shadow-md hover:shadow-2xl transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px]">
+      <div className="border-solid border-2  shadow-md hover:shadow-2xl dark:hover:shadow-[0px_0px_5px_2px_#fff] transition-shadow overflow-hidden rounded-lg w-full sm:w-[302px]">
         <Link to={`/service/${service._id}`}>
           <img
             src={
