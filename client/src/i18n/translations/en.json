@@ -38,6 +38,27 @@
         "message": "Your message",
         "comment": "Leave your comment....",
         "send": "Send",
-        "name": "Name"
+        "name": "Name",
+        "imageuploaderror": "Error Image upload (image must be less than 4 MB)",
+        "imageupload": "The image was successfully uploaded!",
+        "updateprofile": "Update Profile",
+        "createservice": "Create Service",
+        "deleteaccount": "Delete Account",
+        "showservices": "Show Services",
+        "delete": "Delete",
+        "edit": "Edit",
+        "servicename": "Type your service name here.",
+        "city": "City",
+        "selectcity": "Select City",
+        "phone": "Phone",
+        "whatsaap": "Type your WhatsApp number eg: 258848090100",
+        "description": "Description",
+        "description1": "Add a description of your service.",
+        "title": "Title",
+        "title1": "Type your service title here.",
+        "category": "Category",
+        "selectcategory": "Select Category",
+        "coverimg": "Cover Image",
+        "galleryimgs": "Service Gallery Images"
     }
 }

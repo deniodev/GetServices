@@ -38,6 +38,27 @@
         "message": "Sua mensagem",
         "comment": "Deixe o seu comentario....",
         "send": "Enviar",
-        "name": "Nome"
+        "name": "Nome",
+        "imageuploaderror": "Erro ao carregar a imagem (a imagem deve ter menos de 4 MB)",
+        "imageupload": "Imagem carregada com êxito!",
+        "updateprofile": "Atualizar Perfil",
+        "createservice": "Criar Serviço",
+        "deleteaccount": "Apagar a Conta",
+        "showservices": "Mostrar Serviços",
+        "delete": "Eliminar",
+        "edit": "Editar",
+        "servicename": "Digite o nome do seu serviço aqui.",
+        "city": "Cidade",
+        "selectcity": "Selecione Cidade",
+        "phone": "Telefone",
+        "whatsaap": "Digite seu número de WhatsApp ex: 258848090100",
+        "description": "Descrição",
+        "description1": "Adicione a descrição do seu serviço.",
+        "title": "Título",
+        "title1": "Digite o título do seu serviço aqui.",
+        "category": "Categoria",
+        "selectcategory": "Selecione a Categoria",
+        "coverimg": "Imagem de Capa",
+        "galleryimgs": "Imagens da Galeria de Serviço"
     }
 }
