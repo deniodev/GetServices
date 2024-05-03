@@ -1,4 +1,4 @@
-import { Menu, Search, LogIn, Languages } from "lucide-react";
+import { Menu, Search, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -6,14 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ModeToggle from "./mode-toggle";
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
@@ -101,19 +94,7 @@ export default function Header() {
             />
           </div>
         </form>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon">
-              <Languages />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-30">
-            <DropdownMenuGroup>
-              <DropdownMenuItem>English</DropdownMenuItem>
-              <DropdownMenuItem>Portuguese</DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <LanguageSwitcher/>
         <ModeToggle />
         <Link to="/profile">
           {currentUser ? (

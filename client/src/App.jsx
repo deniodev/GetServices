@@ -14,6 +14,8 @@ import FaqList from "./pages/FaqList";
 import Contact from "./pages/Contact";
 import { ThemeProvider } from "./components/theme-provider";
 
+import './i18n/index.js'
+
 const App = () => {
   return (
     
