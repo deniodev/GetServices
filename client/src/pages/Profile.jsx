@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
@@ -23,8 +23,10 @@ import {
   signOutUserStart,
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const Profile = () => {
+  const { t } = useTranslation();
   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [file, setFile] = useState(undefined);
@@ -39,7 +41,7 @@ const Profile = () => {
   // firebase storage
   // allow read;
   // allow write: if
-  // request.resource.size < 2 * 1024 * 1024 &&
+  // request.resource.size < 4 * 1024 * 1024 &&
   // request.resource.contentType.matches('image/.*')
 
   useEffect(() => {
@@ -195,13 +197,13 @@ const Profile = () => {
             <p className="text-sm self-center">
               {fileUploadError ? (
                 <span className="text-red-700">
-                  Error Image upload (image must be less than 2 mb)
+                  {t("imageuploaderror")}
                 </span>
               ) : filePerc > 0 && filePerc < 100 ? (
                 <span className="text-slate-700">{`Uploading ${filePerc}%`}</span>
               ) : filePerc === 100 ? (
                 <span className="text-green-700">
-                  Image successfully uploaded!
+                  {t("imageupload")}
                 </span>
               ) : (
                 ""
@@ -243,10 +245,10 @@ const Profile = () => {
                 />
               </div>
               <Button type="submit" variant="" className="w-full">
-                Update Profile
+                {t("updateprofile")}
               </Button>
               <Link to={"/create-service"}>
-                <Button className="w-full">Create Service</Button>
+                <Button className="w-full">{t("createservice")}</Button>
               </Link>
               <div className="flex gap-4">
                 <Button
@@ -255,7 +257,7 @@ const Profile = () => {
                   className="w-full"
                   onClick={handleDeleteUser}
                 >
-                  Delete Account
+                  {t("deleteaccount")}
                 </Button>
                 <Button
                   type="submit"
@@ -273,7 +275,7 @@ const Profile = () => {
 
       <div className="text-center">
         <Button onClick={handleShowServices} variant="link" className="">
-          Show Services
+          {t("showservices")}
         </Button>
 
         {userServices &&
@@ -291,7 +293,7 @@ const Profile = () => {
                 />
               </Link>
               <Link
-                className="flex-1 text-slate-700 font-semibold hover:underline truncate"
+                className="flex-1 font-semibold hover:underline truncate"
                 to={`/service/${service._id}`}
               >
                 <p>{service.name}</p>
@@ -302,11 +304,11 @@ const Profile = () => {
                   onClick={() => handleServiceDelete(service._id)}
                   variant="link"
                 >
-                  Delete
+                  {t("delete")}
                 </Button>
 
                 <Link to={`/update-service/${service._id}`}>
-                  <Button variant="link">Edit</Button>
+                  <Button variant="link">{t("edit")}</Button>
                 </Link>
               </div>
             </div>
