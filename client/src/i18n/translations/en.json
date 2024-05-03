@@ -14,6 +14,11 @@
         "reforms": "Renovations",
         "classes": "Classes",
         "tech": "Design and Tech",
-        "events": "Events"
+        "events": "Events",
+        "allcities": "All Cities",
+        "allcategories": "All Categories",
+        "noservice": "No services found!",
+        "loading": "Loading...",
+        "search1": "Type your search here"
     }
 }
