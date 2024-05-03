@@ -2,6 +2,11 @@
     "translation": {
         "contact":  "Contact",
         "search":   "Search",
-        "about":      "About"
+        "about":    "About",
+        "hero":     "Find the best  home services in your area",
+        "herop1":   "Unlock a world of top-tier home services tailored to your needs.",
+        "herop2":   "From repairs to renovations, we've got you covered..",
+        "getstarted":   "Get Started",
+        "learnmore":    "Learn more →"
     }
 }

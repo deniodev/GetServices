@@ -2,6 +2,11 @@
     "translation": {
         "contact": "Contacto",
         "search":   "Pesquisar",
-        "about":      "Sobre"
+        "about":      "Sobre",
+        "hero":     "Encontre os melhores serviços na sua região",
+        "herop1":   "Desbloqueie um mundo de serviços de primeira linha, adaptados às suas necessidades.",
+        "herop2":   "Desde reparos até reformas, nós temos o que você precisa.",
+        "getstarted":   "Iniciar",
+        "learnmore":    "Saiba mais →"
     }
 }
