@@ -71,7 +71,16 @@
         "google": "Google",
         "signin": "Sign In",
         "signinemail": "Enter your email below to sign in to your account",
-        "dontaccount": "Don't have an account?"
+        "dontaccount": "Don't have an account?",
+        "allreviews": "All Reviews",
+        "leavereview": "Leave a Review",
+        "leavereview1": "Share your experience with the service.",
+        "rating": "Rating",
+        "review": "Review",
+        "submitreview": "Submit Review",
+        "booknow": "Book Now",
+        "gallery": "Galeria",
+        "reviews": "Reviews"
         
     }
 }

@@ -44,7 +44,7 @@ export default function Header() {
                 Services
               </span>
             </h1>
-          </Link>
+            </Link>
           <Link
             to="/about"
             className="text-muted-foreground hover:text-foreground"
@@ -77,7 +77,7 @@ export default function Header() {
                 <h1 className="">
                   <span className="text-slate-500">Home</span>
                   <span className="text-slate-700">Services</span>
-                </h1>
+                 </h1>
               </Link>
               <Link
                 to="/about"

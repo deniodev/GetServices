@@ -71,6 +71,15 @@
         "google": "Google",
         "signin": "Entrar",
         "signinemail": "Digite seu e-mail abaixo para entrar em sua conta",
-        "dontaccount": "Não tem uma conta?"
+        "dontaccount": "Não tem uma conta?",
+        "allreviews": "Todas as Avaliações",
+        "leavereview": "Deixe a Avaliação",
+        "leavereview1": "Compartilhe sua experiência com o serviço.",
+        "rating": "Classificação",
+        "review": "Análise",
+        "submitreview": "Submeter Avaliação",
+        "booknow": "Agende Agora",
+        "gallery": "Galeria",
+        "reviews": "Avaliações"
     }
 }
