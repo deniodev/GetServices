@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -15,6 +15,7 @@ import OAuth from "../components/OAuth";
 import toast from "react-hot-toast";
 
 export default function SignUp() {
+  const { t } = useTranslation();
     const [formData, setFormData] = useState({});
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -59,9 +60,9 @@ export default function SignUp() {
     <form onSubmit={handleSubmit}>
     <Card className="mx-auto max-w-sm">
       <CardHeader>
-        <CardTitle className="text-xl">Sign Up</CardTitle>
+        <CardTitle className="text-xl">{t("signup")}</CardTitle>
         <CardDescription>
-          Enter your information to create an account
+          {t("singnup1")}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -97,14 +98,14 @@ export default function SignUp() {
             />
           </div>
           <Button type="submit" className="w-full">
-            Create an account
+            {t("createaccount")}
           </Button>
           <OAuth/>
         </div>
         <div className="mt-4 text-center text-sm">
-          Already have an account?{" "}
+          {t("haveaccount")}{" "}
           <Link to={"/sign-in"} className="underline">
-            Sign in
+            {t("signin")}
           </Link>
         </div>
       </CardContent>

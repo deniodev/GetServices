@@ -63,6 +63,12 @@
         "creating": "Criando...",
         "signout": "Sair",
         "updateservice": "Atualize Serviço",
-        "updating": "Atualizando..."
+        "updating": "Atualizando...",
+        "signup": "Registar",
+        "singnup1": "Digite seus dados para criar uma conta",
+        "createaccount": "Criar uma conta",
+        "haveaccount": "Já tem uma conta?",
+        "google": "Google",
+        "signin": "Entrar"
     }
 }
