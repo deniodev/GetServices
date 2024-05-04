@@ -5,9 +5,12 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import toast from "react-hot-toast";
+import { useTranslation } from 'react-i18next';
 
 
 const Contact = () => {
+
+  const { t } = useTranslation();
 
   const form = useRef();
 
@@ -27,14 +30,14 @@ const Contact = () => {
   return (
     <section>
       <div className="p-3 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-semibold text-center p-2"> Contact Us</h1>
+      <h1 className="text-3xl font-semibold text-center p-2"> {t("contact1")} </h1>
         <p className='text-s leading-loose text-center'>
-        Have a technical problem? Want to provide feedback on a better feature? Inform us.
+        {t("contact2")}
         </p>
         <form ref={form} onSubmit={sendEmail} className='space-y-8 ml-5 mr-5'>
         <div>
             <Label htmlFor="name"className='ml-1'>
-            Name
+            {t("name")}
             </Label>
             <Input type="name"
             name='user_name'
@@ -59,18 +62,18 @@ const Contact = () => {
           <div>
             <Label htmlFor="subject"
             className='form__label'>
-              Subject
+              {t("subject1")}
             </Label>
             <Input type="text"
             name='user_subject'
             id='subject'
-            placeholder="Please let us know how we can help you"
+            placeholder={t("subject2")}
             required />
           </div>
           <div className="sm:col-span-2">
             <Label htmlFor="message"
             className='form__label'>
-              Your message
+               {t("message")}
             </Label>
             <Textarea
             name='message'
@@ -84,7 +87,7 @@ const Contact = () => {
           <Button 
           type="submit"
           className="btn rounded sm:w-fit">
-            Send
+            {t("send")}
           </Button>
         </form>
 

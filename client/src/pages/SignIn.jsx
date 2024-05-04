@@ -18,8 +18,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 export default function SignIn() {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -61,9 +63,9 @@ export default function SignIn() {
       <form onSubmit={handleSubmit}>
         <Card className="mx-auto max-w-sm">
           <CardHeader>
-            <CardTitle className="text-2xl">Sign In</CardTitle>
+            <CardTitle className="text-2xl"> {t("signin")} </CardTitle>
             <CardDescription>
-              Enter your email below to sign in to your account
+              {t("signinemail")}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -91,14 +93,14 @@ export default function SignIn() {
                 />
               </div>
               <Button type="submit" className="w-full">
-                Sing In
+              {t("signin")}
               </Button>
               <OAuth />
             </div>
             <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{" "}
+              {t("dontaccount")}{" "}
               <Link to={"/sign-up"} className="underline">
-                Sign up
+                {t("signup")}
               </Link>
             </div>
           </CardContent>

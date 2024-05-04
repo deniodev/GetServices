@@ -4,14 +4,17 @@ import ServiceItem from "../components/ServiceItem";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { UserSearch } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
 
 const Search = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [sidebardata, setSidebardata] = useState({
     searchTerm: "",
     type: "all",
-    category: "All",
-    city: "All",
+    category: "all",
+    city: "all",
   });
 
   const [loading, setLoading] = useState(false);
@@ -29,8 +32,8 @@ const Search = () => {
       setSidebardata({
         searchTerm: searchTermFromUrl || "",
         type: typeFromUrl || "all",
-        category: categoryFromUrl || "All",
-        city: cityFromUrl || "All",
+        category: categoryFromUrl || "all",
+        city: cityFromUrl || "all",
       });
     }
 
@@ -53,7 +56,7 @@ const Search = () => {
   }, [location.search]);
 
   const handleChange = (e) => {
-    const { id, value, checked } = e.target;
+    const { id, value } = e.target;
 
     if (id === "category" || id === "city") {
       setSidebardata({ ...sidebardata, [id]: value });
@@ -69,7 +72,7 @@ const Search = () => {
     e.preventDefault();
     const urlParams = new URLSearchParams();
     for (const key in sidebardata) {
-      if (sidebardata[key] !== "All") {
+      if (sidebardata[key] !== "all") {
         urlParams.set(key, sidebardata[key]);
       }
     }
@@ -83,7 +86,7 @@ const Search = () => {
     const urlParams = new URLSearchParams(location.search);
     urlParams.set("startIndex", startIndex);
     const searchQuery = urlParams.toString();
-    const res = await fetch(`/api/listing/get?${searchQuery}`);
+    const res = await fetch(`/api/service/get?${searchQuery}`);
     const data = await res.json();
     if (data.length < 9) {
       setShowMore(false);
@@ -92,45 +95,48 @@ const Search = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row ">
-      <div className="p-7  border-b-2 md:border-r-2 md:min-h-screen ">
+    <div className="flex flex-col max-w-screen-xl mx-auto mt-2">
+      <div className="p-3">
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-          <div className="relative">
+        
+          <div className="flex flex-col md:flex-row gap-2 p-1">
+
+          <div className="relative w-full ">
             <UserSearch className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="text"
-              placeholder="Search"
+              placeholder={t("search1")}
               id="searchTerm"
               className="pl-8 "
               value={sidebardata.searchTerm}
               onChange={handleChange}
             />
           </div>
-          <div className="flex justify-between gap-2">
+
             <select
               onChange={handleChange}
-              defaultValue={"All"}
+              defaultValue={"all"}
               id="category"
-              className="cursor-pointer appearance-none flex h-9 w-[180px] items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent dark:bg-[#0c0a09] px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+              className="cursor-pointer appearance-none flex h-9 items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent dark:bg-[#0c0a09] px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
             >
-              <option value="All">All Categories</option>
-              <option value="Assistência Técnica">Assistência Técnica</option>
-              <option value="Aulas">Aulas</option>
-              <option value="Design e Tecnologia">Design e Tecnologia</option>
-              <option value="Eventos">Eventos</option>
-              <option value="Reformas">Reformas</option>
-              <option value="Serviços Domésticos">Serviços Domésticos</option>
+              <option value="all">{t("allcategories")}</option>
+              <option value="Assistência Técnica">{t("technicalassistance")}</option>
+              <option value="Aulas">{t("classes")}</option>
+              <option value="Design e Tecnologia">{t("tech")}</option>
+              <option value="Eventos">{t("events")}</option>
+              <option value="Reformas">{t("reforms")}</option>
+              <option value="Serviços Domésticos">{t("homeservices")}</option>
             </select>
 
             <select
               id="city"
               name="city"
-              defaultValue={"All"}
+              defaultValue={"all"}
               required
               onChange={handleChange}
-              className="cursor-pointer appearance-none flex h-9 w-[180px] items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent dark:bg-[#0c0a09] px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+              className="cursor-pointer appearance-none flex h-9  items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent dark:bg-[#0c0a09] px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
             >
-              <option value="All">All Cities</option>
+              <option value="all">{t("allcities")}</option>
               <option value="Pemba">Pemba</option>
               <option value="Lichinga">Lichinga</option>
               <option value="Nampula">Nampula</option>
@@ -147,22 +153,20 @@ const Search = () => {
               <option value="Maputo">Maputo</option>
               <option value="Matola">Matola</option>
             </select>
+            <Button className="uppercase">{t("search")}</Button>
           </div>
 
-          <Button className="uppercase">Search</Button>
+       
         </form>
       </div>
-      <div className="flex-1">
-        <h1 className="text-3xl font-bold border-b p-3 mt-5">
-          Service results:
-        </h1>
-        <div className="p-7 flex flex-wrap gap-4">
+      <div className="flex-1 max-w-screen-xl ">
+        <div className="p-2 flex flex-wrap gap-4">
           {!loading && services.length === 0 && (
-            <p className="text-xl text-slate-700">No services found!</p>
+            <p className="text-xl">{t("noservice")}</p>
           )}
           {loading && (
-            <p className="text-xl text-slate-700 text-center w-full">
-              Loading...
+            <p className="text-xl text-center w-full">
+              {t("loading")}
             </p>
           )}
           {!loading &&
@@ -173,7 +177,7 @@ const Search = () => {
 
           {showMore && (
             <Button variant="link" onClick={onShowMoreClick}>
-              Show more
+              {t("showmore")}
             </Button>
           )}
         </div>

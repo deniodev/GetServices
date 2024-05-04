@@ -8,53 +8,57 @@ import { RiPaintBrushFill } from "react-icons/ri";
 import Footer from "@/components/Footer";
 import Hero from "./Hero";
 
+import { useTranslation } from "react-i18next";
+
 const Home = () => {
-  const [assistenciaServices, setAssistenciaServices] = useState([]);
-  const [domesticosServices, setDomesticosServices] = useState([]);
-  const [reformasServices, setReformasServices] = useState([]);
-  const [aulasServices, setAulasServices] = useState([]);
+  const { t } = useTranslation();
+  const [technicalAssistanceServices, setTechnicalAssistanceServices] =
+    useState([]);
+  const [homeServices, setHomeServices] = useState([]);
+  const [reformsServices, setReformsServices] = useState([]);
+  const [classesServices, setClassesServices] = useState([]);
   const [techServices, setTechServices] = useState([]);
-  const [eventosServices, setEventosServices] = useState([]);
+  const [eventsServices, setEventsServices] = useState([]);
 
   useEffect(() => {
-    const fetchAssistenciaServices = async () => {
+    const fetchTechnicalAssistanceServices = async () => {
       try {
         const res = await fetch(
-          "/api/service/get?category=Assistência+Técnica&limit=6"
+          "/api/service/get?category=Assistência+Técnica&limit=8"
         );
         const data = await res.json();
-        setAssistenciaServices(data);
+        setTechnicalAssistanceServices(data);
       } catch (error) {
         console.log(error);
       }
     };
-    const fetchDomesticosServices = async () => {
+    const fetchHomeServices = async () => {
       try {
         const res = await fetch(
-          "/api/service/get?category=Serviços+Domésticos&limit=6"
+          "/api/service/get?category=Serviços+Domésticos&limit=8"
         );
         const data = await res.json();
-        setDomesticosServices(data);
+        setHomeServices(data);
       } catch (error) {
         console.log(error);
       }
     };
 
-    const fetchReformasServices = async () => {
+    const fetchReformsServices = async () => {
       try {
-        const res = await fetch("/api/service/get?category=Reformas&limit=6");
+        const res = await fetch("/api/service/get?category=Reformas&limit=8");
         const data = await res.json();
-        setReformasServices(data);
+        setReformsServices(data);
       } catch (error) {
-        log(error);
+        console.log(error);
       }
     };
 
-    const fetchAulasServices = async () => {
+    const fetchClassesServices = async () => {
       try {
-        const res = await fetch("/api/service/get?category=Aulas&limit=6");
+        const res = await fetch("/api/service/get?category=Aulas&limit=8");
         const data = await res.json();
-        setAulasServices(data);
+        setClassesServices(data);
       } catch (error) {
         log(error);
       }
@@ -63,7 +67,7 @@ const Home = () => {
     const fetchTechServices = async () => {
       try {
         const res = await fetch(
-          "/api/service/get?category=Design+e+Tecnologia&limit=6"
+          "/api/service/get?category=Design+e+Tecnologia&limit=8"
         );
         const data = await res.json();
         setTechServices(data);
@@ -72,124 +76,112 @@ const Home = () => {
       }
     };
 
-    const fetchEventosServices = async () => {
+    const fetchEventsServices = async () => {
       try {
-        const res = await fetch("/api/service/get?category=Eventos&limit=6");
+        const res = await fetch("/api/service/get?category=Eventos&limit=8");
         const data = await res.json();
-        setEventosServices(data);
+        setEventsServices(data);
       } catch (error) {
         log(error);
       }
     };
-
-    fetchAssistenciaServices();
-    fetchAulasServices();
-    fetchDomesticosServices();
-    fetchEventosServices();
-    fetchReformasServices();
+    fetchTechnicalAssistanceServices();
+    fetchHomeServices();
+    fetchReformsServices();
+    fetchClassesServices();
     fetchTechServices();
+    fetchEventsServices();
   }, []);
   return (
     <>
       <div>
-        {/* <div className="flex flex-col gap-6 p-10 px-3 max-w-screen-xl mx-auto">
-          <h1 className="font-bold text-4xl lg:text-6x ">
-            Discover Premier <br /> Home Services and Repairs in Your Area
-          </h1>
-          <div className=" text-xl ">
-            Unlock a world of top-tier home services tailored to your needs.
-            <br />
-            From repairs to renovations, we've got you covered.
-          </div>
-          <div></div>
-          <Link to={"/search"}>
-            <Button>Get Started</Button>
-          </Link>
-        </div> */}
-        <Hero/>
+        <div className="mx-auto">
+          <Hero />
+        </div>
 
         <div className="max-w-screen-xl mx-auto p-3 flex flex-col gap-8 my-10">
-          {assistenciaServices && assistenciaServices.length > 0 && (
-            <div className="">
-              <div className="my-3">
-                <h2 className="text-3xl font-semibold flex gap-2">
-                  <FaTools size={35} />
-                  Assistência Técnica
-                </h2>
-                <Button variant="link" className="p-0">
-                  <Link
-                    className=""
-                    to={"/search?category=Assistência+Técnica"}
-                  >
-                    Show more...
-                  </Link>
-                </Button>
+          {technicalAssistanceServices &&
+            technicalAssistanceServices.length > 0 && (
+              <div className="">
+                <div className="my-3">
+                  <h2 className="text-3xl font-semibold flex gap-2">
+                    <FaTools size={35} />
+                    {t("technicalassistance")}
+                  </h2>
+                  <Button variant="link" className="p-0">
+                    <Link
+                      className=""
+                      to={"/search?category=Assistência+Técnica"}
+                    >
+                      {t("showmore")}
+                    </Link>
+                  </Button>
+                </div>
+                <div className="flex flex-wrap gap-4">
+                  {technicalAssistanceServices.map((service) => (
+                    <ServiceItem service={service} key={service._id} />
+                  ))}
+                </div>
               </div>
-              <div className="flex flex-wrap gap-4">
-                {assistenciaServices.map((service) => (
-                  <ServiceItem service={service} key={service._id} />
-                ))}
-              </div>
-            </div>
-          )}
-          {domesticosServices && domesticosServices.length > 0 && (
+            )}
+          {homeServices && homeServices.length > 0 && (
             <div className="">
               <div className="my-3">
                 <h2 className="text-3xl font-semibold flex gap-2">
                   <FaHome size={35} />
-                  Servicos Domésticos
+                  {t("homeservices")}
                 </h2>
                 <Button variant="link" className="p-0">
                   <Link
                     className=""
                     to={"/search?category=Serviços+Domésticos"}
                   >
-                    Show more...
+                    {t("showmore")}
                   </Link>
                 </Button>
               </div>
               <div className="flex flex-wrap gap-4">
-                {domesticosServices.map((service) => (
+                {homeServices.map((service) => (
                   <ServiceItem service={service} key={service._id} />
                 ))}
               </div>
             </div>
           )}
-          {reformasServices && reformasServices.length > 0 && (
+          {reformsServices && reformsServices.length > 0 && (
             <div className="">
               <div className="my-3">
                 <h2 className="text-3xl font-semibold flex gap-2">
                   <RiPaintBrushFill size={35} />
-                  Reformas
+                  {t("reforms")}
                 </h2>
                 <Button variant="link" className="p-0">
-                  <Link className="" to={"/search?category=Reformas"}>
-                    Show more...
+                  <Link className="" to={"/search?category=reforms"}>
+                    {t("showmore")}
                   </Link>
                 </Button>
               </div>
               <div className="flex flex-wrap gap-4">
-                {reformasServices.map((service) => (
+                {reformsServices.map((service) => (
                   <ServiceItem service={service} key={service._id} />
                 ))}
               </div>
             </div>
           )}
-          {aulasServices && aulasServices.length > 0 && (
+          {classesServices && classesServices.length > 0 && (
             <div className="">
               <div className="my-3">
                 <h2 className="text-3xl font-semibold flex gap-2">
                   <GiTeacher size={35} />
-                  Aulas
+                  {t("classes")}
                 </h2>
                 <Button variant="link" className="p-0">
-                  <Link className="" to={"/search?category=Aulas"}>
-                    Show more...
+                  <Link className="" to={"/search?category=classes"}>
+                    {t("showmore")}
                   </Link>
                 </Button>
               </div>
               <div className="flex flex-wrap gap-4">
-                {aulasServices.map((service) => (
+                {classesServices.map((service) => (
                   <ServiceItem service={service} key={service._id} />
                 ))}
               </div>
@@ -200,14 +192,14 @@ const Home = () => {
               <div className="my-3">
                 <h2 className="text-3xl font-semibold flex gap-2">
                   <FaLaptopCode size={35} />
-                  Design e Tecnologia
+                  {t("tech")}
                 </h2>
                 <Button variant="link" className="p-0">
                   <Link
                     className=""
                     to={"/search?category=Design+e+Tecnologia"}
                   >
-                    Show more...
+                    {t("showmore")}
                   </Link>
                 </Button>
               </div>
@@ -218,21 +210,21 @@ const Home = () => {
               </div>
             </div>
           )}
-          {eventosServices && eventosServices.length > 0 && (
+          {eventsServices && eventsServices.length > 0 && (
             <div className="">
               <div className="my-3">
                 <h2 className="text-3xl font-semibold flex gap-2">
                   <GiPartyPopper size={35} />
-                  Eventos
+                  {t("events")}
                 </h2>
                 <Button variant="link" className="p-0">
-                  <Link className="" to={"/search?category=Eventos"}>
-                    Show more...
+                  <Link className="" to={"/search?category=events"}>
+                    {t("showmore")}
                   </Link>
                 </Button>
               </div>
               <div className="flex flex-wrap gap-4">
-                {eventosServices.map((service) => (
+                {eventsServices.map((service) => (
                   <ServiceItem service={service} key={service._id} />
                 ))}
               </div>

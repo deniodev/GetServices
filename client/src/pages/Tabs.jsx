@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 const Tabs = ({ tab, setTab }) => {
+  const { t } = useTranslation();
   return (
     <div>
       <div
@@ -12,7 +14,7 @@ const Tabs = ({ tab, setTab }) => {
           className="w-full"
           variant={`${tab === "about" ? "outline" : "seconday"}`}
         >
-          About
+          {t("about")}
         </Button>
 
         <Button
@@ -20,7 +22,7 @@ const Tabs = ({ tab, setTab }) => {
           className="w-full"
           variant={`${tab === "gallery" ? "outline" : "seconday"}`}
         >
-          Gallery
+          {t("gallery")}
         </Button>
 
         <Button
@@ -28,7 +30,7 @@ const Tabs = ({ tab, setTab }) => {
           className="w-full"
           variant={`${tab === "reviews" ? "outline" : "seconday"}`}
         >
-          Reviews
+          {t("reviews")}
         </Button>
       </div>
     </div>

@@ -1,8 +1,9 @@
 import React from 'react'
+import FaqList from './FaqList'
 
 const About = () => {
   return (
-    <div>About</div>
+    <div><FaqList/></div>
   )
 }
 

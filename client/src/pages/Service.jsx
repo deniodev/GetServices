@@ -22,10 +22,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { AiFillStar } from "react-icons/ai";
 import { formateDate } from "@/utils/formateDate";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 // https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
 
 export default function Service() {
+  const { t } = useTranslation();
   const [tab, setTab] = useState("about");
   SwiperCore.use([Navigation]);
   const [service, setservice] = useState(null);
@@ -185,7 +187,7 @@ export default function Service() {
                     <div className="space-y-8">
                       <div>
                         <h1 className="text-3xl font-bold">
-                          All Reviews ({service.totalRating})
+                          {t("allreviews")} ({service.totalRating})
                         </h1>
 
                         {service.reviews?.map((review, index) => (
@@ -226,13 +228,13 @@ export default function Service() {
                       </div>
 
                       <div>
-                        <h2 className="text-2xl font-bold">Leave a Review</h2>
+                        <h2 className="text-2xl font-bold">{t("leavereview")}</h2>
                         <p className="text-gray-500 dark:text-gray-400">
-                          Share your experience with the service.
+                        {t("leavereview1")}
                         </p>
                         <form className="mt-6 space-y-4">
                           <div className="space-y-2">
-                            <Label htmlFor="rating">Rating</Label>
+                            <Label htmlFor="rating">{t("rating")}</Label>
 
                             <div>
                               {[...Array(5).keys()].map((_, index) => {
@@ -264,7 +266,7 @@ export default function Service() {
                             </div>
                           </div>
                           <div className="space-y-2">
-                            <Label htmlFor="review">Review</Label>
+                            <Label htmlFor="review">{t("review")}</Label>
                             <Textarea
                               id="review"
                               placeholder="Enter your review"
@@ -277,7 +279,7 @@ export default function Service() {
                             type="submit"
                             onClick={handleSubmitReview}
                           >
-                            Submit Review
+                            {t("submitreview")}
                           </Button>
                         </form>
                       </div>
@@ -294,7 +296,7 @@ export default function Service() {
                 service.userRef !== currentUser._id &&
                 !booking && (
                   <Button onClick={() => setBooking(true)}>
-                    Book Appointment
+                    {t("booknow")}
                   </Button>
                 )}
               {booking && <Booking service={service} />}

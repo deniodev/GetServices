@@ -2,8 +2,10 @@ import HeroBlack from "../assets/hero-black.png";
 import HeroWhite from "../assets/hero-white.png";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 const Hero = () => {
+  const { t } = useTranslation();
   return (
     <div className="relative isolate">
       <svg className="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]">
@@ -34,22 +36,21 @@ const Hero = () => {
       </svg>
       <div className="max-w-screen-xl mx-auto px-6  sm:py-32 lg:flex lg:gap-x-10 lg:px-8 lg:py-20">
         <div className="max-w-2xl mx-auto lg:mx-0 lg:flex-auto">
-          <div className="flex"></div>
-          <h1 className="max-w-lg text-4xl font-bold tracking-tight sm:text-6xl mt-4 lg:mt-20 ">
-            Discover The Best Home Services and Repairs in Your Area
+          <h1 className="max-w-lg text-4xl font-bold tracking-tight sm:text-6xl mt-4 lg:mt-10 ">
+            {t("hero")}
           </h1>
           <p className="mt-6 text-lg leading-8 ">
-            Unlock a world of top-tier home services tailored to your needs.
+            {t("herop1")}
             <br />
-            From repairs to renovations, we've got you covered..
+            {t("herop2")}
           </p>
           <div className="mt-10 flex items-center gap-x-6">
             <Link to={"/search"}>
-              <Button>Get Started</Button>
+              <Button>{t("getstarted")}</Button>
             </Link>
-            <Link to={"/faq"}>
+            <Link to={"/about"}>
               <button className="text-sm font-semibold leading-6">
-                Learn more →
+                {t("learnmore")}
               </button>
             </Link>
           </div>

@@ -4,10 +4,11 @@ import { useDispatch } from "react-redux";
 import { signInSuccess } from "../redux/user/userSlice";
 import {useNavigate} from "react-router-dom";
 import { Button } from "@/components/ui/button"
-
+import { useTranslation } from "react-i18next";
 import { FcGoogle } from "react-icons/fc";
 
 const OAuth = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleGoogleClick = async () => {
@@ -42,7 +43,7 @@ const OAuth = () => {
       variant="outline" 
       className="w-full"
     >
-      <FcGoogle className="mr-2"/> Continue with Google
+      <FcGoogle className="mr-2"/> {t("google")}
     </Button>
   );
 };
