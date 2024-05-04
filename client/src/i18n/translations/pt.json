@@ -69,6 +69,8 @@
         "createaccount": "Criar uma conta",
         "haveaccount": "Já tem uma conta?",
         "google": "Google",
-        "signin": "Entrar"
+        "signin": "Entrar",
+        "signinemail": "Digite seu e-mail abaixo para entrar em sua conta",
+        "dontaccount": "Não tem uma conta?"
     }
 }

@@ -69,7 +69,9 @@
         "createaccount": "Create an account",
         "haveaccount": "Already have an account?",
         "google": "Google",
-        "signin": "Sign In"
+        "signin": "Sign In",
+        "signinemail": "Enter your email below to sign in to your account",
+        "dontaccount": "Don't have an account?"
         
     }
 }
