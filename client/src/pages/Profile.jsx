@@ -265,7 +265,7 @@ const Profile = () => {
                   className="w-full"
                   onClick={handleSignOut}
                 >
-                  Sign Out
+                  {t("signout")}
                 </Button>
               </div>
             </div>

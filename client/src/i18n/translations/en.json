@@ -59,6 +59,10 @@
         "category": "Category",
         "selectcategory": "Select Category",
         "coverimg": "Cover Image",
-        "galleryimgs": "Service Gallery Images"
+        "galleryimgs": "Service Gallery Images",
+        "creating": "Creating...",
+        "signout": "Sign Out",
+        "updateservice": "Update Service",
+        "updating": "Updating..."
     }
 }

@@ -12,8 +12,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useTranslation } from "react-i18next";
 
 const updateService = () => {
+  const { t } = useTranslation();
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const params = useParams();
@@ -48,7 +50,6 @@ const updateService = () => {
     fetchService();
   }, []);
 
-  
   const handleCoverImageSubmit = (e) => {
     if (files.length === 1) {
       setCoverUploading(true);
@@ -94,11 +95,11 @@ const updateService = () => {
           setUploading(false);
         })
         .catch((err) => {
-          setImageUploadError("Image upload failed (2 mb max per image)");
+          setImageUploadError("Image upload failed (4 mb max per image)");
           setUploading(false);
         });
     } else {
-      setImageUploadError("You can only upload 6 images per listing");
+      setImageUploadError("You can only upload 6 images per service");
       setUploading(false);
     }
   };
@@ -143,8 +144,8 @@ const updateService = () => {
   };
 
   const handleChange = (e) => {
-      {
-         setFormData({
+    {
+      setFormData({
         ...formData,
         [e.target.id]: e.target.value,
       });
@@ -181,16 +182,19 @@ const updateService = () => {
   };
   return (
     <main className="p-3 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-semibold text-center p-2"> Update a Service </h1>
+      <h1 className="text-3xl font-semibold text-center p-2">
+        {" "}
+        {t("updateservice")}{" "}
+      </h1>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
-      <div className="flex flex-col gap-4 flex-1">
+        <div className="flex flex-col gap-4 flex-1">
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="name" className="ml-1">
-              Name
+              {t("name")}
             </Label>
             <Input
               type="text"
-              placeholder="Type your service name here."
+              placeholder={t("servicename")}
               id="name"
               maxLength="62"
               minLength="10"
@@ -201,7 +205,7 @@ const updateService = () => {
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="select" className="ml-1">
-              City
+              {t("city")}
             </Label>
             <select
               id="city"
@@ -211,7 +215,7 @@ const updateService = () => {
               required
               className="dark:bg-[#0c0a09] cursor-pointer appearance-none flex h-9 w-full rounded-md border border-input  px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
             >
-              <option value="All">All</option>
+              <option value="All">{t("selectcity")}</option>
               <option value="Pemba">Pemba</option>
               <option value="Lichinga">Lichinga</option>
               <option value="Nampula">Nampula</option>
@@ -231,11 +235,11 @@ const updateService = () => {
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="phone" className="ml-1">
-              Phone
+              {t("phone")}
             </Label>
             <Input
               type="phone"
-              placeholder="Type your whatsaap number ex: 258848090100"
+              placeholder={t("whatsaap")}
               id="phone"
               required
               onChange={handleChange}
@@ -245,11 +249,11 @@ const updateService = () => {
 
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="description" className="ml-1">
-              Description
+              {t("description")}
             </Label>
             <Textarea
               type="text"
-              placeholder="Add description of your service."
+              placeholder={t("description1")}
               id="description"
               rows="6"
               required
@@ -262,11 +266,11 @@ const updateService = () => {
         <div className="flex flex-col flex-1 gap-4">
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="title" className="ml-1">
-              Title
+              {t("title")}
             </Label>
             <Input
               type="title"
-              placeholder="Type your service title here."
+              placeholder={t("title1")}
               id="title"
               required
               onChange={handleChange}
@@ -276,7 +280,7 @@ const updateService = () => {
 
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="category" className="ml-1">
-              Category
+              {t("category")}
             </Label>
             <select
               id="category"
@@ -285,19 +289,21 @@ const updateService = () => {
               value={formData.category}
               className="dark:bg-[#0c0a09] cursor-pointer appearance-none flex h-9 w-full rounded-md border border-input  px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
             >
-              <option value="All">All</option>
-              <option value="Assistência Técnica">Assistência Técnica</option>
-              <option value="Aulas">Aulas</option>
-              <option value="Design e Tecnologia">Design e Tecnologia</option>
-              <option value="Eventos">Eventos</option>
-              <option value="Reformas">Reformas</option>
-              <option value="Serviços Domésticos">Serviços Domésticos</option>
+              <option value="All">{t("selectcategory")}</option>
+              <option value="Assistência Técnica">
+                {t("technicalassistance")}
+              </option>
+              <option value="Aulas">{t("classes")}</option>
+              <option value="Design e Tecnologia">{t("tech")}</option>
+              <option value="Eventos">{t("events")}</option>
+              <option value="Reformas">{t("reforms")}</option>
+              <option value="Serviços Domésticos">{t("homeservices")}</option>
             </select>
           </div>
 
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="cover" className="ml-1">
-              Cover Image
+              {t("coverimg")}
             </Label>
             <div className="flex gap-2">
               <Input
@@ -332,7 +338,7 @@ const updateService = () => {
                   onClick={handleRemoveCoverImage}
                   variant="link"
                 >
-                  Delete
+                  {t("delete")}
                 </Button>
               </div>
             )}
@@ -340,7 +346,7 @@ const updateService = () => {
 
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="images" className="ml-1">
-              Service Gallery Images
+              {t("galleryimgs")}
             </Label>
             <div className="flex gap-2">
               <Input
@@ -380,13 +386,13 @@ const updateService = () => {
                     onClick={() => handleRemoveImage(index)}
                     variant="link"
                   >
-                    Delete
+                    {t("delete")}
                   </Button>
                 </div>
               ))}
 
             <Button disabled={loading || uploading} className="mt-4 p">
-              {loading ? "Updating..." : "Update service"}
+              {loading ? `${t("updating")}` : `${t("updateservice")}`}
             </Button>
             {error && <p className="text-red-700 text-sm">{error}</p>}
           </div>

@@ -59,6 +59,10 @@
         "category": "Categoria",
         "selectcategory": "Selecione a Categoria",
         "coverimg": "Imagem de Capa",
-        "galleryimgs": "Imagens da Galeria de Serviço"
+        "galleryimgs": "Imagens da Galeria de Serviço",
+        "creating": "Criando...",
+        "signout": "Sair",
+        "updateservice": "Atualize Serviço",
+        "updating": "Atualizando..."
     }
 }

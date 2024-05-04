@@ -372,7 +372,7 @@ const createService = () => {
               ))}
 
             <Button disabled={loading || uploading} className="mt-7">
-              {loading ? "Creating..." : "Create service"}
+              {loading ? `${t("creating")}` : `${t("createservice")}`}
             </Button>
             {error && <p className="text-red-700 text-sm">{error}</p>}
           </div>
