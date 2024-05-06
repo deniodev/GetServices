@@ -21,6 +21,8 @@ import {
   deleteUserStart,
   deleteUserSuccess,
   signOutUserStart,
+  signOutUserFailure,
+  signOutUserSuccess,
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -37,12 +39,6 @@ const Profile = () => {
   const [showServicesError, setShowServicesError] = useState(false);
   const [userServices, setUserServices] = useState([]);
   const dispatch = useDispatch();
-
-  // firebase storage
-  // allow read;
-  // allow write: if
-  // request.resource.size < 4 * 1024 * 1024 &&
-  // request.resource.contentType.matches('image/.*')
 
   useEffect(() => {
     if (file) {
@@ -131,14 +127,14 @@ const Profile = () => {
       const res = await fetch("/api/auth/signout");
       const data = await res.json();
       if (data.success === false) {
-        dispatch(deleteUserFailure(data.message));
+        dispatch(signOutUserFailure(data.message));
         toast.error(data.message);
         return;
       }
-      dispatch(deleteUserSuccess(data));
+      dispatch(signOutUserSuccess(data));
       toast.success("Sign Out");
     } catch (error) {
-      dispatch(deleteUserFailure(data.message));
+      dispatch(signOutUserFailure(data.message));
     }
   };
 
@@ -196,15 +192,11 @@ const Profile = () => {
             />
             <p className="text-sm self-center">
               {fileUploadError ? (
-                <span className="text-red-700">
-                  {t("imageuploaderror")}
-                </span>
+                <span className="text-red-700">{t("imageuploaderror")}</span>
               ) : filePerc > 0 && filePerc < 100 ? (
                 <span className="text-slate-700">{`Uploading ${filePerc}%`}</span>
               ) : filePerc === 100 ? (
-                <span className="text-green-700">
-                  {t("imageupload")}
-                </span>
+                <span className="text-green-700">{t("imageupload")}</span>
               ) : (
                 ""
               )}
@@ -252,7 +244,7 @@ const Profile = () => {
               </Link>
               <div className="flex gap-4">
                 <Button
-                  type="submit"
+                  type="button"
                   variant="destructive"
                   className="w-full"
                   onClick={handleDeleteUser}
@@ -260,7 +252,7 @@ const Profile = () => {
                   {t("deleteaccount")}
                 </Button>
                 <Button
-                  type="submit"
+                  type="button"
                   variant="destructive"
                   className="w-full"
                   onClick={handleSignOut}
