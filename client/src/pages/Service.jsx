@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import SwiperCore from "swiper";
 import { useSelector } from "react-redux";
 import { Navigation } from "swiper/modules";
@@ -23,6 +22,7 @@ import { AiFillStar } from "react-icons/ai";
 import { formateDate } from "@/utils/formateDate";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { useParams, useNavigate } from "react-router-dom";
 
 // https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
 
@@ -41,6 +41,7 @@ export default function Service() {
   const [reviewText, setReviewText] = useState("");
 
   const { serviceId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchservice = async () => {
@@ -63,6 +64,14 @@ export default function Service() {
     };
     fetchservice();
   }, [params.serviceId]);
+
+  const handleBookingClick = () => {
+    if (!currentUser) {
+      navigate("/sign-in");
+    } else {
+      setBooking(true);
+    }
+  };
 
   const handleSubmitReview = async (e) => {
     e.preventDefault();
@@ -228,9 +237,11 @@ export default function Service() {
                       </div>
 
                       <div>
-                        <h2 className="text-2xl font-bold">{t("leavereview")}</h2>
+                        <h2 className="text-2xl font-bold">
+                          {t("leavereview")}
+                        </h2>
                         <p className="text-gray-500 dark:text-gray-400">
-                        {t("leavereview1")}
+                          {t("leavereview1")}
                         </p>
                         <form className="mt-6 space-y-4">
                           <div className="space-y-2">
@@ -289,18 +300,15 @@ export default function Service() {
               )}
             </div>
           </div>
-
-          <div>
-            <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4">
-              {currentUser &&
-                service.userRef !== currentUser._id &&
-                !booking && (
-                  <Button onClick={() => setBooking(true)}>
-                    {t("booknow")}
-                  </Button>
-                )}
-              {booking && <Booking service={service} />}
+          {!booking && (
+            <div>
+              <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4">
+                <Button onClick={handleBookingClick}>{t("booknow")}</Button>
+              </div>
             </div>
+          )}
+          <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4">
+            {booking && <Booking service={service} />}
           </div>
         </>
       )}
