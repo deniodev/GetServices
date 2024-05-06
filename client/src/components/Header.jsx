@@ -1,7 +1,12 @@
 import { Menu, Search, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -44,7 +49,7 @@ export default function Header() {
                 Services
               </span>
             </h1>
-            </Link>
+          </Link>
           <Link
             to="/about"
             className="text-muted-foreground hover:text-foreground"
@@ -70,27 +75,33 @@ export default function Header() {
           </SheetTrigger>
           <SheetContent side="left">
             <nav className="grid gap-6 text-lg font-medium">
-              <Link
-                to="/"
-                className="flex items-center gap-2 text-lg font-semibold"
-              >
-                <h1 className="">
-                  <span className="text-slate-500">Home</span>
-                  <span className="text-slate-700">Services</span>
-                 </h1>
-              </Link>
-              <Link
-                to="/about"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                {t("about")}
-              </Link>
-              <Link
-                to="/contact"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                {t("contact")}
-              </Link>
+              <SheetClose asChild>
+                <Link
+                  to="/"
+                  className="flex items-center gap-2 text-lg font-semibold"
+                >
+                  <h1 className="">
+                    <span className="text-slate-500">Home</span>
+                    <span className="text-slate-700">Services</span>
+                  </h1>
+                </Link>
+              </SheetClose>
+              <SheetClose asChild>
+                <Link
+                  to="/about"
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  {t("about")}
+                </Link>
+              </SheetClose>
+              <SheetClose asChild>
+                <Link
+                  to="/contact"
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  {t("contact")}
+                </Link>
+              </SheetClose>
             </nav>
           </SheetContent>
         </Sheet>
@@ -103,7 +114,7 @@ export default function Header() {
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 type="text"
-                placeholder= {t("search")}
+                placeholder={t("search")}
                 className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
