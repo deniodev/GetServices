@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
+import { useTranslation } from "react-i18next";
 
 const Booking = ({ service }) => {
+  const { t } = useTranslation();
   const [appointment, setAppointment] = useState(null);
   const [message, setMessage] = useState("");
   const onChange = (e) => {
@@ -28,8 +30,7 @@ const Booking = ({ service }) => {
       {appointment && (
         <div className="flex flex-col gap-2">
           <p className="">
-            Contact{" "}
-            <span className="font-semibold">{service.name.toLowerCase()}</span>
+            <span className="font-semibold">{service.name}</span>
           </p>
           <Textarea
             name="message"
@@ -37,7 +38,7 @@ const Booking = ({ service }) => {
             rows="2"
             value={message}
             onChange={onChange}
-            placeholder="Enter your message here"
+            placeholder={t("yourmessage")}
           ></Textarea>
 
           <Link
@@ -45,7 +46,7 @@ const Booking = ({ service }) => {
               service.phone
             }&text=${encodeURIComponent(message)}`}
           >
-            <Button className="w-full">Send Message</Button>
+            <Button className="w-full">{t("send")}</Button>
           </Link>
         </div>
       )}
