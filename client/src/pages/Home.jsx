@@ -155,7 +155,7 @@ const Home = () => {
                   {t("reforms")}
                 </h2>
                 <Button variant="link" className="p-0">
-                  <Link className="" to={"/search?category=reforms"}>
+                  <Link className="" to={"/search?category=Reformas"}>
                     {t("showmore")}
                   </Link>
                 </Button>
@@ -175,7 +175,7 @@ const Home = () => {
                   {t("classes")}
                 </h2>
                 <Button variant="link" className="p-0">
-                  <Link className="" to={"/search?category=classes"}>
+                  <Link className="" to={"/search?category=Aulas"}>
                     {t("showmore")}
                   </Link>
                 </Button>
@@ -218,7 +218,7 @@ const Home = () => {
                   {t("events")}
                 </h2>
                 <Button variant="link" className="p-0">
-                  <Link className="" to={"/search?category=events"}>
+                  <Link className="" to={"/search?category=Eventos"}>
                     {t("showmore")}
                   </Link>
                 </Button>

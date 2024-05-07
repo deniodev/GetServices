@@ -76,6 +76,7 @@ export const getServices = async (req, res, next) => {
 
     const filter = {
       name: { $regex: searchTerm, $options: "i" },
+      isApproved: "approved",
     };
 
     if (city) {

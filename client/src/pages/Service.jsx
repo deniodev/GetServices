@@ -3,7 +3,6 @@ import SwiperCore from "swiper";
 import { useSelector } from "react-redux";
 import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
-import Booking from "../components/Booking";
 import Tabs from "./Tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -22,7 +21,21 @@ import { AiFillStar } from "react-icons/ai";
 import { formateDate } from "@/utils/formateDate";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import {
+  PhoneCall,
+  MessageSquareText,
+  CircleX,
+  CalendarDays,
+} from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
 // https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
 
@@ -113,8 +126,30 @@ export default function Service() {
       )}
       {service && !loading && !error && (
         <>
+          {service.isApproved === "pending" && (
+            <div className="flex p-4 mb-4 text-yellow-800 bg-yellow-50 rounded-lg max-w-4xl mx-auto mt-2">
+              <svg
+                aria-hidden="true"
+                className="flex-shrink-0 w-5 h-5"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000
+                  2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+
+              <span className="sr-only">Info</span>
+              <div className="ml-3 text-sm font-medium">{t("isApproved")}</div>
+            </div>
+          )}
+
           <div className="lg:col-span-2">
-            <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4">
+            <div className="flex flex-col max-w-4xl mx-auto p-3 md:my-7 gap-4">
               <div className="flex gap-4 ">
                 <img
                   src={service.coverImg}
@@ -123,7 +158,7 @@ export default function Service() {
                 />
 
                 <div className="">
-                  <Badge>{service.title}</Badge>
+                  <Badge variant="outline">{service.title}</Badge>
 
                   <h3 className="text-[22px] leading-9 font-bold ">
                     {service.name}
@@ -147,6 +182,41 @@ export default function Service() {
                   <p className="text__para font-[15px] lg:max-w-[390px] leading-6">
                     {service.city}
                   </p>
+                  <Drawer>
+                    <DrawerTrigger className="flex mt-2">
+                      <Button onClick={handleBookingClick}>
+                        <CalendarDays className="mr-2 h-4 w-4" />
+                        Agendar
+                      </Button>
+                    </DrawerTrigger>
+                    <DrawerContent>
+                      <DrawerFooter className="flex flex-row justify-between">
+                        <Link to={`tel:${service.phone}`} target="_blank">
+                          <Button variant="outline">
+                            <PhoneCall />
+                          </Button>
+                        </Link>
+                        <Link to={`sms:${service.phone}`} target="_blank">
+                          <Button variant="outline">
+                            <MessageSquareText />
+                          </Button>
+                        </Link>
+                        <Link
+                          to={`http://wa.me/${service.phone}`}
+                          target="_blank"
+                        >
+                          <Button variant="outline">
+                            <FaWhatsapp size={25} />
+                          </Button>
+                        </Link>
+                        <DrawerClose>
+                          <Button variant="outline">
+                            <CircleX />
+                          </Button>
+                        </DrawerClose>
+                      </DrawerFooter>
+                    </DrawerContent>
+                  </Drawer>
                 </div>
               </div>
             </div>
@@ -299,16 +369,6 @@ export default function Service() {
                 </div>
               )}
             </div>
-          </div>
-          {!booking && (
-            <div>
-              <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4">
-                <Button onClick={handleBookingClick}>{t("booknow")}</Button>
-              </div>
-            </div>
-          )}
-          <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4">
-            {booking && <Booking service={service} />}
           </div>
         </>
       )}

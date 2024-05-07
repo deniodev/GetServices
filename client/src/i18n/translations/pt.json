@@ -81,6 +81,7 @@
         "booknow": "Agende Agora",
         "gallery": "Galeria",
         "reviews": "Avaliações",
-        "yourmessage": "Digite sua mensagem aqui"
+        "yourmessage": "Digite sua mensagem aqui",
+        "isApproved": "Para obter aprovação, actualize todos os dados do seu perfil e a galeria com fotografias de trabalhos recentes."
     }
 }
