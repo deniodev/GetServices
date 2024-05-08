@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 
 const createService = () => {
   const { t } = useTranslation();
@@ -160,6 +161,7 @@ const createService = () => {
       if (data.success === false) {
         setError(data.message);
       }
+      toast.success("Service Created!");
       navigate(`/service/${data._id}`);
     } catch (error) {
       setError(error.message);
@@ -168,7 +170,9 @@ const createService = () => {
   };
   return (
     <main className="p-3 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-semibold text-center p-2">{t("createservice")}</h1>
+      <h1 className="text-3xl font-semibold text-center p-2">
+        {t("createservice")}
+      </h1>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
         <div className="flex flex-col gap-4 flex-1">
           <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -272,7 +276,9 @@ const createService = () => {
               className="dark:bg-[#0c0a09] cursor-pointer appearance-none flex h-9 w-full rounded-md border border-input  px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
             >
               <option value="All">{t("selectcategory")}</option>
-              <option value="Assistência Técnica">{t("technicalassistance")}</option>
+              <option value="Assistência Técnica">
+                {t("technicalassistance")}
+              </option>
               <option value="Aulas">{t("classes")}</option>
               <option value="Design e Tecnologia">{t("tech")}</option>
               <option value="Eventos">{t("events")}</option>

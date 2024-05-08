@@ -8,7 +8,7 @@ const Hero = () => {
   const { t } = useTranslation();
   return (
     <div className="relative isolate">
-      <svg className="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]">
+      <svg className="dark:invisible  lg:dark:visible absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]">
         <defs>
           <pattern
             id="83fd4e5a-9d52-42fc-97b6-718e5d7ee527"
