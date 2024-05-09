@@ -1,11 +1,11 @@
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { app } from "../firebase";
-import { useDispatch } from "react-redux";
-import { signInSuccess } from "../redux/user/userSlice";
-import {useNavigate} from "react-router-dom";
-import { Button } from "@/components/ui/button"
-import { useTranslation } from "react-i18next";
-import { FcGoogle } from "react-icons/fc";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { FcGoogle } from 'react-icons/fc';
+import { Button } from './ui/button';
+import { signInSuccess, signInFailure } from '../redux/user/userSlice';
+import { app } from '../firebase';
 
 const OAuth = () => {
   const { t } = useTranslation();
@@ -18,10 +18,10 @@ const OAuth = () => {
 
       const result = await signInWithPopup(auth, provider);
 
-      const res = await fetch("/api/auth/google", {
-        method: "POST",
+      const res = await fetch('/api/auth/google', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           name: result.user.displayName,
@@ -31,19 +31,21 @@ const OAuth = () => {
       });
       const data = await res.json();
       dispatch(signInSuccess(data));
-        navigate('/')
+      navigate('/');
     } catch (error) {
-      console.log("could not sign in with google", error);
+      dispatch(signInFailure(error));
     }
   };
   return (
     <Button
       onClick={handleGoogleClick}
       type="button"
-      variant="outline" 
+      variant="outline"
       className="w-full"
     >
-      <FcGoogle className="mr-2"/> {t("google")}
+      <FcGoogle className="mr-2" />
+      {' '}
+      {t('google')}
     </Button>
   );
 };

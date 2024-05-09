@@ -1,18 +1,21 @@
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
-import { useRef, useState, useEffect } from "react";
+/* eslint no-underscore-dangle: 0 */
+import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useSelector, useDispatch } from 'react-redux';
+import { useRef, useState, useEffect } from 'react';
 import {
   getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
-} from "firebase/storage";
-import { app } from "../firebase";
+} from 'firebase/storage';
+import { useTranslation } from 'react-i18next';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader } from '../components/ui/card';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
+import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
+import { app } from '../firebase';
 import {
   updateUserStart,
   updateUserSuccess,
@@ -23,52 +26,50 @@ import {
   signOutUserStart,
   signOutUserFailure,
   signOutUserSuccess,
-} from "../redux/user/userSlice";
-import { useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
+} from '../redux/user/userSlice';
 
 const Profile = () => {
   const { t } = useTranslation();
   const fileRef = useRef(null);
-  const { currentUser, loading, error } = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
-  const [updateSuccess, setUpdateSuccess] = useState(false);
   const [showServicesError, setShowServicesError] = useState(false);
   const [userServices, setUserServices] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const handleFileUpload = (file) => {
+      const storage = getStorage(app);
+      const fileName = new Date().getTime() + file.name;
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setFilePerc(Math.round(progress));
+        },
+        () => {
+          setFileUploadError(true);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref)
+            .then((downloadURL) => setFormData((prevFormData) => ({
+              ...prevFormData,
+              avatar: downloadURL,
+            })));
+        },
+      );
+    };
+
     if (file) {
       handleFileUpload(file);
     }
   }, [file]);
-
-  const handleFileUpload = (file) => {
-    const storage = getStorage(app);
-    const fileName = new Date().getTime() + file.name;
-    const storageRef = ref(storage, fileName);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setFilePerc(Math.round(progress));
-      },
-      (error) => {
-        setFileUploadError(true);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
-          setFormData({ ...formData, avatar: downloadURL })
-        );
-      }
-    );
-  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -79,9 +80,9 @@ const Profile = () => {
     try {
       dispatch(updateUserStart());
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
@@ -93,11 +94,10 @@ const Profile = () => {
       }
 
       dispatch(updateUserSuccess(data));
-      setUpdateSuccess(true);
-      toast.success("Profile Updated!");
+      toast.success('Profile Updated!');
     } catch (error) {
       dispatch(updateUserFailure(error.message));
-      toast.error(data.message);
+      toast.error(error.message);
     }
   };
 
@@ -105,7 +105,7 @@ const Profile = () => {
     try {
       dispatch(deleteUserStart());
       const res = await fetch(`/api/user/delete/${currentUser._id}`, {
-        method: "DELETE",
+        method: 'DELETE',
       });
       const data = await res.json();
       if (data.success === false) {
@@ -114,17 +114,17 @@ const Profile = () => {
         return;
       }
       dispatch(deleteUserSuccess(data));
-      toast.success("User deleted");
+      toast.success('User deleted');
     } catch (error) {
       dispatch(deleteUserFailure(error.message));
-      toast.error(data.message);
+      toast.error(error.message);
     }
   };
 
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch("/api/auth/signout");
+      const res = await fetch('/api/auth/signout');
       const data = await res.json();
       if (data.success === false) {
         dispatch(signOutUserFailure(data.message));
@@ -132,9 +132,9 @@ const Profile = () => {
         return;
       }
       dispatch(signOutUserSuccess(data));
-      toast.success("Sign Out");
+      toast.success('Sign Out');
     } catch (error) {
-      dispatch(signOutUserFailure(data.message));
+      dispatch(signOutUserFailure(error.message));
     }
   };
 
@@ -156,19 +156,16 @@ const Profile = () => {
   const handleServiceDelete = async (serviceId) => {
     try {
       const res = await fetch(`/api/service/delete/${serviceId}`, {
-        method: "DELETE",
+        method: 'DELETE',
       });
       const data = await res.json();
       if (data.success === false) {
-        console.log(data.message);
         toast.error(data.message);
         return;
       }
-      setUserServices((prev) =>
-        prev.filter((service) => service._id !== serviceId)
-      );
+      setUserServices((prev) => prev.filter((service) => service._id !== serviceId));
     } catch (error) {
-      console.log(error.message);
+      // Do nothing intentionally, as we are handling the error elsewhere
     }
   };
 
@@ -184,21 +181,25 @@ const Profile = () => {
               hidden
               accept="image/*"
             />
-            <img
+            <Avatar
               onClick={() => fileRef.current.click()}
-              src={formData.avatar || currentUser.avatar}
-              alt="profile"
-              className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2"
-            />
+              className="self-center h-24 w-24 cursor-pointer"
+            >
+              <AvatarImage
+                src={formData.avatar || currentUser.avatar}
+                alt="profile"
+              />
+              <AvatarFallback>HS</AvatarFallback>
+            </Avatar>
             <p className="text-sm self-center">
-              {fileUploadError ? (
-                <span className="text-red-700">{t("imageuploaderror")}</span>
-              ) : filePerc > 0 && filePerc < 100 ? (
+              {fileUploadError && (
+                <span className="text-red-700">{t('imageuploaderror')}</span>
+              )}
+              {filePerc > 0 && filePerc < 100 && !fileUploadError && (
                 <span className="text-slate-700">{`Uploading ${filePerc}%`}</span>
-              ) : filePerc === 100 ? (
-                <span className="text-green-700">{t("imageupload")}</span>
-              ) : (
-                ""
+              )}
+              {filePerc === 100 && !fileUploadError && (
+                <span className="text-green-700">{t('imageupload')}</span>
               )}
             </p>
           </CardHeader>
@@ -237,10 +238,10 @@ const Profile = () => {
                 />
               </div>
               <Button type="submit" variant="" className="w-full">
-                {t("updateprofile")}
+                {t('updateprofile')}
               </Button>
-              <Link to={"/create-service"}>
-                <Button className="w-full">{t("createservice")}</Button>
+              <Link to="/create-service">
+                <Button className="w-full">{t('createservice')}</Button>
               </Link>
               <div className="flex gap-4">
                 <Button
@@ -249,7 +250,7 @@ const Profile = () => {
                   className="w-full"
                   onClick={handleDeleteUser}
                 >
-                  {t("deleteaccount")}
+                  {t('deleteaccount')}
                 </Button>
                 <Button
                   type="button"
@@ -257,7 +258,7 @@ const Profile = () => {
                   className="w-full"
                   onClick={handleSignOut}
                 >
-                  {t("signout")}
+                  {t('signout')}
                 </Button>
               </div>
             </div>
@@ -267,12 +268,12 @@ const Profile = () => {
 
       <div className="text-center">
         <Button onClick={handleShowServices} variant="link" className="">
-          {t("showservices")}
+          {t('showservices')}
         </Button>
 
-        {userServices &&
-          userServices.length > 0 &&
-          userServices.map((service) => (
+        {userServices
+          && userServices.length > 0
+          && userServices.map((service) => (
             <div
               key={service._id}
               className="border rounded-lg p-3 flex justify-between items-center gap-4 mb-2"
@@ -296,11 +297,11 @@ const Profile = () => {
                   onClick={() => handleServiceDelete(service._id)}
                   variant="link"
                 >
-                  {t("delete")}
+                  {t('delete')}
                 </Button>
 
                 <Link to={`/update-service/${service._id}`}>
-                  <Button variant="link">{t("edit")}</Button>
+                  <Button variant="link">{t('edit')}</Button>
                 </Link>
               </div>
             </div>

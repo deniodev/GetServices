@@ -1,21 +1,24 @@
-import { useEffect, useState } from "react";
+/* eslint no-underscore-dangle: 0 */
+/* eslint-disable no-plusplus */
+/* eslint-disable consistent-return */
+import { useEffect, useState } from 'react';
 import {
   getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
-} from "firebase/storage";
-import { app } from "../firebase";
-import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { useTranslation } from "react-i18next";
-import toast from "react-hot-toast";
+} from 'firebase/storage';
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import toast from 'react-hot-toast';
+import { app } from '../firebase';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
+import { Textarea } from '../components/ui/textarea';
 
-const updateService = () => {
+const UpdateService = () => {
   const { t } = useTranslation();
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -23,13 +26,13 @@ const updateService = () => {
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
     imageUrls: [],
-    name: "",
-    description: "",
-    city: "",
-    phone: "",
-    coverImg: "",
-    title: "",
-    category: "",
+    name: '',
+    description: '',
+    city: '',
+    phone: '',
+    coverImg: '',
+    title: '',
+    category: '',
   });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -39,7 +42,7 @@ const updateService = () => {
 
   useEffect(() => {
     const fetchService = async () => {
-      const serviceId = params.serviceId;
+      const { serviceId } = params;
       const res = await fetch(`/api/service/get/${serviceId}`);
       const data = await res.json();
       if (data.success === false) {
@@ -51,7 +54,29 @@ const updateService = () => {
     fetchService();
   }, []);
 
-  const handleCoverImageSubmit = (e) => {
+  const storeImage = async (file) => new Promise((resolve, reject) => {
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + file.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log(`Upload is ${progress}% done`);
+      },
+      (error) => {
+        reject(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          resolve(downloadURL);
+        });
+      },
+    );
+  });
+
+  const handleCoverImageSubmit = () => {
     if (files.length === 1) {
       setCoverUploading(true);
       setImageUploadError(false);
@@ -67,17 +92,17 @@ const updateService = () => {
           setImageUploadError(false);
           setCoverUploading(false);
         })
-        .catch((err) => {
-          setImageUploadError("Image upload failed (4 mb max per image)");
+        .catch(() => {
+          setImageUploadError('Image upload failed (4 mb max per image)');
           setCoverUploading(false);
         });
     } else {
-      setImageUploadError("You can only upload 1 image for the cover.");
+      setImageUploadError('You can only upload 1 image for the cover.');
       setCoverUploading(false);
     }
   };
 
-  const handleImageSubmit = (e) => {
+  const handleImageSubmit = () => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
       setImageUploadError(false);
@@ -95,39 +120,14 @@ const updateService = () => {
           setImageUploadError(false);
           setUploading(false);
         })
-        .catch((err) => {
-          setImageUploadError("Image upload failed (4 mb max per image)");
+        .catch(() => {
+          setImageUploadError('Image upload failed (4 mb max per image)');
           setUploading(false);
         });
     } else {
-      setImageUploadError("You can only upload 6 images per service");
+      setImageUploadError('You can only upload 6 images per service');
       setUploading(false);
     }
-  };
-
-  const storeImage = async (file) => {
-    return new Promise((resolve, reject) => {
-      const storage = getStorage(app);
-      const fileName = new Date().getTime() + file.name;
-      const storageRef = ref(storage, fileName);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`Upload is ${progress}% done`);
-        },
-        (error) => {
-          reject(error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            resolve(downloadURL);
-          });
-        }
-      );
-    });
   };
 
   const handleRemoveImage = (index) => {
@@ -137,33 +137,30 @@ const updateService = () => {
     });
   };
 
-  const handleRemoveCoverImage = (index) => {
+  const handleRemoveCoverImage = () => {
     setFormData({
       ...formData,
-      coverImg: "",
+      coverImg: '',
     });
   };
 
   const handleChange = (e) => {
-    {
-      setFormData({
-        ...formData,
-        [e.target.id]: e.target.value,
-      });
-    }
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (formData.imageUrls.length < 1)
-        return setError("You must upload at least one image");
+      if (formData.imageUrls.length < 1) { return setError('You must upload at least one image'); }
       setLoading(true);
       setError(false);
       const res = await fetch(`/api/service/update/${params.serviceId}`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           ...formData,
@@ -175,7 +172,7 @@ const updateService = () => {
       if (data.success === false) {
         setError(data.message);
       }
-      toast.success("Service Updated!");
+      toast.success('Service Updated!');
       navigate(`/service/${data._id}`);
     } catch (error) {
       setError(error.message);
@@ -185,18 +182,19 @@ const updateService = () => {
   return (
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center p-2">
-        {" "}
-        {t("updateservice")}{" "}
+        {' '}
+        {t('Updateservice')}
+        {' '}
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
         <div className="flex flex-col gap-4 flex-1">
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="name" className="ml-1">
-              {t("name")}
+              {t('name')}
             </Label>
             <Input
               type="text"
-              placeholder={t("servicename")}
+              placeholder={t('servicename')}
               id="name"
               maxLength="62"
               minLength="10"
@@ -207,7 +205,7 @@ const updateService = () => {
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="select" className="ml-1">
-              {t("city")}
+              {t('city')}
             </Label>
             <select
               id="city"
@@ -217,7 +215,7 @@ const updateService = () => {
               required
               className="dark:bg-[#0c0a09] cursor-pointer appearance-none flex h-9 w-full rounded-md border border-input  px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
             >
-              <option value="All">{t("selectcity")}</option>
+              <option value="All">{t('selectcity')}</option>
               <option value="Pemba">Pemba</option>
               <option value="Lichinga">Lichinga</option>
               <option value="Nampula">Nampula</option>
@@ -237,11 +235,11 @@ const updateService = () => {
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="phone" className="ml-1">
-              {t("phone")}
+              {t('phone')}
             </Label>
             <Input
               type="phone"
-              placeholder={t("whatsaap")}
+              placeholder={t('whatsaap')}
               id="phone"
               required
               onChange={handleChange}
@@ -251,11 +249,11 @@ const updateService = () => {
 
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="description" className="ml-1">
-              {t("description")}
+              {t('description')}
             </Label>
             <Textarea
               type="text"
-              placeholder={t("description1")}
+              placeholder={t('description1')}
               id="description"
               rows="6"
               required
@@ -268,11 +266,11 @@ const updateService = () => {
         <div className="flex flex-col flex-1 gap-4">
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="title" className="ml-1">
-              {t("title")}
+              {t('title')}
             </Label>
             <Input
               type="title"
-              placeholder={t("title1")}
+              placeholder={t('title1')}
               id="title"
               required
               onChange={handleChange}
@@ -282,7 +280,7 @@ const updateService = () => {
 
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="category" className="ml-1">
-              {t("category")}
+              {t('category')}
             </Label>
             <select
               id="category"
@@ -291,21 +289,21 @@ const updateService = () => {
               value={formData.category}
               className="dark:bg-[#0c0a09] cursor-pointer appearance-none flex h-9 w-full rounded-md border border-input  px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
             >
-              <option value="All">{t("selectcategory")}</option>
+              <option value="All">{t('selectcategory')}</option>
               <option value="Assistência Técnica">
-                {t("technicalassistance")}
+                {t('technicalassistance')}
               </option>
-              <option value="Aulas">{t("classes")}</option>
-              <option value="Design e Tecnologia">{t("tech")}</option>
-              <option value="Eventos">{t("events")}</option>
-              <option value="Reformas">{t("reforms")}</option>
-              <option value="Serviços Domésticos">{t("homeservices")}</option>
+              <option value="Aulas">{t('classes')}</option>
+              <option value="Design e Tecnologia">{t('tech')}</option>
+              <option value="Eventos">{t('events')}</option>
+              <option value="Reformas">{t('reforms')}</option>
+              <option value="Serviços Domésticos">{t('homeservices')}</option>
             </select>
           </div>
 
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="cover" className="ml-1">
-              {t("coverimg")}
+              {t('coverimg')}
             </Label>
             <div className="flex gap-2">
               <Input
@@ -319,7 +317,7 @@ const updateService = () => {
                 disabled={coverUploading}
                 onClick={handleCoverImageSubmit}
               >
-                {coverUploading ? "Uploading..." : "Upload"}
+                {coverUploading ? 'Uploading...' : 'Upload'}
               </Button>
             </div>
           </div>
@@ -328,11 +326,11 @@ const updateService = () => {
             <p className="text-red-700 text-sm">
               {imageUploadError && imageUploadError}
             </p>
-            {formData.coverImg !== "" && (
+            {formData.coverImg !== '' && (
               <div className="flex justify-between p-3 border items-center rounded-md">
                 <img
                   src={formData.coverImg}
-                  alt="cover image"
+                  alt=""
                   className="w-20 h-20 object-contain"
                 />
                 <Button
@@ -340,7 +338,7 @@ const updateService = () => {
                   onClick={handleRemoveCoverImage}
                   variant="link"
                 >
-                  {t("delete")}
+                  {t('delete')}
                 </Button>
               </div>
             )}
@@ -348,7 +346,7 @@ const updateService = () => {
 
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="images" className="ml-1">
-              {t("galleryimgs")}
+              {t('galleryimgs')}
             </Label>
             <div className="flex gap-2">
               <Input
@@ -363,7 +361,7 @@ const updateService = () => {
                 disabled={uploading}
                 onClick={handleImageSubmit}
               >
-                {uploading ? "Uploading..." : "Upload"}
+                {uploading ? 'Uploading...' : 'Upload'}
               </Button>
             </div>
           </div>
@@ -372,8 +370,8 @@ const updateService = () => {
             <p className="text-red-700 text-sm">
               {imageUploadError && imageUploadError}
             </p>
-            {formData.imageUrls.length > 0 &&
-              formData.imageUrls.map((url, index) => (
+            {formData.imageUrls.length > 0
+              && formData.imageUrls.map((url, index) => (
                 <div
                   key={url}
                   className="flex justify-between p-3 border items-center rounded-md"
@@ -388,13 +386,13 @@ const updateService = () => {
                     onClick={() => handleRemoveImage(index)}
                     variant="link"
                   >
-                    {t("delete")}
+                    {t('delete')}
                   </Button>
                 </div>
               ))}
 
             <Button disabled={loading || uploading} className="mt-4 p">
-              {loading ? `${t("updating")}` : `${t("updateservice")}`}
+              {loading ? `${t('updating')}` : `${t('Updateservice')}`}
             </Button>
             {error && <p className="text-red-700 text-sm">{error}</p>}
           </div>
@@ -404,4 +402,4 @@ const updateService = () => {
   );
 };
 
-export default updateService;
+export default UpdateService;

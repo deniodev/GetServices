@@ -1,24 +1,24 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import {
   signInStart,
   signInSuccess,
   signInFailure,
-} from "../redux/user/userSlice";
-import OAuth from "../components/OAuth";
-import { Button } from "@/components/ui/button";
+} from '../redux/user/userSlice';
+import OAuth from '../components/OAuth';
+import { Button } from '../components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import toast from "react-hot-toast";
-import { useTranslation } from "react-i18next";
+} from '../components/ui/card';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
 
 export default function SignIn() {
   const { t } = useTranslation();
@@ -36,10 +36,10 @@ export default function SignIn() {
     e.preventDefault();
     try {
       dispatch(signInStart());
-      const res = await fetch("api/auth/signin", {
-        method: "POST",
+      const res = await fetch('api/auth/signin', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
@@ -50,11 +50,11 @@ export default function SignIn() {
         return;
       }
       dispatch(signInSuccess(data));
-      navigate("/");
-      toast.success("Sign In successful");
+      navigate('/');
+      toast.success('Sign In successful');
     } catch (error) {
-      dispatch(signInFailure(data.message));
-      toast.error(data.message);
+      dispatch(signInFailure(error.message));
+      toast.error(error.message);
     }
   };
 
@@ -63,10 +63,12 @@ export default function SignIn() {
       <form onSubmit={handleSubmit}>
         <Card className="mx-auto max-w-sm">
           <CardHeader>
-            <CardTitle className="text-2xl"> {t("signin")} </CardTitle>
-            <CardDescription>
-              {t("signinemail")}
-            </CardDescription>
+            <CardTitle className="text-2xl">
+              {' '}
+              {t('signin')}
+              {' '}
+            </CardTitle>
+            <CardDescription>{t('signinemail')}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4">
@@ -93,14 +95,15 @@ export default function SignIn() {
                 />
               </div>
               <Button type="submit" className="w-full">
-              {t("signin")}
+                {t('signin')}
               </Button>
               <OAuth />
             </div>
             <div className="mt-4 text-center text-sm">
-              {t("dontaccount")}{" "}
-              <Link to={"/sign-up"} className="underline">
-                {t("signup")}
+              {t('dontaccount')}
+              {' '}
+              <Link to="/sign-up" className="underline">
+                {t('signup')}
               </Link>
             </div>
           </CardContent>

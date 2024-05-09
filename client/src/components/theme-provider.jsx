@@ -1,39 +1,34 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext, useContext, useEffect, useState,
+} from 'react';
+import PropTypes from 'prop-types';
 
-// Define props for ThemeProvider
-const ThemeProviderProps = {
-  children: React.ReactNode,
-  defaultTheme: "system",
-  storageKey: "vite-ui-theme",
-};
-
-// Initial state for ThemeProvider
 const initialState = {
-  theme: "system",
+  theme: 'system',
   setTheme: () => null,
 };
 
-// Create the context for ThemeProvider
 const ThemeProviderContext = createContext(initialState);
 
-// Define the ThemeProvider component
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
-  storageKey = "vite-ui-theme",
-  ...props
+  defaultTheme = 'system',
+  storageKey = 'vite-ui-theme',
 }) {
-  // State to manage the theme
-  const [theme, setTheme] = useState(() => (localStorage.getItem(storageKey)) || defaultTheme);
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem(storageKey) || defaultTheme,
+  );
 
-  // Effect to update theme based on changes
   useEffect(() => {
     const root = window.document.documentElement;
 
-    root.classList.remove("light", "dark");
+    root.classList.remove('light', 'dark');
 
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    if (theme === 'system') {
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+        .matches
+        ? 'dark'
+        : 'light';
 
       root.classList.add(systemTheme);
       return;
@@ -42,7 +37,6 @@ export function ThemeProvider({
     root.classList.add(theme);
   }, [theme]);
 
-  // Value for the context
   const value = {
     theme,
     setTheme: (theme) => {
@@ -52,17 +46,22 @@ export function ThemeProvider({
   };
 
   return (
-    <ThemeProviderContext.Provider {...props} value={value}>
+    <ThemeProviderContext.Provider value={value}>
       {children}
     </ThemeProviderContext.Provider>
   );
 }
 
-// Custom hook to consume the theme
+ThemeProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+  defaultTheme: PropTypes.string.isRequired,
+  storageKey: PropTypes.string.isRequired,
+};
+
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext);
 
-  if (context === undefined) throw new Error("useTheme must be used within a ThemeProvider");
+  if (context === undefined) throw new Error('useTheme must be used within a ThemeProvider');
 
   return context;
 };

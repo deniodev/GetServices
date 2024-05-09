@@ -1,58 +1,60 @@
-import { useEffect, useState } from "react";
-import SwiperCore from "swiper";
-import { useSelector } from "react-redux";
-import { Navigation } from "swiper/modules";
-import "swiper/css/bundle";
-import Tabs from "./Tabs";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+/* eslint-disable consistent-return */
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-param-reassign */
+/* eslint-disable jsx-a11y/control-has-associated-label */
+import { useEffect, useState } from 'react';
+import SwiperCore from 'swiper';
+import { useSelector } from 'react-redux';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css/bundle';
+import { AiFillStar } from 'react-icons/ai';
+import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import {
+  PhoneCall,
+  MessageSquareText,
+  CircleX,
+  CalendarDays,
+} from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
+import Tabs from './Tabs';
+import { Button } from '../components/ui/button';
+import { Badge } from '../components/ui/badge';
+import { Card, CardContent } from '../components/ui/card';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
-import { AvatarImage, Avatar } from "@/components/ui/avatar";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { AiFillStar } from "react-icons/ai";
-import { formateDate } from "@/utils/formateDate";
-import toast from "react-hot-toast";
-import { useTranslation } from "react-i18next";
-import { useParams, useNavigate, Link } from "react-router-dom";
+} from '../components/ui/carousel';
+import { AvatarImage, Avatar } from '../components/ui/avatar';
+import { Label } from '../components/ui/label';
+import { Textarea } from '../components/ui/textarea';
+import formateDate from '../utils/formateDate';
 import {
   Drawer,
   DrawerClose,
   DrawerContent,
   DrawerFooter,
   DrawerTrigger,
-} from "@/components/ui/drawer";
-import {
-  PhoneCall,
-  MessageSquareText,
-  CircleX,
-  CalendarDays,
-} from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+} from '../components/ui/drawer';
 
 // https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
 
 export default function Service() {
   const { t } = useTranslation();
-  const [tab, setTab] = useState("about");
+  const [tab, setTab] = useState('about');
   SwiperCore.use([Navigation]);
   const [service, setservice] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [booking, setBooking] = useState(false);
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
-  const [reviewText, setReviewText] = useState("");
-
+  const [reviewText, setReviewText] = useState('');
   const { serviceId } = useParams();
   const navigate = useNavigate();
 
@@ -80,9 +82,7 @@ export default function Service() {
 
   const handleBookingClick = () => {
     if (!currentUser) {
-      navigate("/sign-in");
-    } else {
-      setBooking(true);
+      navigate('/sign-in');
     }
   };
 
@@ -93,13 +93,13 @@ export default function Service() {
     try {
       if (!rating || !reviewText) {
         setLoading(false);
-        return toast.error("Rating & Review Fields are required");
+        return toast.error('Rating & Review Fields are required');
       }
 
       const res = await fetch(`/api/service/${serviceId}/reviews`, {
-        method: "post",
+        method: 'post',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ rating, reviewText }),
       });
@@ -126,7 +126,7 @@ export default function Service() {
       )}
       {service && !loading && !error && (
         <>
-          {service.isApproved === "pending" && (
+          {service.isApproved === 'pending' && (
             <div className="flex p-4 mb-4 text-yellow-800 bg-yellow-50 rounded-lg max-w-4xl mx-auto mt-2">
               <svg
                 aria-hidden="true"
@@ -140,11 +140,11 @@ export default function Service() {
                   d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000
                   2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                   clipRule="evenodd"
-                ></path>
+                />
               </svg>
 
               <span className="sr-only">Info</span>
-              <div className="ml-3 text-sm font-medium">{t("isApproved")}</div>
+              <div className="ml-3 text-sm font-medium">{t('isApproved')}</div>
             </div>
           )}
 
@@ -153,7 +153,7 @@ export default function Service() {
               <div className="flex gap-4 ">
                 <img
                   src={service.coverImg}
-                  alt="service image"
+                  alt=""
                   className="max-w-[200px] max-h-[200px] rounded-lg"
                 />
 
@@ -169,13 +169,17 @@ export default function Service() {
                       className="flex items-center gap-[6px] text-headingColor text-[14px]
                               leading-5 lg:text-[16px] lg:leading-6 font-semibold"
                     >
-                      <AiFillStar /> {service.averageRating}
+                      <AiFillStar />
+                      {' '}
+                      {service.averageRating}
                     </span>
                     <span
                       className="text-textColor text-[14px]
                               leading-5 lg:text-[16px] lg:leading-6 font-semibold"
                     >
-                      ({service.totalRating})
+                      (
+                      {service.totalRating}
+                      )
                     </span>
                   </div>
 
@@ -226,7 +230,7 @@ export default function Service() {
             </div>
 
             <div className="mt-8">
-              {tab === "about" && (
+              {tab === 'about' && (
                 <div>
                   <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4">
                     <p className="">{service.description}</p>
@@ -234,7 +238,7 @@ export default function Service() {
                 </div>
               )}
 
-              {tab === "gallery" && (
+              {tab === 'gallery' && (
                 <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4 items-center">
                   <Carousel className="w-full max-w-xl ">
                     <CarouselContent>
@@ -245,7 +249,7 @@ export default function Service() {
                               <CardContent className="flex aspect-square items-center justify-center p-6">
                                 <img
                                   src={url}
-                                  alt={`Image ${index + 1}`}
+                                  alt=""
                                   className="rounded-md"
                                 />
                               </CardContent>
@@ -260,13 +264,17 @@ export default function Service() {
                 </div>
               )}
 
-              {tab === "reviews" && (
+              {tab === 'reviews' && (
                 <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4">
                   <div>
                     <div className="space-y-8">
                       <div>
                         <h1 className="text-3xl font-bold">
-                          {t("allreviews")} ({service.totalRating})
+                          {t('allreviews')}
+                          {' '}
+                          (
+                          {service.totalRating}
+                          )
                         </h1>
 
                         {service.reviews?.map((review, index) => (
@@ -299,7 +307,7 @@ export default function Service() {
                               {[...Array(review?.rating).keys()].map(
                                 (_, index) => (
                                   <AiFillStar key={index} />
-                                )
+                                ),
                               )}
                             </div>
                           </div>
@@ -308,14 +316,14 @@ export default function Service() {
 
                       <div>
                         <h2 className="text-2xl font-bold">
-                          {t("leavereview")}
+                          {t('leavereview')}
                         </h2>
                         <p className="text-gray-500 dark:text-gray-400">
-                          {t("leavereview1")}
+                          {t('leavereview1')}
                         </p>
                         <form className="mt-6 space-y-4">
                           <div className="space-y-2">
-                            <Label htmlFor="rating">{t("rating")}</Label>
+                            <Label htmlFor="rating">{t('rating')}</Label>
 
                             <div>
                               {[...Array(5).keys()].map((_, index) => {
@@ -327,8 +335,8 @@ export default function Service() {
                                     type="button"
                                     className={`${
                                       index <= ((rating && hover) || hover)
-                                        ? "text-yellowColor"
-                                        : "text-gray-400"
+                                        ? 'text-yellowColor'
+                                        : 'text-gray-400'
                                     } bg-transparent border-none outline-none text-[22px] cursor-pointer`}
                                     onClick={() => setRating(index)}
                                     onMouseEnter={() => setHover(index)}
@@ -347,7 +355,7 @@ export default function Service() {
                             </div>
                           </div>
                           <div className="space-y-2">
-                            <Label htmlFor="review">{t("review")}</Label>
+                            <Label htmlFor="review">{t('review')}</Label>
                             <Textarea
                               id="review"
                               placeholder="Enter your review"
@@ -360,7 +368,7 @@ export default function Service() {
                             type="submit"
                             onClick={handleSubmitReview}
                           >
-                            {t("submitreview")}
+                            {t('submitreview')}
                           </Button>
                         </form>
                       </div>

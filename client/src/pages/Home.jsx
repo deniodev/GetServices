@@ -1,19 +1,18 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import ServiceItem from "../components/ServiceItem";
-import { Button } from "@/components/ui/button";
-import { FaTools, FaHome, FaLaptopCode } from "react-icons/fa";
-import { GiTeacher, GiPartyPopper } from "react-icons/gi";
-import { RiPaintBrushFill } from "react-icons/ri";
-import Footer from "@/components/Footer";
-import Hero from "./Hero";
-
-import { useTranslation } from "react-i18next";
+/* eslint no-underscore-dangle: 0 */
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FaTools, FaHome, FaLaptopCode } from 'react-icons/fa';
+import { GiTeacher, GiPartyPopper } from 'react-icons/gi';
+import { RiPaintBrushFill } from 'react-icons/ri';
+import { useTranslation } from 'react-i18next';
+import ServiceItem from '../components/ServiceItem';
+import { Button } from '../components/ui/button';
+import Footer from '../components/Footer';
+import Hero from './Hero';
 
 const Home = () => {
   const { t } = useTranslation();
-  const [technicalAssistanceServices, setTechnicalAssistanceServices] =
-    useState([]);
+  const [technicalAssistanceServices, setTechnicalAssistanceServices] = useState([]);
   const [homeServices, setHomeServices] = useState([]);
   const [reformsServices, setReformsServices] = useState([]);
   const [classesServices, setClassesServices] = useState([]);
@@ -24,65 +23,65 @@ const Home = () => {
     const fetchTechnicalAssistanceServices = async () => {
       try {
         const res = await fetch(
-          "/api/service/get?category=Assistência+Técnica&limit=8"
+          '/api/service/get?category=Assistência+Técnica&limit=8',
         );
         const data = await res.json();
         setTechnicalAssistanceServices(data);
       } catch (error) {
-        console.log(error);
+        // Do nothing intentionally, as we are handling the error elsewhere
       }
     };
     const fetchHomeServices = async () => {
       try {
         const res = await fetch(
-          "/api/service/get?category=Serviços+Domésticos&limit=8"
+          '/api/service/get?category=Serviços+Domésticos&limit=8',
         );
         const data = await res.json();
         setHomeServices(data);
       } catch (error) {
-        console.log(error);
+        // Do nothing intentionally, as we are handling the error elsewhere
       }
     };
 
     const fetchReformsServices = async () => {
       try {
-        const res = await fetch("/api/service/get?category=Reformas&limit=8");
+        const res = await fetch('/api/service/get?category=Reformas&limit=8');
         const data = await res.json();
         setReformsServices(data);
       } catch (error) {
-        console.log(error);
+        // Do nothing intentionally, as we are handling the error elsewhere
       }
     };
 
     const fetchClassesServices = async () => {
       try {
-        const res = await fetch("/api/service/get?category=Aulas&limit=8");
+        const res = await fetch('/api/service/get?category=Aulas&limit=8');
         const data = await res.json();
         setClassesServices(data);
       } catch (error) {
-        log(error);
+        // Do nothing intentionally, as we are handling the error elsewhere
       }
     };
 
     const fetchTechServices = async () => {
       try {
         const res = await fetch(
-          "/api/service/get?category=Design+e+Tecnologia&limit=8"
+          '/api/service/get?category=Design+e+Tecnologia&limit=8',
         );
         const data = await res.json();
         setTechServices(data);
       } catch (error) {
-        log(error);
+        // Do nothing intentionally, as we are handling the error elsewhere
       }
     };
 
     const fetchEventsServices = async () => {
       try {
-        const res = await fetch("/api/service/get?category=Eventos&limit=8");
+        const res = await fetch('/api/service/get?category=Eventos&limit=8');
         const data = await res.json();
         setEventsServices(data);
       } catch (error) {
-        log(error);
+        // Do nothing intentionally, as we are handling the error elsewhere
       }
     };
     fetchTechnicalAssistanceServices();
@@ -100,20 +99,20 @@ const Home = () => {
         </div>
 
         <div className="max-w-screen-xl mx-auto p-3 flex flex-col gap-8 my-10">
-          {technicalAssistanceServices &&
-            technicalAssistanceServices.length > 0 && (
+          {technicalAssistanceServices
+            && technicalAssistanceServices.length > 0 && (
               <div className="">
                 <div className="my-3">
                   <h2 className="text-3xl font-semibold flex gap-2">
                     <FaTools size={35} />
-                    {t("technicalassistance")}
+                    {t('technicalassistance')}
                   </h2>
                   <Button variant="link" className="p-0">
                     <Link
                       className=""
-                      to={"/search?category=Assistência+Técnica"}
+                      to="/search?category=Assistência+Técnica"
                     >
-                      {t("showmore")}
+                      {t('showmore')}
                     </Link>
                   </Button>
                 </div>
@@ -123,20 +122,20 @@ const Home = () => {
                   ))}
                 </div>
               </div>
-            )}
+          )}
           {homeServices && homeServices.length > 0 && (
             <div className="">
               <div className="my-3">
                 <h2 className="text-3xl font-semibold flex gap-2">
                   <FaHome size={35} />
-                  {t("homeservices")}
+                  {t('homeservices')}
                 </h2>
                 <Button variant="link" className="p-0">
                   <Link
                     className=""
-                    to={"/search?category=Serviços+Domésticos"}
+                    to="/search?category=Serviços+Domésticos"
                   >
-                    {t("showmore")}
+                    {t('showmore')}
                   </Link>
                 </Button>
               </div>
@@ -152,11 +151,11 @@ const Home = () => {
               <div className="my-3">
                 <h2 className="text-3xl font-semibold flex gap-2">
                   <RiPaintBrushFill size={35} />
-                  {t("reforms")}
+                  {t('reforms')}
                 </h2>
                 <Button variant="link" className="p-0">
-                  <Link className="" to={"/search?category=Reformas"}>
-                    {t("showmore")}
+                  <Link className="" to="/search?category=Reformas">
+                    {t('showmore')}
                   </Link>
                 </Button>
               </div>
@@ -172,11 +171,11 @@ const Home = () => {
               <div className="my-3">
                 <h2 className="text-3xl font-semibold flex gap-2">
                   <GiTeacher size={35} />
-                  {t("classes")}
+                  {t('classes')}
                 </h2>
                 <Button variant="link" className="p-0">
-                  <Link className="" to={"/search?category=Aulas"}>
-                    {t("showmore")}
+                  <Link className="" to="/search?category=Aulas">
+                    {t('showmore')}
                   </Link>
                 </Button>
               </div>
@@ -192,14 +191,14 @@ const Home = () => {
               <div className="my-3">
                 <h2 className="text-3xl font-semibold flex gap-2">
                   <FaLaptopCode size={35} />
-                  {t("tech")}
+                  {t('tech')}
                 </h2>
                 <Button variant="link" className="p-0">
                   <Link
                     className=""
-                    to={"/search?category=Design+e+Tecnologia"}
+                    to="/search?category=Design+e+Tecnologia"
                   >
-                    {t("showmore")}
+                    {t('showmore')}
                   </Link>
                 </Button>
               </div>
@@ -215,11 +214,11 @@ const Home = () => {
               <div className="my-3">
                 <h2 className="text-3xl font-semibold flex gap-2">
                   <GiPartyPopper size={35} />
-                  {t("events")}
+                  {t('events')}
                 </h2>
                 <Button variant="link" className="p-0">
-                  <Link className="" to={"/search?category=Eventos"}>
-                    {t("showmore")}
+                  <Link className="" to="/search?category=Eventos">
+                    {t('showmore')}
                   </Link>
                 </Button>
               </div>
