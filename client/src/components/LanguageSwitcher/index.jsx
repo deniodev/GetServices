@@ -1,14 +1,14 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
+import { Languages } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Languages } from "lucide-react";
-import { Button } from "../ui/button";
+} from '../ui/dropdown-menu';
+import { Button } from '../ui/button';
 
-export const LanguageSwitcher = () => {
+const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
 
   const changeLanguage = (languageCode) => {
@@ -23,13 +23,15 @@ export const LanguageSwitcher = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-30">
-        <DropdownMenuItem onClick={() => changeLanguage("pt")}>
+        <DropdownMenuItem onClick={() => changeLanguage('pt')}>
           Português
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => changeLanguage("en")}>
+        <DropdownMenuItem onClick={() => changeLanguage('en')}>
           English
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 };
+
+export default LanguageSwitcher;

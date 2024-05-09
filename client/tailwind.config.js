@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+/* eslint-disable */ 
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -75,3 +76,4 @@ module.exports = {
   },
   plugins: [require("tailwindcss-animate")],
 }
+

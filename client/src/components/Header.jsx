@@ -1,39 +1,36 @@
-import { Menu, Search, LogIn } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Menu, Search, CircleUserRound } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
 import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetClose,
-} from "@/components/ui/sheet";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import ModeToggle from "./mode-toggle";
-import { LanguageSwitcher } from "./LanguageSwitcher";
-import { useTranslation } from "react-i18next";
+  Sheet, SheetContent, SheetTrigger, SheetClose,
+} from './ui/sheet';
+import ModeToggle from './mode-toggle';
+import LanguageSwitcher from './LanguageSwitcher/index';
 
 export default function Header() {
   const { t } = useTranslation();
   const { currentUser } = useSelector((state) => state.user);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set("searchTerm", searchTerm);
+    urlParams.set('searchTerm', searchTerm);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(location.search);
-    const searchTermFromUrl = urlParams.get("searchTerm");
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchTermFromUrl = urlParams.get('searchTerm');
     if (searchTermFromUrl) {
       setSearchTerm(searchTermFromUrl);
     }
-  }, [location.search]);
+  }, []);
 
   return (
     <header className=" flex h-16 items-center gap-4  bg-background max-w-screen-xl mx-auto p-3 border-b">
@@ -48,10 +45,10 @@ export default function Header() {
           </h1>
         </Link>
         <Link to="/about" className="hover:text-muted-foreground">
-          {t("about")}
+          {t('about')}
         </Link>
         <Link to="/contact" className="hover:text-muted-foreground">
-          {t("contact")}
+          {t('contact')}
         </Link>
       </nav>
       <Sheet>
@@ -78,7 +75,7 @@ export default function Header() {
                 to="/about"
                 className="text-muted-foreground hover:text-foreground"
               >
-                {t("about")}
+                {t('about')}
               </Link>
             </SheetClose>
             <SheetClose asChild>
@@ -86,7 +83,7 @@ export default function Header() {
                 to="/contact"
                 className="text-muted-foreground hover:text-foreground"
               >
-                {t("contact")}
+                {t('contact')}
               </Link>
             </SheetClose>
           </nav>
@@ -101,7 +98,7 @@ export default function Header() {
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="text"
-              placeholder={t("search")}
+              placeholder={t('search')}
               className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -115,11 +112,11 @@ export default function Header() {
             <img
               className="rounded-full h-7 w-7 object-cover"
               src={currentUser.avatar}
-              alt="profile picture"
+              alt=""
             />
           ) : (
             <Button variant="outline" size="icon">
-              <LogIn className="h-5 w-5" />
+              <CircleUserRound className="h-5 w-5" />
             </Button>
           )}
         </Link>
