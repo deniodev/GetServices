@@ -22,7 +22,7 @@ export default function Footer() {
         <Link to="/" target="_blank" className="hover:scale-110 transition-transform duration-500">
           <BsTwitterX />
         </Link>
-        <Link to="/" target="_blank" lassName="hover:scale-110 transition-transform duration-500">
+        <Link to="/" target="_blank" className="hover:scale-110 transition-transform duration-500">
           <BsYoutube />
         </Link>
       </div>
