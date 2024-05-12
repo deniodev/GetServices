@@ -12,12 +12,12 @@ import Service from './pages/Service';
 import Search from './pages/Search';
 import SignIn from './pages/SignIn';
 import Contact from './pages/Contact';
-import { ThemeProvider } from './components/theme-provider';
+// import { ThemeProvider } from './components/theme-provider';
 import './i18n/index';
 
 const App = () => (
   <BrowserRouter>
-    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+    {/* <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme"> */}
       <Headroom>
         <Header />
       </Headroom>
@@ -38,7 +38,7 @@ const App = () => (
           />
         </Route>
       </Routes>
-    </ThemeProvider>
+    {/* </ThemeProvider> */}
   </BrowserRouter>
 );
 
