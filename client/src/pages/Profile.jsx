@@ -10,6 +10,7 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { useTranslation } from 'react-i18next';
+import { Loader2 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader } from '../components/ui/card';
 import { Input } from '../components/ui/input';
@@ -38,6 +39,7 @@ const Profile = () => {
   const [formData, setFormData] = useState({});
   const [showServicesError, setShowServicesError] = useState(false);
   const [userServices, setUserServices] = useState([]);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -140,6 +142,7 @@ const Profile = () => {
 
   const handleShowServices = async () => {
     try {
+      setLoading(true);
       setShowServicesError(false);
       const res = await fetch(`/api/user/services/${currentUser._id}`);
       const data = await res.json();
@@ -150,6 +153,8 @@ const Profile = () => {
       setUserServices(data);
     } catch (error) {
       showServicesError(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -267,8 +272,15 @@ const Profile = () => {
       </form>
 
       <div className="text-center">
-        <Button onClick={handleShowServices} variant="link" className="">
-          {t('showservices')}
+        <Button onClick={handleShowServices} className="mt-2" disabled={loading}>
+          {loading ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              {t('loading')}
+            </>
+          ) : (
+            t('showservices')
+          )}
         </Button>
 
         {userServices
@@ -276,7 +288,7 @@ const Profile = () => {
           && userServices.map((service) => (
             <div
               key={service._id}
-              className="border rounded-lg p-3 flex justify-between items-center gap-4 mb-2"
+              className="border rounded-lg p-3 flex justify-between items-center gap-4 mb-2 mt-2"
             >
               <Link to={`/service/${service._id}`}>
                 <img

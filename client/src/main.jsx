@@ -10,10 +10,10 @@ import { ThemeProvider } from './components/theme-provider';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-      <Toaster position="bottom-center" reverseOrder={false} />
-      <App />
-    </ThemeProvider>
+      <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+        <Toaster position="bottom-center" reverseOrder={false} />
+        <App />
+      </ThemeProvider>
     </PersistGate>
   </Provider>,
 );
