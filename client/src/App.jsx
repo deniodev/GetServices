@@ -12,33 +12,30 @@ import Service from './pages/Service';
 import Search from './pages/Search';
 import SignIn from './pages/SignIn';
 import Contact from './pages/Contact';
-// import { ThemeProvider } from './components/theme-provider';
 import './i18n/index';
 
 const App = () => (
   <BrowserRouter>
-    {/* <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme"> */}
-      <Headroom>
-        <Header />
-      </Headroom>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/service/:serviceId" element={<Service />} />
-        <Route element={<PrivateRoute />}>
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/create-service" element={<CreateService />} />
-          <Route
-            path="/update-service/:serviceId"
-            element={<UpdateService />}
-          />
-        </Route>
-      </Routes>
-    {/* </ThemeProvider> */}
+    <Headroom>
+      <Header />
+    </Headroom>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/sign-in" element={<SignIn />} />
+      <Route path="/sign-up" element={<SignUp />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/search" element={<Search />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/service/:serviceId" element={<Service />} />
+      <Route element={<PrivateRoute />}>
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/create-service" element={<CreateService />} />
+        <Route
+          path="/update-service/:serviceId"
+          element={<UpdateService />}
+        />
+      </Route>
+    </Routes>
   </BrowserRouter>
 );
 
