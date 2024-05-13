@@ -1,7 +1,8 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import { Loader2 } from 'lucide-react';
 import { Label } from '../components/ui/label';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
@@ -9,12 +10,12 @@ import { Button } from '../components/ui/button';
 
 const Contact = () => {
   const { t } = useTranslation();
-
+  const [loading, setLoading] = useState(false);
   const form = useRef();
 
   const sendEmail = (e) => {
     e.preventDefault();
-
+    setLoading(true);
     emailjs
       .sendForm(
         'service_up3dqi5',
@@ -23,6 +24,7 @@ const Contact = () => {
         'r10s-hMpE6DwP6_gw',
       )
       .then(() => {
+        setLoading(false);
         toast.success('Message sent!');
         e.target.reset();
       });
@@ -90,8 +92,19 @@ const Contact = () => {
               className="form__input mt-1"
             />
           </div>
-          <Button type="submit" className="btn rounded sm:w-fit">
-            {t('send')}
+          <Button
+            type="submit"
+            className="btn rounded sm:w-fit"
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                {t('loading')}
+              </>
+            ) : (
+              t('send')
+            )}
           </Button>
         </form>
       </div>
