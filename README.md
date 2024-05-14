@@ -1,4 +1,4 @@
-<h1><b>Carhub App Frontend</b></h1>
+<h1><b>Moz-Services</b></h1>
 
 </div>
 
@@ -186,4 +186,3 @@ If you like this project consider adding a ⭐️
 This project is [MIT](./LICENSE) licensed.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
