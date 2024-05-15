@@ -9,7 +9,7 @@ import './setup';
 import { ThemeProvider } from '../components/theme-provider';
 
 describe('App', () => {
-  it('checking whetever service text is available', () => {
+  it('renders without crashing', () => {
     render(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
@@ -19,7 +19,9 @@ describe('App', () => {
         </PersistGate>
       </Provider>,
     );
-    const text = screen.getByText('Services');
+    const text = screen.getByText('Sobre');
     expect(text).toBeInTheDocument();
   });
 });
+
+
