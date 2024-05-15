@@ -10,6 +10,8 @@ import {
 } from './ui/sheet';
 import ModeToggle from './mode-toggle';
 import LanguageSwitcher from './LanguageSwitcher/index';
+import logoWhite from '../assets/logo-white.png';
+import logoBlack from '../assets/logo-black.png';
 
 export default function Header() {
   const { t } = useTranslation();
@@ -33,16 +35,11 @@ export default function Header() {
   }, []);
 
   return (
-    <header className=" flex h-16 items-center gap-4  bg-background max-w-screen-xl mx-auto p-3 border-b">
-      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 ">
-        <Link
-          to="/"
-          className="flex items-center gap-2 text-lg font-bold md:text-base"
-        >
-          <h1>
-            <span className="text-slate-700 dark:text-slate-500">Home</span>
-            <span className="text-slate-500 dark:text-slate-100">Services</span>
-          </h1>
+    <header className="flex h-16 items-center gap-4  bg-background max-w-screen-xl mx-auto p-3 border-b">
+      <nav className="hidden flex-col gap-4 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 ">
+        <Link to="/">
+          <img src={logoBlack} alt="logo" className="hidden dark:block w-60" />
+          <img src={logoWhite} alt="logo" className="dark:hidden w-60" />
         </Link>
         <Link to="/about" className="hover:text-muted-foreground">
           {t('about')}
@@ -64,10 +61,12 @@ export default function Header() {
                 to="/"
                 className="flex items-center gap-2 text-lg font-semibold"
               >
-                <h1 className="">
-                  <span className="text-slate-500">Home</span>
-                  <span className="text-slate-700">Services</span>
-                </h1>
+                <img
+                  src={logoBlack}
+                  alt="logo"
+                  className="hidden dark:block w-32"
+                />
+                <img src={logoWhite} alt="logo" className="dark:hidden w-32" />
               </Link>
             </SheetClose>
             <SheetClose asChild>
