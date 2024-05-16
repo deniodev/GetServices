@@ -1,7 +1,8 @@
 <h1><b>Moz-Services</b></h1>
 
-![mozservices](https://github.com/deniodev/home-services/assets/92977776/59f8d0a5-f8c2-444c-9324-38a17379106e)
 
+
+![moz](https://github.com/deniodev/moz-services/assets/92977776/b3f707a8-3152-4b8d-b2e5-4feba0454227)
 
 
 </div>
