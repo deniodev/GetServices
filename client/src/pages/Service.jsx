@@ -196,12 +196,12 @@ export default function Service() {
                     <DrawerContent>
                       <DrawerFooter className="flex flex-row justify-between">
                         <Link to={`tel:${service.phone}`} target="_blank">
-                          <Button variant="outline">
+                          <Button variant="outline" title={`${service.phone}`}>
                             <PhoneCall />
                           </Button>
                         </Link>
                         <Link to={`sms:${service.phone}`} target="_blank">
-                          <Button variant="outline">
+                          <Button variant="outline" title={`${service.phone}`}>
                             <MessageSquareText />
                           </Button>
                         </Link>
@@ -209,12 +209,12 @@ export default function Service() {
                           to={`http://wa.me/${service.phone}`}
                           target="_blank"
                         >
-                          <Button variant="outline">
+                          <Button variant="outline" title={`${service.phone}`}>
                             <FaWhatsapp size={25} />
                           </Button>
                         </Link>
                         <DrawerClose>
-                          <Button variant="outline">
+                          <Button variant="outline" title="exit">
                             <CircleX />
                           </Button>
                         </DrawerClose>
