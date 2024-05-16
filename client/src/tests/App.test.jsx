@@ -23,5 +23,3 @@ describe('App', () => {
     expect(text).toBeInTheDocument();
   });
 });
-
-
