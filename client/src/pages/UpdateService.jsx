@@ -17,6 +17,7 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Textarea } from '../components/ui/textarea';
+import { BASE_URL } from '../utils/config';
 
 const UpdateService = () => {
   const { t } = useTranslation();
@@ -43,7 +44,10 @@ const UpdateService = () => {
   useEffect(() => {
     const fetchService = async () => {
       const { serviceId } = params;
-      const res = await fetch(`/api/service/get/${serviceId}`);
+      const res = await fetch(`${BASE_URL}/api/service/get/${serviceId}`, {
+        method: 'GET',
+        credentials: 'include',
+      });
       const data = await res.json();
       if (data.success === false) {
         console.log(data.message);
@@ -52,7 +56,7 @@ const UpdateService = () => {
       setFormData(data);
     };
     fetchService();
-  }, []);
+  }, [params]);
 
   const storeImage = async (file) => new Promise((resolve, reject) => {
     const storage = getStorage(app);
@@ -157,7 +161,7 @@ const UpdateService = () => {
       if (formData.imageUrls.length < 1) { return setError('You must upload at least one image'); }
       setLoading(true);
       setError(false);
-      const res = await fetch(`/api/service/update/${params.serviceId}`, {
+      const res = await fetch(`${BASE_URL}/api/service/update/${params.serviceId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -166,6 +170,7 @@ const UpdateService = () => {
           ...formData,
           userRef: currentUser._id,
         }),
+        credentials: 'include',
       });
       const data = await res.json();
       setLoading(false);
@@ -183,7 +188,7 @@ const UpdateService = () => {
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center p-2">
         {' '}
-        {t('Updateservice')}
+        {t('updateservice')}
         {' '}
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
@@ -392,7 +397,7 @@ const UpdateService = () => {
               ))}
 
             <Button disabled={loading || uploading} className="mt-4 p">
-              {loading ? `${t('updating')}` : `${t('Updateservice')}`}
+              {loading ? `${t('updating')}` : `${t('updateservice')}`}
             </Button>
             {error && <p className="text-red-700 text-sm">{error}</p>}
           </div>

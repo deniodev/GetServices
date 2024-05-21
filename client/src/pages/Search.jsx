@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import ServiceItem from '../components/ServiceItem';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
+import { BASE_URL } from '../utils/config';
 
 const Search = () => {
   const { t } = useTranslation();
@@ -41,7 +42,7 @@ const Search = () => {
       setLoading(true);
       setShowMore(false);
       const searchQuery = urlParams.toString();
-      const res = await fetch(`/api/service/get?${searchQuery}`);
+      const res = await fetch(`${BASE_URL}/api/service/get?${searchQuery}`);
       const data = await res.json();
       if (data.length > 8) {
         setShowMore(true);
@@ -86,7 +87,7 @@ const Search = () => {
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set('startIndex', startIndex);
     const searchQuery = urlParams.toString();
-    const res = await fetch(`/api/service/get?${searchQuery}`);
+    const res = await fetch(`${BASE_URL}/api/service/get?${searchQuery}`);
     const data = await res.json();
     if (data.length < 9) {
       setShowMore(false);

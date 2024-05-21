@@ -40,6 +40,7 @@ import {
   DrawerFooter,
   DrawerTrigger,
 } from '../components/ui/drawer';
+import { BASE_URL } from '../utils/config';
 
 // https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
 
@@ -62,7 +63,7 @@ export default function Service() {
     const fetchservice = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/service/get/${params.serviceId}`);
+        const res = await fetch(`${BASE_URL}/api/service/get/${params.serviceId}`);
         const data = await res.json();
         if (data.success === false) {
           setError(true);
@@ -96,12 +97,13 @@ export default function Service() {
         return toast.error('Rating & Review Fields are required');
       }
 
-      const res = await fetch(`/api/service/${serviceId}/reviews`, {
+      const res = await fetch(`${BASE_URL}/api/service/${serviceId}/reviews`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ rating, reviewText }),
+        credentials: 'include',
       });
 
       const result = await res.json();

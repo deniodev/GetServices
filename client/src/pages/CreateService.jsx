@@ -18,6 +18,7 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Textarea } from '../components/ui/textarea';
+import { BASE_URL } from '../utils/config';
 
 const CreateService = () => {
   const { t } = useTranslation();
@@ -143,7 +144,7 @@ const CreateService = () => {
       if (formData.imageUrls.length < 1) return setError('You must upload at least one image');
       setLoading(true);
       setError(false);
-      const res = await fetch('/api/service/create', {
+      const res = await fetch(`${BASE_URL}/api/service/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -152,6 +153,7 @@ const CreateService = () => {
           ...formData,
           userRef: currentUser._id,
         }),
+        credentials: 'include',
       });
       const data = await res.json();
       setLoading(false);

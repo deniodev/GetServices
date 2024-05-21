@@ -9,6 +9,7 @@ import ServiceItem from '../components/ServiceItem';
 import { Button } from '../components/ui/button';
 import Footer from '../components/Footer';
 import Hero from './Hero';
+import { BASE_URL } from '../utils/config';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -23,18 +24,18 @@ const Home = () => {
     const fetchTechnicalAssistanceServices = async () => {
       try {
         const res = await fetch(
-          '/api/service/get?category=Assistência+Técnica&limit=8',
+          `${BASE_URL}/api/service/get?category=Assistência+Técnica&limit=8`,
         );
         const data = await res.json();
         setTechnicalAssistanceServices(data);
       } catch (error) {
-        // Do nothing intentionally, as we are handling the error elsewhere
+        console.log(error);
       }
     };
     const fetchHomeServices = async () => {
       try {
         const res = await fetch(
-          '/api/service/get?category=Serviços+Domésticos&limit=8',
+          `${BASE_URL}/api/service/get?category=Serviços+Domésticos&limit=8`,
         );
         const data = await res.json();
         setHomeServices(data);
@@ -45,7 +46,7 @@ const Home = () => {
 
     const fetchReformsServices = async () => {
       try {
-        const res = await fetch('/api/service/get?category=Reformas&limit=8');
+        const res = await fetch(`${BASE_URL}/api/service/get?category=Reformas&limit=8`);
         const data = await res.json();
         setReformsServices(data);
       } catch (error) {
@@ -55,7 +56,7 @@ const Home = () => {
 
     const fetchClassesServices = async () => {
       try {
-        const res = await fetch('/api/service/get?category=Aulas&limit=8');
+        const res = await fetch(`${BASE_URL}/api/service/get?category=Aulas&limit=8`);
         const data = await res.json();
         setClassesServices(data);
       } catch (error) {
@@ -66,7 +67,7 @@ const Home = () => {
     const fetchTechServices = async () => {
       try {
         const res = await fetch(
-          '/api/service/get?category=Design+e+Tecnologia&limit=8',
+          `${BASE_URL}/api/service/get?category=Design+e+Tecnologia&limit=8`,
         );
         const data = await res.json();
         setTechServices(data);
@@ -77,7 +78,7 @@ const Home = () => {
 
     const fetchEventsServices = async () => {
       try {
-        const res = await fetch('/api/service/get?category=Eventos&limit=8');
+        const res = await fetch(`${BASE_URL}/api/service/get?category=Eventos&limit=8`);
         const data = await res.json();
         setEventsServices(data);
       } catch (error) {

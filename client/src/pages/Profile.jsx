@@ -28,6 +28,7 @@ import {
   signOutUserFailure,
   signOutUserSuccess,
 } from '../redux/user/userSlice';
+import { BASE_URL } from '../utils/config';
 
 const Profile = () => {
   const { t } = useTranslation();
@@ -81,12 +82,13 @@ const Profile = () => {
     e.preventDefault();
     try {
       dispatch(updateUserStart());
-      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+      const res = await fetch(`${BASE_URL}/api/user/update/${currentUser._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
+        credentials: 'include',
       });
       const data = await res.json();
       if (data.success === false) {
@@ -106,7 +108,7 @@ const Profile = () => {
   const handleDeleteUser = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`${BASE_URL}/api/user/delete/${currentUser._id}`, {
         method: 'DELETE',
       });
       const data = await res.json();
@@ -126,7 +128,7 @@ const Profile = () => {
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch('/api/auth/signout');
+      const res = await fetch(`${BASE_URL}/api/auth/signout`);
       const data = await res.json();
       if (data.success === false) {
         dispatch(signOutUserFailure(data.message));
@@ -144,7 +146,10 @@ const Profile = () => {
     try {
       setLoading(true);
       setShowServicesError(false);
-      const res = await fetch(`/api/user/services/${currentUser._id}`);
+      const res = await fetch(`${BASE_URL}/api/user/services/${currentUser._id}`, {
+        method: 'GET',
+        credentials: 'include',
+      });
       const data = await res.json();
       if (data.success === false) {
         setShowServicesError(true);
@@ -160,7 +165,7 @@ const Profile = () => {
 
   const handleServiceDelete = async (serviceId) => {
     try {
-      const res = await fetch(`/api/service/delete/${serviceId}`, {
+      const res = await fetch(`${BASE_URL}/api/service/delete/${serviceId}`, {
         method: 'DELETE',
       });
       const data = await res.json();

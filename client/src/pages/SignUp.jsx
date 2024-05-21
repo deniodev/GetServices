@@ -13,6 +13,7 @@ import {
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import OAuth from '../components/OAuth';
+import { BASE_URL } from '../utils/config';
 
 export default function SignUp() {
   const { t } = useTranslation();
@@ -29,7 +30,7 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('api/auth/signup', {
+      const res = await fetch(`${BASE_URL}/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

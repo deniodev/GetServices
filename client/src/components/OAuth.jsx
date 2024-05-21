@@ -6,6 +6,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { Button } from './ui/button';
 import { signInSuccess, signInFailure } from '../redux/user/userSlice';
 import { app } from '../firebase';
+import { BASE_URL } from '../utils/config';
 
 const OAuth = () => {
   const { t } = useTranslation();
@@ -18,7 +19,7 @@ const OAuth = () => {
 
       const result = await signInWithPopup(auth, provider);
 
-      const res = await fetch('/api/auth/google', {
+      const res = await fetch(`${BASE_URL}/api/auth/google`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,6 +29,7 @@ const OAuth = () => {
           email: result.user.email,
           photo: result.user.photoURL,
         }),
+        credentials: 'include',
       });
       const data = await res.json();
       dispatch(signInSuccess(data));
