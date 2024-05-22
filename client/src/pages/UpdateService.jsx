@@ -183,7 +183,7 @@ const UpdateService = () => {
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center p-2">
         {' '}
-        {t('Updateservice')}
+        {t('updateservice')}
         {' '}
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
@@ -392,7 +392,7 @@ const UpdateService = () => {
               ))}
 
             <Button disabled={loading || uploading} className="mt-4 p">
-              {loading ? `${t('updating')}` : `${t('Updateservice')}`}
+              {loading ? `${t('updating')}` : `${t('updateservice')}`}
             </Button>
             {error && <p className="text-red-700 text-sm">{error}</p>}
           </div>
