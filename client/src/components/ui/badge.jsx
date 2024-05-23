@@ -1,4 +1,3 @@
-/* eslint-disable */ 
 import { cva } from 'class-variance-authority';
 import PropTypes from 'prop-types';
 import { cn } from '@/lib/utils';
@@ -24,7 +23,9 @@ const badgeVariants = cva(
 );
 
 function Badge({ className, variant, ...props }) {
-  return <div className={cn(badgeVariants({ variant }), className)} {...props} />;
+  return (
+    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+  );
 }
 
 Badge.propTypes = {

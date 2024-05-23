@@ -14,33 +14,23 @@ const FaqList = () => {
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="item-1">
           <AccordionTrigger>{t('faq1')}</AccordionTrigger>
-          <AccordionContent>
-            {t('faq1a')}
-          </AccordionContent>
+          <AccordionContent>{t('faq1a')}</AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
           <AccordionTrigger>{t('faq2')}</AccordionTrigger>
-          <AccordionContent>
-            {t('faq2a')}
-          </AccordionContent>
+          <AccordionContent>{t('faq2a')}</AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
           <AccordionTrigger>{t('faq3')}</AccordionTrigger>
-          <AccordionContent>
-            {t('faq3a')}
-          </AccordionContent>
+          <AccordionContent>{t('faq3a')}</AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-4">
           <AccordionTrigger>{t('faq4')}</AccordionTrigger>
-          <AccordionContent>
-            {t('faq4a')}
-          </AccordionContent>
+          <AccordionContent>{t('faq4a')}</AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-5">
           <AccordionTrigger>{t('faq5')}</AccordionTrigger>
-          <AccordionContent>
-            {t('faq5a')}
-          </AccordionContent>
+          <AccordionContent>{t('faq5a')}</AccordionContent>
         </AccordionItem>
       </Accordion>
     </div>

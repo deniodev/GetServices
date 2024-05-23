@@ -1,4 +1,3 @@
-/* eslint no-underscore-dangle: 0 */
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserSearch } from 'lucide-react';
@@ -98,9 +97,7 @@ const Search = () => {
     <div className="flex flex-col max-w-screen-xl mx-auto mt-2">
       <div className="p-3">
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-
           <div className="flex flex-col md:flex-row gap-2 p-1">
-
             <div className="relative w-full ">
               <UserSearch className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
@@ -120,7 +117,9 @@ const Search = () => {
               className="cursor-pointer appearance-none flex h-9 items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent dark:bg-[#0c0a09] px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
             >
               <option value="all">{t('allcategories')}</option>
-              <option value="Assistência Técnica">{t('technicalassistance')}</option>
+              <option value="Assistência Técnica">
+                {t('technicalassistance')}
+              </option>
               <option value="Aulas">{t('classes')}</option>
               <option value="Design e Tecnologia">{t('tech')}</option>
               <option value="Eventos">{t('events')}</option>
@@ -155,7 +154,6 @@ const Search = () => {
             </select>
             <Button className="uppercase">{t('search')}</Button>
           </div>
-
         </form>
       </div>
       <div className="flex-1 max-w-screen-xl ">
@@ -164,13 +162,11 @@ const Search = () => {
             <p className="text-xl">{t('noservice')}</p>
           )}
           {loading && (
-            <p className="text-xl text-center w-full">
-              {t('loading')}
-            </p>
+            <p className="text-xl text-center w-full">{t('loading')}</p>
           )}
-          {!loading
-            && services
-            && services.map((service) => (
+          {!loading &&
+            services &&
+            services.map((service) => (
               <ServiceItem key={service._id} service={service} />
             ))}
 

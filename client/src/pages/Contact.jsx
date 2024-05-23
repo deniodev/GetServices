@@ -35,8 +35,7 @@ const Contact = () => {
       <div className="p-3 max-w-4xl mx-auto">
         <h1 className="text-3xl font-semibold text-center p-2">
           {' '}
-          {t('contact1')}
-          {' '}
+          {t('contact1')}{' '}
         </h1>
         <p className="text-s leading-loose text-center">{t('contact2')}</p>
         <form ref={form} onSubmit={sendEmail} className="space-y-8 ml-5 mr-5">

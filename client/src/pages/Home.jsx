@@ -1,4 +1,3 @@
-/* eslint no-underscore-dangle: 0 */
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaTools, FaHome, FaLaptopCode } from 'react-icons/fa';
@@ -12,12 +11,14 @@ import Hero from './Hero';
 
 const Home = () => {
   const { t } = useTranslation();
-  const [technicalAssistanceServices, setTechnicalAssistanceServices] = useState([]);
+  const [technicalAssistanceServices, setTechnicalAssistanceServices] =
+    useState([]);
   const [homeServices, setHomeServices] = useState([]);
   const [reformsServices, setReformsServices] = useState([]);
   const [classesServices, setClassesServices] = useState([]);
   const [techServices, setTechServices] = useState([]);
   const [eventsServices, setEventsServices] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchTechnicalAssistanceServices = async () => {
@@ -28,7 +29,7 @@ const Home = () => {
         const data = await res.json();
         setTechnicalAssistanceServices(data);
       } catch (error) {
-        // Do nothing intentionally, as we are handling the error elsewhere
+        setError(error.message);
       }
     };
     const fetchHomeServices = async () => {
@@ -39,7 +40,7 @@ const Home = () => {
         const data = await res.json();
         setHomeServices(data);
       } catch (error) {
-        // Do nothing intentionally, as we are handling the error elsewhere
+        setError(error.message);
       }
     };
 
@@ -49,7 +50,7 @@ const Home = () => {
         const data = await res.json();
         setReformsServices(data);
       } catch (error) {
-        // Do nothing intentionally, as we are handling the error elsewhere
+        setError(error.message);
       }
     };
 
@@ -59,7 +60,7 @@ const Home = () => {
         const data = await res.json();
         setClassesServices(data);
       } catch (error) {
-        // Do nothing intentionally, as we are handling the error elsewhere
+        setError(error.message);
       }
     };
 
@@ -71,7 +72,7 @@ const Home = () => {
         const data = await res.json();
         setTechServices(data);
       } catch (error) {
-        // Do nothing intentionally, as we are handling the error elsewhere
+        setError(error.message);
       }
     };
 
@@ -81,7 +82,7 @@ const Home = () => {
         const data = await res.json();
         setEventsServices(data);
       } catch (error) {
-        // Do nothing intentionally, as we are handling the error elsewhere
+        setError(error.message);
       }
     };
     fetchTechnicalAssistanceServices();
@@ -93,14 +94,15 @@ const Home = () => {
   }, []);
   return (
     <>
+      {error && <div className="error-message">Error: {error}</div>}
       <div>
         <div className="mx-auto">
           <Hero />
         </div>
 
         <div className="max-w-screen-xl mx-auto p-3 flex flex-col gap-8 my-10">
-          {technicalAssistanceServices
-            && technicalAssistanceServices.length > 0 && (
+          {technicalAssistanceServices &&
+            technicalAssistanceServices.length > 0 && (
               <div className="">
                 <div className="my-3">
                   <h2 className="text-3xl font-semibold flex gap-2">
@@ -122,7 +124,7 @@ const Home = () => {
                   ))}
                 </div>
               </div>
-          )}
+            )}
           {homeServices && homeServices.length > 0 && (
             <div className="">
               <div className="my-3">
@@ -131,10 +133,7 @@ const Home = () => {
                   {t('homeservices')}
                 </h2>
                 <Button variant="link" className="p-0">
-                  <Link
-                    className=""
-                    to="/search?category=Serviços+Domésticos"
-                  >
+                  <Link className="" to="/search?category=Serviços+Domésticos">
                     {t('showmore')}
                   </Link>
                 </Button>
@@ -194,10 +193,7 @@ const Home = () => {
                   {t('tech')}
                 </h2>
                 <Button variant="link" className="p-0">
-                  <Link
-                    className=""
-                    to="/search?category=Design+e+Tecnologia"
-                  >
+                  <Link className="" to="/search?category=Design+e+Tecnologia">
                     {t('showmore')}
                   </Link>
                 </Button>

@@ -1,6 +1,3 @@
-/* eslint no-underscore-dangle: 0 */
-/* eslint-disable no-plusplus */
-/* eslint-disable consistent-return */
 import { useEffect, useState } from 'react';
 import {
   getDownloadURL,
@@ -17,6 +14,7 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Textarea } from '../components/ui/textarea';
+import { Progress } from '../components/ui/progress';
 
 const UpdateService = () => {
   const { t } = useTranslation();
@@ -39,6 +37,7 @@ const UpdateService = () => {
   const [coverUploading, setCoverUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const fetchService = async () => {
@@ -46,7 +45,7 @@ const UpdateService = () => {
       const res = await fetch(`/api/service/get/${serviceId}`);
       const data = await res.json();
       if (data.success === false) {
-        console.log(data.message);
+        setError(data.message);
         return;
       }
       setFormData(data);
@@ -54,27 +53,29 @@ const UpdateService = () => {
     fetchService();
   }, []);
 
-  const storeImage = async (file) => new Promise((resolve, reject) => {
-    const storage = getStorage(app);
-    const fileName = new Date().getTime() + file.name;
-    const storageRef = ref(storage, fileName);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(`Upload is ${progress}% done`);
-      },
-      (error) => {
-        reject(error);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          resolve(downloadURL);
-        });
-      },
-    );
-  });
+  const storeImage = async (file) =>
+    new Promise((resolve, reject) => {
+      const storage = getStorage(app);
+      const fileName = new Date().getTime() + file.name;
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setProgress(progress);
+        },
+        (error) => {
+          reject(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            resolve(downloadURL);
+          });
+        },
+      );
+    });
 
   const handleCoverImageSubmit = () => {
     if (files.length === 1) {
@@ -154,7 +155,9 @@ const UpdateService = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (formData.imageUrls.length < 1) { return setError('You must upload at least one image'); }
+      if (formData.imageUrls.length < 1) {
+        return setError('You must upload at least one image');
+      }
       setLoading(true);
       setError(false);
       const res = await fetch(`/api/service/update/${params.serviceId}`, {
@@ -183,8 +186,7 @@ const UpdateService = () => {
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center p-2">
         {' '}
-        {t('updateservice')}
-        {' '}
+        {t('updateservice')}{' '}
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
         <div className="flex flex-col gap-4 flex-1">
@@ -320,6 +322,7 @@ const UpdateService = () => {
                 {coverUploading ? 'Uploading...' : 'Upload'}
               </Button>
             </div>
+            {coverUploading && <Progress value={progress} />}
           </div>
 
           <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -364,14 +367,15 @@ const UpdateService = () => {
                 {uploading ? 'Uploading...' : 'Upload'}
               </Button>
             </div>
+            {uploading && <Progress value={progress} />}
           </div>
 
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <p className="text-red-700 text-sm">
               {imageUploadError && imageUploadError}
             </p>
-            {formData.imageUrls.length > 0
-              && formData.imageUrls.map((url, index) => (
+            {formData.imageUrls.length > 0 &&
+              formData.imageUrls.map((url, index) => (
                 <div
                   key={url}
                   className="flex justify-between p-3 border items-center rounded-md"

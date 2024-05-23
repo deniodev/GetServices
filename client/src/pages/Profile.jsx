@@ -1,4 +1,3 @@
-/* eslint no-underscore-dangle: 0 */
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
@@ -52,18 +51,20 @@ const Profile = () => {
       uploadTask.on(
         'state_changed',
         (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           setFilePerc(Math.round(progress));
         },
         () => {
           setFileUploadError(true);
         },
         () => {
-          getDownloadURL(uploadTask.snapshot.ref)
-            .then((downloadURL) => setFormData((prevFormData) => ({
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
+            setFormData((prevFormData) => ({
               ...prevFormData,
               avatar: downloadURL,
-            })));
+            })),
+          );
         },
       );
     };
@@ -165,12 +166,13 @@ const Profile = () => {
       });
       const data = await res.json();
       if (data.success === false) {
-        toast.error(data.message);
         return;
       }
-      setUserServices((prev) => prev.filter((service) => service._id !== serviceId));
+      setUserServices((prev) =>
+        prev.filter((service) => service._id !== serviceId),
+      );
     } catch (error) {
-      // Do nothing intentionally, as we are handling the error elsewhere
+      toast.error(data.message);
     }
   };
 
@@ -272,7 +274,11 @@ const Profile = () => {
       </form>
 
       <div className="text-center">
-        <Button onClick={handleShowServices} className="mt-2" disabled={loading}>
+        <Button
+          onClick={handleShowServices}
+          className="mt-2"
+          disabled={loading}
+        >
           {loading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -283,9 +289,9 @@ const Profile = () => {
           )}
         </Button>
 
-        {userServices
-          && userServices.length > 0
-          && userServices.map((service) => (
+        {userServices &&
+          userServices.length > 0 &&
+          userServices.map((service) => (
             <div
               key={service._id}
               className="border rounded-lg p-3 flex justify-between items-center gap-4 mb-2 mt-2"

@@ -1,4 +1,3 @@
-/* eslint-disable */ 
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
@@ -22,9 +21,7 @@ const DropdownMenuSub = DropdownMenuPrimitive.Sub;
 const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
 
 const DropdownMenuSubTrigger = React.forwardRef(
-  ({
-    className, inset, children, ...props
-  }, ref) => (
+  ({ className, inset, children, ...props }, ref) => (
     <DropdownMenuPrimitive.SubTrigger
       ref={ref}
       className={cn(
@@ -39,7 +36,8 @@ const DropdownMenuSubTrigger = React.forwardRef(
     </DropdownMenuPrimitive.SubTrigger>
   ),
 );
-DropdownMenuSubTrigger.displayName = DropdownMenuPrimitive.SubTrigger.displayName;
+DropdownMenuSubTrigger.displayName =
+  DropdownMenuPrimitive.SubTrigger.displayName;
 
 const DropdownMenuSubContent = React.forwardRef(
   ({ className, ...props }, ref) => (
@@ -53,7 +51,8 @@ const DropdownMenuSubContent = React.forwardRef(
     />
   ),
 );
-DropdownMenuSubContent.displayName = DropdownMenuPrimitive.SubContent.displayName;
+DropdownMenuSubContent.displayName =
+  DropdownMenuPrimitive.SubContent.displayName;
 
 const DropdownMenuContent = React.forwardRef(
   ({ className, sideOffset = 4, ...props }, ref) => (
@@ -89,9 +88,7 @@ const DropdownMenuItem = React.forwardRef(
 DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName;
 
 const DropdownMenuCheckboxItem = React.forwardRef(
-  ({
-    className, children, checked, ...props
-  }, ref) => (
+  ({ className, children, checked, ...props }, ref) => (
     <DropdownMenuPrimitive.CheckboxItem
       ref={ref}
       className={cn(
@@ -110,7 +107,8 @@ const DropdownMenuCheckboxItem = React.forwardRef(
     </DropdownMenuPrimitive.CheckboxItem>
   ),
 );
-DropdownMenuCheckboxItem.displayName = DropdownMenuPrimitive.CheckboxItem.displayName;
+DropdownMenuCheckboxItem.displayName =
+  DropdownMenuPrimitive.CheckboxItem.displayName;
 
 const DropdownMenuRadioItem = React.forwardRef(
   ({ className, children, ...props }, ref) => (

@@ -14,7 +14,7 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import OAuth from '../components/OAuth';
 
-export default function SignUp() {
+const SignUp = () => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
@@ -95,8 +95,7 @@ export default function SignUp() {
               <OAuth />
             </div>
             <div className="mt-4 text-center text-sm">
-              {t('haveaccount')}
-              {' '}
+              {t('haveaccount')}{' '}
               <Link to="/sign-in" className="underline">
                 {t('signin')}
               </Link>
@@ -107,4 +106,6 @@ export default function SignUp() {
       {error && <p className="text-red-500 mt-5">{error}</p>}
     </div>
   );
-}
+};
+
+export default SignUp;

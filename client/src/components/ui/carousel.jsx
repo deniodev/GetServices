@@ -1,4 +1,3 @@
-/* eslint-disable */ 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
@@ -31,10 +30,13 @@ const Carousel = React.forwardRef(
     },
     ref,
   ) => {
-    const [carouselRef, api] = useEmblaCarousel({
-      ...opts,
-      axis: orientation === 'horizontal' ? 'x' : 'y',
-    }, plugins);
+    const [carouselRef, api] = useEmblaCarousel(
+      {
+        ...opts,
+        axis: orientation === 'horizontal' ? 'x' : 'y',
+      },
+      plugins,
+    );
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
 
@@ -55,15 +57,18 @@ const Carousel = React.forwardRef(
       api?.scrollNext();
     }, [api]);
 
-    const handleKeyDown = React.useCallback((event) => {
-      if (event.key === 'ArrowLeft') {
-        event.preventDefault();
-        scrollPrev();
-      } else if (event.key === 'ArrowRight') {
-        event.preventDefault();
-        scrollNext();
-      }
-    }, [scrollPrev, scrollNext]);
+    const handleKeyDown = React.useCallback(
+      (event) => {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          scrollPrev();
+        } else if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          scrollNext();
+        }
+      },
+      [scrollPrev, scrollNext],
+    );
 
     React.useEffect(() => {
       if (!api || !setApi) {
@@ -173,9 +178,7 @@ CarouselItem.propTypes = {
 };
 
 const CarouselPrevious = React.forwardRef(
-  ({
-    className, variant = 'outline', size = 'icon', ...props
-  }, ref) => {
+  ({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
     const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
     return (
@@ -209,9 +212,7 @@ CarouselPrevious.propTypes = {
 };
 
 const CarouselNext = React.forwardRef(
-  ({
-    className, variant = 'outline', size = 'icon', ...props
-  }, ref) => {
+  ({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
     const { orientation, scrollNext, canScrollNext } = useCarousel();
 
     return (
@@ -245,5 +246,9 @@ CarouselNext.propTypes = {
 };
 
 export {
-  Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
 };

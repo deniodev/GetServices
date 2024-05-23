@@ -43,9 +43,7 @@ const OAuth = () => {
       variant="outline"
       className="w-full"
     >
-      <FcGoogle className="mr-2" />
-      {' '}
-      {t('google')}
+      <FcGoogle className="mr-2" /> {t('google')}
     </Button>
   );
 };
