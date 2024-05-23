@@ -1,7 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable no-param-reassign */
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { useEffect, useState } from 'react';
 import SwiperCore from 'swiper';
 import { useSelector } from 'react-redux';
@@ -41,9 +37,7 @@ import {
   DrawerTrigger,
 } from '../components/ui/drawer';
 
-// https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
-
-export default function Service() {
+const Service = () => {
   const { t } = useTranslation();
   const [tab, setTab] = useState('about');
   SwiperCore.use([Navigation]);
@@ -169,17 +163,13 @@ export default function Service() {
                       className="flex items-center gap-[6px] text-headingColor text-[14px]
                               leading-5 lg:text-[16px] lg:leading-6 font-semibold"
                     >
-                      <AiFillStar />
-                      {' '}
-                      {service.averageRating}
+                      <AiFillStar /> {service.averageRating}
                     </span>
                     <span
                       className="text-textColor text-[14px]
                               leading-5 lg:text-[16px] lg:leading-6 font-semibold"
                     >
-                      (
-                      {service.totalRating}
-                      )
+                      ({service.totalRating})
                     </span>
                   </div>
 
@@ -190,7 +180,7 @@ export default function Service() {
                     <DrawerTrigger className="flex mt-2">
                       <Button onClick={handleBookingClick}>
                         <CalendarDays className="mr-2 h-4 w-4" />
-                        Agendar
+                        {t('book')}
                       </Button>
                     </DrawerTrigger>
                     <DrawerContent>
@@ -247,11 +237,7 @@ export default function Service() {
                           <div className="p-1">
                             <Card>
                               <CardContent className="flex aspect-square items-center justify-center p-6">
-                                <img
-                                  src={url}
-                                  alt=""
-                                  className="rounded-md"
-                                />
+                                <img src={url} alt="" className="rounded-md" />
                               </CardContent>
                             </Card>
                           </div>
@@ -270,11 +256,7 @@ export default function Service() {
                     <div className="space-y-8">
                       <div>
                         <h1 className="text-3xl font-bold">
-                          {t('allreviews')}
-                          {' '}
-                          (
-                          {service.totalRating}
-                          )
+                          {t('allreviews')} ({service.totalRating})
                         </h1>
 
                         {service.reviews?.map((review, index) => (
@@ -382,4 +364,6 @@ export default function Service() {
       )}
     </main>
   );
-}
+};
+
+export default Service;

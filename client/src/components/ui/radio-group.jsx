@@ -1,4 +1,3 @@
-/* eslint-disable */ 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CheckIcon } from '@radix-ui/react-icons';

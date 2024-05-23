@@ -20,7 +20,7 @@ import {
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 
-export default function SignIn() {
+const SignIn = () => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
@@ -63,11 +63,7 @@ export default function SignIn() {
       <form onSubmit={handleSubmit}>
         <Card className="mx-auto max-w-sm">
           <CardHeader>
-            <CardTitle className="text-2xl">
-              {' '}
-              {t('signin')}
-              {' '}
-            </CardTitle>
+            <CardTitle className="text-2xl"> {t('signin')} </CardTitle>
             <CardDescription>{t('signinemail')}</CardDescription>
           </CardHeader>
           <CardContent>
@@ -100,8 +96,7 @@ export default function SignIn() {
               <OAuth />
             </div>
             <div className="mt-4 text-center text-sm">
-              {t('dontaccount')}
-              {' '}
+              {t('dontaccount')}{' '}
               <Link to="/sign-up" className="underline">
                 {t('signup')}
               </Link>
@@ -111,4 +106,6 @@ export default function SignIn() {
       </form>
     </div>
   );
-}
+};
+
+export default SignIn;

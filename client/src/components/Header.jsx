@@ -5,9 +5,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import {
-  Sheet, SheetContent, SheetTrigger, SheetClose,
-} from './ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from './ui/sheet';
 import ModeToggle from './mode-toggle';
 import LanguageSwitcher from './LanguageSwitcher/index';
 import logoWhite from '../assets/logo-white.png';

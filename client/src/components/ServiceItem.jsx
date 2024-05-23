@@ -14,8 +14,8 @@ const ServiceItem = ({ service }) => {
         <Link to={`/service/${service._id}`}>
           <img
             src={
-              service.coverImg
-              || 'https://i0.wp.com/florrycreativecare.com/wp-content/uploads/2020/08/blank-profile-picture-mystery-man-avatar-973460.jpg?ssl=1'
+              service.coverImg ||
+              'https://i0.wp.com/florrycreativecare.com/wp-content/uploads/2020/08/blank-profile-picture-mystery-man-avatar-973460.jpg?ssl=1'
             }
             alt="service cover"
             className="h-[320px] sm:h-[220px] w-full object-cover hover:scale-105 transition-scale duration-300"
@@ -26,8 +26,7 @@ const ServiceItem = ({ service }) => {
             <div className="flex items-center justify-between">
               <p className="text-sm  font-semibold">{service.title}</p>
               <div className="flex items-center gap-[6px]">
-                <AiFillStar size={15} />
-                {' '}
+                <AiFillStar size={15} />{' '}
                 <span className="font-semibold">{service.averageRating}</span>
               </div>
             </div>

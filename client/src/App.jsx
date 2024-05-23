@@ -30,10 +30,7 @@ const App = () => (
       <Route element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
         <Route path="/create-service" element={<CreateService />} />
-        <Route
-          path="/update-service/:serviceId"
-          element={<UpdateService />}
-        />
+        <Route path="/update-service/:serviceId" element={<UpdateService />} />
       </Route>
     </Routes>
   </BrowserRouter>
