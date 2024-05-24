@@ -1,4 +1,4 @@
-<h1><b>Moz-Services</b></h1>
+<h1><b>GetServices</b></h1>
 
 
 
@@ -30,9 +30,9 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 Moz-Services <a name="about-project"></a>
+# 📖 GetServices <a name="about-project"></a>
 
-**Moz-Services:** is a full-stack app that aims to connect those in need with those who have the know-how. It's an application that links customers with professionals, offering various types of services.
+**GetServices:** is a full-stack app that aims to connect those in need with those who have the know-how. It's an application that links customers with professionals, offering various types of services.
 
 
 ## 🛠 Built With <a name="built-with"></a>
@@ -87,7 +87,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- <a href="https://home-services-dlys.onrender.com/">Moz-Services Live</a>
+- <a href="https://home-services-dlys.onrender.com/">GetServices Live</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -115,7 +115,7 @@ In order to run this project you need:
 Clone this repository to your desired folder:
 
 ```sh
-  git clone git@github.com:deniodev/home-services.git
+  git clone git@github.com:deniodev/get-services.git
 ```
 
 ### Install
@@ -161,7 +161,6 @@ To run tests, run the following command:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- **Dockerize the app using docker-compose**
 - **Add a contributing guide**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -172,7 +171,7 @@ To run tests, run the following command:
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/deniodev/home-services/issues).
+Feel free to check the [issues page](https://github.com/deniodev/get-services/issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
