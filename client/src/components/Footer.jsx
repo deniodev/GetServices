@@ -1,19 +1,13 @@
 import { Link } from 'react-router-dom';
-import { BsTwitterX, BsYoutube, BsGithub, BsFacebook } from 'react-icons/bs';
+import { BsYoutube, BsGithub, BsFacebook, BsInstagram } from 'react-icons/bs';
 
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <div className="pb-4  border">
-      <div className="text-center mt-4 text-sm pb-2 ">
-        Want to contribute? Find it on{' '}
-        <Link to="https://github.com/deniodev/home-services" target="_blank">
-          <span className=" hover:underline font-semibold">GitHub</span>
-        </Link>
-      </div>
-      <div className="flex items-center justify-center space-x-4 mb-2 text-3xl">
+      <div className="flex items-center justify-center space-x-4 mb-2 text-3xl mt-4">
         <Link
-          to="https://github.com/deniodev"
+          to="https://github.com/deniodev/moz-services"
           target="_blank"
           className="hover:scale-110 transition-transform duration-500"
         >
@@ -31,7 +25,7 @@ export default function Footer() {
           target="_blank"
           className="hover:scale-110 transition-transform duration-500"
         >
-          <BsTwitterX />
+          <BsInstagram />
         </Link>
         <Link
           to="/"
@@ -41,7 +35,18 @@ export default function Footer() {
           <BsYoutube />
         </Link>
       </div>
-      <p className="text-xs text-center"> Copyright ©{year} DASN Lda.</p>
+
+      <p className="text-xs text-center">
+        {' '}
+        ©{year} Developed by{' '}
+        <Link
+          to="https://denio-portfolio.vercel.app/"
+          target="_blank"
+          className="hover:underline font-semibold"
+        >
+          Denio Nhanale
+        </Link>
+      </p>
     </div>
   );
 }

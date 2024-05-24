@@ -94,7 +94,6 @@ const Home = () => {
   }, []);
   return (
     <>
-      {error && <div className="error-message">Error: {error}</div>}
       <div>
         <div className="mx-auto">
           <Hero />
@@ -227,6 +226,7 @@ const Home = () => {
           )}
         </div>
       </div>
+      {error && <div className="error-message">Error: {error}</div>}
       <Footer />
     </>
   );
