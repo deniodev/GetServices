@@ -7,32 +7,32 @@ export default function Footer() {
     <div className="pb-4  border">
       <div className="flex items-center justify-center space-x-4 mb-2 text-3xl mt-4">
         <Link
-          to="https://github.com/deniodev/moz-services"
+          to="https://github.com/deniodev/get-services"
           target="_blank"
           className="hover:scale-110 transition-transform duration-500"
         >
-          <BsGithub />
+          <BsGithub size={20} />
         </Link>
         <Link
           to="/"
           target="_blank"
           className="hover:scale-110 transition-transform duration-500"
         >
-          <BsFacebook />
+          <BsFacebook size={20} />
         </Link>
         <Link
           to="/"
           target="_blank"
           className="hover:scale-110 transition-transform duration-500"
         >
-          <BsInstagram />
+          <BsInstagram size={20} />
         </Link>
         <Link
           to="/"
           target="_blank"
           className="hover:scale-110 transition-transform duration-500"
         >
-          <BsYoutube />
+          <BsYoutube size={20} />
         </Link>
       </div>
 

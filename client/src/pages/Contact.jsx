@@ -32,13 +32,13 @@ const Contact = () => {
 
   return (
     <section>
-      <div className="p-3 max-w-4xl mx-auto">
-        <h1 className="text-3xl font-semibold text-center p-2">
+      <div className="p-3 max-w-screen-xl mx-auto">
+        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl">
           {' '}
           {t('contact1')}{' '}
         </h1>
-        <p className="text-s leading-loose text-center">{t('contact2')}</p>
-        <form ref={form} onSubmit={sendEmail} className="space-y-8 ml-5 mr-5">
+        <p className="leading-7 [&:not(:first-child)]:mt-6">{t('contact2')}</p>
+        <form ref={form} onSubmit={sendEmail} className="space-y-8 mt-8">
           <div>
             <Label htmlFor="name" className="ml-1">
               {t('name')}

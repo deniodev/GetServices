@@ -196,7 +196,7 @@ const Profile = () => {
                 src={formData.avatar || currentUser.avatar}
                 alt="profile"
               />
-              <AvatarFallback>HS</AvatarFallback>
+              <AvatarFallback>GS</AvatarFallback>
             </Avatar>
             <p className="text-sm self-center">
               {fileUploadError && (

@@ -104,6 +104,32 @@ const Service = () => {
         throw new Error(result.message);
       }
 
+      setservice((prevService) => {
+        const newReview = {
+          rating,
+          reviewText,
+          createdAt: new Date().toISOString(),
+          user: {
+            avatar: currentUser.avatar,
+            username: currentUser.username,
+          },
+        };
+
+        const updatedReviews = [newReview, ...prevService.reviews];
+        const updatedTotalRating = prevService.totalRating + 1;
+        const updatedAverageRating = (
+          (prevService.averageRating * prevService.totalRating + rating) /
+          updatedTotalRating
+        ).toFixed(1);
+
+        return {
+          ...prevService,
+          reviews: updatedReviews,
+          totalRating: updatedTotalRating,
+          averageRating: updatedAverageRating,
+        };
+      });
+
       setLoading(false);
       toast.success(result.message);
     } catch (err) {
@@ -145,11 +171,13 @@ const Service = () => {
           <div className="lg:col-span-2">
             <div className="flex flex-col max-w-4xl mx-auto p-3 md:my-7 gap-4">
               <div className="flex gap-4 ">
-                <img
-                  src={service.coverImg}
-                  alt=""
-                  className="max-w-[200px] max-h-[200px] rounded-lg"
-                />
+                <Avatar className="w-[200px] h-[200px] ">
+                  <AvatarImage
+                    src={service.coverImg}
+                    alt="cover image"
+                    className="object-cover"
+                  />
+                </Avatar>
 
                 <div className="">
                   <Badge variant="outline">{service.title}</Badge>
@@ -186,12 +214,12 @@ const Service = () => {
                     <DrawerContent>
                       <DrawerFooter className="flex flex-row justify-between">
                         <Link to={`tel:${service.phone}`} target="_blank">
-                          <Button variant="outline">
+                          <Button variant="outline" title={`${service.phone}`}>
                             <PhoneCall />
                           </Button>
                         </Link>
                         <Link to={`sms:${service.phone}`} target="_blank">
-                          <Button variant="outline">
+                          <Button variant="outline" title={`${service.phone}`}>
                             <MessageSquareText />
                           </Button>
                         </Link>
@@ -199,12 +227,12 @@ const Service = () => {
                           to={`http://wa.me/${service.phone}`}
                           target="_blank"
                         >
-                          <Button variant="outline">
+                          <Button variant="outline" title={`${service.phone}`}>
                             <FaWhatsapp size={25} />
                           </Button>
                         </Link>
                         <DrawerClose>
-                          <Button variant="outline">
+                          <Button variant="outline" title="Exit">
                             <CircleX />
                           </Button>
                         </DrawerClose>
