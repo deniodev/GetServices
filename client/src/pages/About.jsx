@@ -5,7 +5,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '../components/ui/accordion';
-import Footer from '../components/Footer';
 
 const About = () => {
   const { t } = useTranslation();
@@ -48,7 +47,6 @@ const About = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

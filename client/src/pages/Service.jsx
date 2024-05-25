@@ -104,6 +104,33 @@ const Service = () => {
         throw new Error(result.message);
       }
 
+      // Update the reviews in the state
+      setservice((prevService) => {
+        const newReview = {
+          rating,
+          reviewText,
+          createdAt: new Date().toISOString(),
+          user: {
+            avatar: currentUser.avatar,
+            username: currentUser.username,
+          },
+        };
+
+        const updatedReviews = [newReview, ...prevService.reviews];
+        const updatedTotalRating = prevService.totalRating + 1;
+        const updatedAverageRating = (
+          (prevService.averageRating * prevService.totalRating + rating) /
+          updatedTotalRating
+        ).toFixed(1);
+
+        return {
+          ...prevService,
+          reviews: updatedReviews,
+          totalRating: updatedTotalRating,
+          averageRating: updatedAverageRating,
+        };
+      });
+
       setLoading(false);
       toast.success(result.message);
     } catch (err) {

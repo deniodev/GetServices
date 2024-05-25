@@ -35,7 +35,7 @@ export default function Header() {
   return (
     <div className="border-b">
       <header className="flex h-16 items-center gap-4  bg-background max-w-screen-xl mx-auto p-3">
-        <nav className="hidden flex-col gap-4 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 ">
+        <nav className="hidden flex-col gap-4 text-lg font-bold md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 ">
           <Link to="/">
             <img
               src={logoBlack}
