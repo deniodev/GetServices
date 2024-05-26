@@ -180,11 +180,11 @@ const Service = () => {
                 </Avatar>
 
                 <div className="">
-                  <Badge variant="outline">{service.title}</Badge>
-
                   <h3 className="text-[22px] leading-9 font-bold ">
                     {service.name}
                   </h3>
+
+                  <Badge variant="outline">{service.title}</Badge>
 
                   <div className="flex items-center gap-[6px]">
                     <span
