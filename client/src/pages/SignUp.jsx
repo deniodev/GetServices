@@ -50,7 +50,7 @@ const SignUp = () => {
     }
   };
   return (
-    <div className="p-3 max-w-lg mx-auto mt-20">
+    <div className="p-3 mt-2">
       <form onSubmit={handleSubmit}>
         <Card className="mx-auto max-w-sm">
           <CardHeader>
