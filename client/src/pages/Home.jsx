@@ -6,7 +6,6 @@ import { RiPaintBrushFill } from 'react-icons/ri';
 import { useTranslation } from 'react-i18next';
 import ServiceItem from '../components/ServiceItem';
 import { Button } from '../components/ui/button';
-import Footer from '../components/Footer';
 import Hero from './Hero';
 
 const Home = () => {
@@ -227,7 +226,6 @@ const Home = () => {
         </div>
       </div>
       {error && <div className="error-message">Error: {error}</div>}
-      <Footer />
     </>
   );
 };
