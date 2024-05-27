@@ -177,7 +177,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="p-3 max-w-lg mx-auto ">
+    <div className="p-3  ">
       <form onSubmit={handleSubmit}>
         <Card className="mx-auto max-w-sm">
           <CardHeader>
@@ -272,7 +272,6 @@ const Profile = () => {
           </CardContent>
         </Card>
       </form>
-
       <div className="text-center">
         <Button
           onClick={handleShowServices}
@@ -288,7 +287,8 @@ const Profile = () => {
             t('showservices')
           )}
         </Button>
-
+      </div>
+      <div className="mx-auto max-w-sm ">
         {userServices &&
           userServices.length > 0 &&
           userServices.map((service) => (

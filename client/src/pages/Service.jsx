@@ -31,7 +31,6 @@ import { Textarea } from '../components/ui/textarea';
 import formateDate from '../utils/formateDate';
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerFooter,
   DrawerTrigger,
@@ -214,7 +213,8 @@ const Service = () => {
                       <DrawerFooter className="flex flex-row justify-between">
                         <Link to={`tel:${service.phone}`} target="_blank">
                           <Button variant="outline" title={`${service.phone}`}>
-                            <PhoneCall /> <span className="ml-2">Call</span>
+                            <PhoneCall />{' '}
+                            <span className="ml-2">{t('call')}</span>
                           </Button>
                         </Link>
                         <Link
@@ -229,7 +229,7 @@ const Service = () => {
                         <Link to={`sms:${service.phone}`} target="_blank">
                           <Button variant="outline" title={`${service.phone}`}>
                             <MessageSquareText />{' '}
-                            <span className="ml-2">Text</span>
+                            <span className="ml-2">{t('text')}</span>
                           </Button>
                         </Link>
                       </DrawerFooter>
