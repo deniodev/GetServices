@@ -180,11 +180,10 @@ const Service = () => {
                 </Avatar>
 
                 <div className="">
-                  <Badge variant="outline">{service.title}</Badge>
-
                   <h3 className="text-[22px] leading-9 font-bold ">
                     {service.name}
                   </h3>
+                  <Badge variant="outline">{service.title}</Badge>
 
                   <div className="flex items-center gap-[6px]">
                     <span
@@ -215,12 +214,7 @@ const Service = () => {
                       <DrawerFooter className="flex flex-row justify-between">
                         <Link to={`tel:${service.phone}`} target="_blank">
                           <Button variant="outline" title={`${service.phone}`}>
-                            <PhoneCall />
-                          </Button>
-                        </Link>
-                        <Link to={`sms:${service.phone}`} target="_blank">
-                          <Button variant="outline" title={`${service.phone}`}>
-                            <MessageSquareText />
+                            <PhoneCall /> <span className="ml-2">Call</span>
                           </Button>
                         </Link>
                         <Link
@@ -229,13 +223,15 @@ const Service = () => {
                         >
                           <Button variant="outline" title={`${service.phone}`}>
                             <FaWhatsapp size={25} />
+                            <span className="ml-2">Whatsaap</span>
                           </Button>
                         </Link>
-                        <DrawerClose>
-                          <Button variant="outline" title="Exit">
-                            <CircleX />
+                        <Link to={`sms:${service.phone}`} target="_blank">
+                          <Button variant="outline" title={`${service.phone}`}>
+                            <MessageSquareText />{' '}
+                            <span className="ml-2">Text</span>
                           </Button>
-                        </DrawerClose>
+                        </Link>
                       </DrawerFooter>
                     </DrawerContent>
                   </Drawer>

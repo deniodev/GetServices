@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { BsYoutube, BsGithub, BsFacebook, BsInstagram } from 'react-icons/bs';
 
-export default function Footer() {
+const Footer = () => {
   const year = new Date().getFullYear();
   return (
-    <div className="pb-4  border">
-      <div className="flex items-center justify-center space-x-4 mb-2 text-3xl mt-4">
+    <div className="pb-4  border mt-auto">
+      <div className="flex items-center justify-center space-x-4 mb-2 text-3xl mt-4 ">
         <Link
           to="https://github.com/deniodev/get-services"
           target="_blank"
@@ -49,4 +49,5 @@ export default function Footer() {
       </p>
     </div>
   );
-}
+};
+export default Footer;
