@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserSearch } from 'lucide-react';
+import { UserSearch, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import ServiceItem from '../components/ServiceItem';
 import { Button } from '../components/ui/button';
@@ -67,6 +67,10 @@ const Search = () => {
     }
   };
 
+  const handleClear = () => {
+    setSidebardata({ ...sidebardata, searchTerm: '' });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams();
@@ -98,16 +102,22 @@ const Search = () => {
       <div className="p-3">
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
           <div className="flex flex-col md:flex-row gap-2 p-1">
-            <div className="relative w-full ">
+            <div className="relative w-full">
               <UserSearch className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 type="text"
                 placeholder={t('search1')}
                 id="searchTerm"
-                className="pl-8 "
+                className="pl-8 pr-8"
                 value={sidebardata.searchTerm}
                 onChange={handleChange}
               />
+              {sidebardata.searchTerm && (
+                <X
+                  className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground cursor-pointer"
+                  onClick={handleClear}
+                />
+              )}
             </div>
 
             <select
