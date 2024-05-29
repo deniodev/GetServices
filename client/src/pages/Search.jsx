@@ -99,8 +99,8 @@ const Search = () => {
 
   return (
     <div className="flex flex-col max-w-screen-xl mx-auto mt-2">
-      <div className="p-3">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+      <div className="p-2">
+        <form onSubmit={handleSubmit} className="flex flex-col">
           <div className="flex flex-col md:flex-row gap-2 p-1">
             <div className="relative w-full">
               <UserSearch className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -166,7 +166,7 @@ const Search = () => {
           </div>
         </form>
       </div>
-      <div className="flex-1 max-w-screen-xl ">
+      <div className="flex-1 max-w-screen-xl mx-auto">
         <div className="p-2 flex flex-wrap gap-4">
           {!loading && services.length === 0 && (
             <p className="text-xl">{t('noservice')}</p>
