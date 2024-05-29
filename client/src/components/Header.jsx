@@ -1,4 +1,4 @@
-import { Menu, Search, CircleUserRound } from 'lucide-react';
+import { Menu, Search, CircleUserRound, X } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -16,6 +16,7 @@ export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
@@ -31,6 +32,10 @@ export default function Header() {
       setSearchTerm(searchTermFromUrl);
     }
   }, []);
+
+  const handleClear = () => {
+    setSearchTerm('');
+  };
 
   return (
     <div className="border-b">
@@ -109,10 +114,16 @@ export default function Header() {
               <Input
                 type="text"
                 placeholder={t('search')}
-                className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
+                className="pl-8 pr-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
+              {searchTerm && (
+                <X
+                  className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground cursor-pointer"
+                  onClick={handleClear}
+                />
+              )}
             </div>
           </form>
           <LanguageSwitcher />
