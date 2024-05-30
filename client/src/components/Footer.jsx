@@ -1,5 +1,11 @@
 import { Link } from 'react-router-dom';
-import { BsYoutube, BsGithub, BsFacebook, BsInstagram } from 'react-icons/bs';
+import {
+  BsYoutube,
+  BsGithub,
+  BsFacebook,
+  BsInstagram,
+  BsTiktok,
+} from 'react-icons/bs';
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -33,6 +39,13 @@ const Footer = () => {
           className="hover:scale-110 transition-transform duration-500"
         >
           <BsYoutube size={20} />
+        </Link>
+        <Link
+          to="https://www.youtube.com/@GetServices"
+          target="_blank"
+          className="hover:scale-110 transition-transform duration-500"
+        >
+          <BsTiktok size={20} />
         </Link>
       </div>
 
