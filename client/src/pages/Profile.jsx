@@ -195,6 +195,7 @@ const Profile = () => {
               <AvatarImage
                 src={formData.avatar || currentUser.avatar}
                 alt="profile"
+                className="object-cover"
               />
               <AvatarFallback>GS</AvatarFallback>
             </Avatar>
