@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import ServiceItem from '../components/ServiceItem';
 import { Button } from '../components/ui/button';
 import Hero from './Hero';
+import ScrollToTopButton from '@/components/ScrollToTopButton ';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -226,6 +227,7 @@ const Home = () => {
         </div>
       </div>
       {error && <div className="error-message">Error: {error}</div>}
+      <ScrollToTopButton />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import {
   BsYoutube,
-  BsGithub,
+  BsLinkedin,
   BsFacebook,
   BsInstagram,
   BsTiktok,
@@ -17,7 +17,7 @@ const Footer = () => {
           target="_blank"
           className="hover:scale-110 transition-transform duration-500"
         >
-          <BsGithub size={20} />
+          <BsLinkedin size={20} />
         </Link>
         <Link
           to="/"
