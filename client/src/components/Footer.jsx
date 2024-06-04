@@ -13,7 +13,7 @@ const Footer = () => {
     <div className="pb-4  border mt-auto">
       <div className="flex items-center justify-center space-x-4 mb-2 text-3xl mt-4 ">
         <Link
-          to="https://github.com/deniodev/get-services"
+          to="/"
           target="_blank"
           className="hover:scale-110 transition-transform duration-500"
         >
