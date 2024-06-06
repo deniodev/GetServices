@@ -91,7 +91,7 @@ Another advantage of GetServices is the possibility for customers to evaluate an
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- <a href="https://home-services-dlys.onrender.com/">GetServices Live</a>
+- <a href="https://www.getservices.co.mz/">GetServices Live</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
