@@ -1,8 +1,8 @@
 <h1><b>GetServices</b></h1>
 
 
+![Untitled design](https://github.com/deniodev/get-services/assets/92977776/01a43feb-19e9-4447-a9f3-af4302e94e16)
 
-![moz](https://github.com/deniodev/moz-services/assets/92977776/b3f707a8-3152-4b8d-b2e5-4feba0454227)
 
 
 </div>
@@ -15,7 +15,6 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -88,13 +87,6 @@ Another advantage of GetServices is the possibility for customers to evaluate an
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
-
-## 🚀 Live Demo <a name="live-demo"></a>
-
-- <a href="https://www.getservices.co.mz/">GetServices Live</a>
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
