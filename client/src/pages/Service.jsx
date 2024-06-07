@@ -293,6 +293,7 @@ const Service = () => {
                                 <AvatarImage
                                   alt="user image"
                                   src={review?.user?.avatar}
+                                  className="object-cover"
                                 />
                               </Avatar>
 

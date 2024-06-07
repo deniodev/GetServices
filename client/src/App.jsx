@@ -14,10 +14,9 @@ import SignIn from './pages/SignIn';
 import Contact from './pages/Contact';
 import './i18n/index';
 import Footer from './components/Footer';
-import './App.css';
 
 const App = () => (
-  <div className="App">
+  <div className="flex flex-col min-h-screen">
     <BrowserRouter>
       <Headroom>
         <Header />
