@@ -22,7 +22,7 @@ const About = () => {
 
           <div className="max-w-screen-xl mx-auto mt-4 flex flex-col gap-4">
             <YoutubeEmbed embedId="sNb9g7cL6hY?si=yzt-a8e_vmwN91GY" />
-            <YoutubeEmbed embedId="sNb9g7cL6hY?si=yzt-a8e_vmwN91GY" />
+            <YoutubeEmbed embedId="7m2TMujoxx4?si=AF2kazbdzizaZhSJ" />
           </div>
 
           <h2 className="mt-10 scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl ">
