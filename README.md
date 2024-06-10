@@ -1,7 +1,7 @@
 <h1><b>GetServices</b></h1>
 
+![moz-services](https://github.com/deniodev/get-services/assets/92977776/c955b584-a197-4943-879a-26e899424442)
 
-![Untitled design](https://github.com/deniodev/get-services/assets/92977776/01a43feb-19e9-4447-a9f3-af4302e94e16)
 
 
 
@@ -157,7 +157,8 @@ To run tests, run the following command:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- **Add a contributing guide**
+- **Admin Dashboard**
+- **Contributing Guide**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
