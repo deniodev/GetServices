@@ -13,39 +13,25 @@ const Footer = () => {
     <div className="pb-4  border mt-auto">
       <div className="flex items-center justify-center space-x-4 mb-2 text-3xl mt-4 ">
         <Link
-          to="/"
-          target="_blank"
-          className="hover:scale-110 transition-transform duration-500"
-        >
-          <BsLinkedin size={20} />
-        </Link>
-        <Link
-          to="/"
+          to="https://www.facebook.com/share/ua4iHKoQbtLbZ1tv/?mibextid=LQQJ4d"
           target="_blank"
           className="hover:scale-110 transition-transform duration-500"
         >
           <BsFacebook size={20} />
         </Link>
         <Link
-          to="/"
-          target="_blank"
-          className="hover:scale-110 transition-transform duration-500"
-        >
-          <BsInstagram size={20} />
-        </Link>
-        <Link
-          to="/"
+          to="https://www.youtube.com/@GetServices"
           target="_blank"
           className="hover:scale-110 transition-transform duration-500"
         >
           <BsYoutube size={20} />
         </Link>
         <Link
-          to="https://www.youtube.com/@GetServices"
+          to="https://www.linkedin.com/company/getservicesmz"
           target="_blank"
           className="hover:scale-110 transition-transform duration-500"
         >
-          <BsTiktok size={20} />
+          <BsLinkedin size={20} />
         </Link>
       </div>
 
