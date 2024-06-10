@@ -183,7 +183,7 @@ const CreateService = () => {
               placeholder={t('servicename')}
               id="name"
               maxLength="62"
-              minLength="10"
+              minLength="5"
               required
               onChange={handleChange}
               value={formData.name}
