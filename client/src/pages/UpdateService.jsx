@@ -146,10 +146,22 @@ const UpdateService = () => {
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
+    const { id, value } = e.target;
+    if (id === 'phone') {
+      const digitsOnly = value.replace(/\D/g, '');
+      const phoneWithPrefix = digitsOnly.startsWith('258')
+        ? digitsOnly
+        : `258${digitsOnly}`;
+      setFormData({
+        ...formData,
+        [id]: phoneWithPrefix,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [id]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -167,6 +179,9 @@ const UpdateService = () => {
         },
         body: JSON.stringify({
           ...formData,
+          phone: formData.phone.startsWith('258')
+            ? formData.phone
+            : `258${formData.phone}`,
           userRef: currentUser._id,
         }),
       });
