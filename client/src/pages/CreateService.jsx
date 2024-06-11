@@ -131,14 +131,29 @@ const CreateService = () => {
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
+    const { id, value } = e.target;
+    if (id === 'phone') {
+      const digitsOnly = value.replace(/\D/g, '');
+      setFormData({
+        ...formData,
+        [id]: digitsOnly,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [id]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let updatedPhone = formData.phone;
+    if (!updatedPhone.startsWith('258')) {
+      updatedPhone = `258${updatedPhone}`;
+    }
+
     try {
       if (formData.imageUrls.length < 1)
         return setError('You must upload at least one image');
@@ -151,6 +166,7 @@ const CreateService = () => {
         },
         body: JSON.stringify({
           ...formData,
+          phone: updatedPhone,
           userRef: currentUser._id,
         }),
       });
