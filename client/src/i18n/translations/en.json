@@ -89,6 +89,26 @@
         "aboutp2": "In addition to facilitating meetings between customers and service providers in Mozambique, GetServices also offers several tools to so professionals can manage their ads and improve their visibility. With an intuitive and easy-to-navigate system, platform allows users to find information necessary in an agile manner, increasing satisfaction and confidence in the time to hire a service.",
         "aboutp3": "Another advantage of GetServices is the possibility for customers to evaluate and leave comments about the services provided. This creates an environment of transparency and trustworthiness, where top-rated professionals can stand out and win more clients, while clients can make informed decisions based on other users' experiences. With GetServices, Mozambicans have a powerful tool at their disposal to facilitate and improve the search for quality services in the country.",
         "call": "Call",
-        "text": "SMS"
+        "text": "SMS",
+        "serviceName1": "Technical Support",
+        "serviceDesc1": "Count on our specialized team to resolve technical problems in your equipment, ensuring smooth and efficient operation.",
+        "serviceName2": "Classes",
+        "serviceDesc2": "Explore a variety of classes taught by qualified professionals to help you develop new skills and achieve your learning goals.",
+        "serviceName3": "Design and Tech",
+        "serviceDesc3": "Let our design and technology experts turn your ideas into reality. From logo creation and graphic design to web and app development.",
+        "serviceName4": "Events",
+        "serviceDesc4": "Plan memorable events with the help of our experienced team. From organizational details to impeccable execution, we will take care of everything to ensure the success of your event.",
+        "serviceName5": "Renovations",
+        "serviceDesc5": "Renovate and transform spaces with our renovation services. From small updates to large-scale projects, our dedicated team works to make your vision a reality.",
+        "serviceName6": "Home Services",
+        "serviceDesc6": "Simplify your everyday life with our reliable home services. From residential cleaning to general repairs, we're here to help you keep your home in order.",
+        "services": "Our Services",
+        "servicesdesc": "Explore our wide range of services to find the perfect solution for your needs.",
+        "booking": "How to Book a Service?",
+        "booking1": "Easily Find and Book the Services You Need",
+        "booking2": " Our platform makes it simple to search for and book services from trusted providers in your area. Just a few clicks and you're on your way to getting the help you need.",
+        "register": "How to Register a Service?",
+        "register2": "Showcase Your Services to Potential Customers",
+        "register3": "Our platform makes it easy for service providers to create a profile and showcase their offerings. Reach a wider audience and connect with more customers than ever before."
     }
 }
