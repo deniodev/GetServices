@@ -249,7 +249,9 @@ const Profile = () => {
                 {t('updateprofile')}
               </Button>
               <Link to="/create-service">
-                <Button className="w-full">{t('createservice')}</Button>
+                <Button className="w-full bg-lime-500 hover:bg-slate-100 text-black uppercase font-bold">
+                  {t('createservice')}
+                </Button>
               </Link>
               <div className="flex gap-4">
                 <Button

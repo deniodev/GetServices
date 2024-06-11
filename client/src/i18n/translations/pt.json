@@ -89,6 +89,26 @@
         "aboutp2": "Além de facilitar o encontro entre clientes e prestadores de serviços em Moçambique, o GetServices também oferece diversas ferramentas para que os profissionais possam gerenciar seus anúncios e melhorar sua visibilidade. Com um sistema intuitivo e de fácil navegação, a plataforma permite que os usuários encontrem as informações necessárias de forma ágil, aumentando a satisfação e a confiança na hora de contratar um serviço.",
         "aboutp3": "Outra vantagem do GetServices é a possibilidade de os clientes avaliarem e deixarem comentários sobre os serviços prestados. Isso cria um ambiente de transparência e confiabilidade, onde os profissionais bem avaliados podem se destacar e conquistar mais clientes, enquanto os clientes podem tomar decisões informadas com base nas experiências de outros usuários. Com o GetServices, os moçambicanos têm à disposição uma ferramenta poderosa para facilitar e aprimorar a busca por serviços de qualidade no país.",
         "call": "Tel",
-        "text": "SMS"
+        "text": "SMS",
+        "serviceName1": "Assistência Técnica",
+        "serviceDesc1": "Conte com nossa equipe especializada para resolver problemas técnicos em seus equipamentos, garantindo um funcionamento suave e eficiente.",
+        "serviceName2": "Aulas",
+        "serviceDesc2": "Explore uma variedade de aulas ministradas por profissionais qualificados para ajudá-lo a desenvolver novas habilidades e alcançar seus objetivos de aprendizado.",
+        "serviceName3": "Design e Tecnologia",
+        "serviceDesc3": "Transforme suas ideias em realidade! Oferecemos serviços de criação de logotipos, design gráfico, desenvolvimento de websites e aplicativos.",
+        "serviceName4": "Eventos",
+        "serviceDesc4": "Planeje eventos memoráveis ​​com a ajuda de nossa equipe experiente. Dos detalhes de organização à execução impecável, cuidaremos de tudo para garantir o sucesso do seu evento.",
+        "serviceName5": "Reformas",
+        "serviceDesc5": "Renove e transforme espaços com nossos serviços de reforma. Desde pequenas atualizações até projetos de grande escala, nossa equipe dedicada trabalha para tornar sua visão uma realidade.",
+        "serviceName6": "Serviços Domésticos",
+        "serviceDesc6": "Simplifique sua vida cotidiana com nossos serviços domésticos confiáveis. De limpeza residencial a reparos gerais, estamos aqui para ajudar você a manter sua casa em ordem.",
+        "services": "Nossos Serviços",
+        "servicesdesc": "Explore a nossa vasta gama de serviços para encontrar a solução perfeita para as suas necessidades.",
+        "booking": "Como Agendar um Serviço?",
+        "booking1": "Encontre e reserve facilmente os serviços que você precisa",
+        "booking2": "Nossa plataforma simplifica a busca e reserva de serviços de fornecedores confiáveis ​​em sua área. Apenas alguns cliques e você estará no caminho certo para obter a ajuda necessária.",
+        "register": "Como Cadastrar um Serviço?",
+        "register2": "Mostre seus serviços para potenciais clientes",
+        "register3": "Nossa plataforma torna mais fácil para os provedores de serviços criarem um perfil e apresentarem suas ofertas. Alcance um público mais amplo e conecte-se com mais clientes do que nunca."
     }
 }
