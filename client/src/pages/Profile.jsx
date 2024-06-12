@@ -248,11 +248,6 @@ const Profile = () => {
               <Button type="submit" variant="" className="w-full">
                 {t('updateprofile')}
               </Button>
-              <Link to="/create-service">
-                <Button className="w-full bg-lime-500 hover:bg-slate-100 text-black uppercase font-bold">
-                  {t('createservice')}
-                </Button>
-              </Link>
               <div className="flex gap-4">
                 <Button
                   type="button"

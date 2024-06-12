@@ -135,6 +135,7 @@ const Search = () => {
               <option value="Eventos">{t('events')}</option>
               <option value="Reformas">{t('reforms')}</option>
               <option value="Serviços Domésticos">{t('homeservices')}</option>
+              <option value="Outros">{t('other')}</option>
             </select>
 
             <select
