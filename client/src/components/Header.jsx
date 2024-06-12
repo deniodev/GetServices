@@ -1,10 +1,9 @@
-import { Menu, Search, CircleUserRound, X } from 'lucide-react';
+import { Menu, CircleUserRound } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from './ui/button';
-import { Input } from './ui/input';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from './ui/sheet';
 import ModeToggle from './mode-toggle';
 import LanguageSwitcher from './LanguageSwitcher/index';
@@ -32,10 +31,6 @@ export default function Header() {
       setSearchTerm(searchTermFromUrl);
     }
   }, []);
-
-  const handleClear = () => {
-    setSearchTerm('');
-  };
 
   return (
     <div className="border-b">
@@ -109,22 +104,11 @@ export default function Header() {
             onSubmit={handleSubmit}
             className="ml-auto flex-1 sm:flex-initial"
           >
-            <div className="relative">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder={t('search')}
-                className="pl-8 pr-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              {searchTerm && (
-                <X
-                  className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground cursor-pointer"
-                  onClick={handleClear}
-                />
-              )}
-            </div>
+            <Link to="/create-service">
+              <Button className="uppercase font-bold" variant="ringHover">
+                {t('createservice')}
+              </Button>
+            </Link>
           </form>
           <LanguageSwitcher />
           <ModeToggle />
