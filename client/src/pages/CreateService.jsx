@@ -62,12 +62,10 @@ const CreateService = () => {
       );
     });
 
-  const handleCoverImageSubmit = () => {
-    if (files.length === 1) {
+  const handleCoverImageSubmit = (file) => {
+    if (file) {
       setCoverUploading(true);
       setImageUploadError(false);
-
-      const file = files[0];
 
       storeImage(file)
         .then((url) => {
@@ -79,16 +77,16 @@ const CreateService = () => {
           setCoverUploading(false);
         })
         .catch(() => {
-          setImageUploadError('Image upload failed (4 mb max per image)');
+          setImageUploadError(`${t('uploaderror')}`);
           setCoverUploading(false);
         });
     } else {
-      setImageUploadError('You can only upload 1 image for the cover.');
+      setImageUploadError(`${t('uploaderror2')}`);
       setCoverUploading(false);
     }
   };
 
-  const handleImageSubmit = () => {
+  const handleImageSubmit = (files) => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
       setImageUploadError(false);
@@ -107,13 +105,25 @@ const CreateService = () => {
           setUploading(false);
         })
         .catch(() => {
-          setImageUploadError('Image upload failed (2 mb max per image)');
+          setImageUploadError(`${t('uploaderror')}`);
           setUploading(false);
         });
     } else {
-      setImageUploadError('You can only upload 6 images per service');
+      setImageUploadError(`${t('uploaderror3')}`);
       setUploading(false);
     }
+  };
+
+  const handleCoverImageChange = (e) => {
+    const file = e.target.files[0];
+    setFiles([file]);
+    handleCoverImageSubmit(file);
+  };
+
+  const handleGalleryImagesChange = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    setFiles(selectedFiles);
+    handleImageSubmit(selectedFiles);
   };
 
   const handleRemoveImage = (index) => {
@@ -184,13 +194,16 @@ const CreateService = () => {
   };
 
   return (
-    <main className="p-3 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-semibold text-center p-2">
-        {t('createservice')}
-      </h1>
-      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
-        <div className="flex flex-col gap-4 flex-1">
-          <div className="grid w-full max-w-sm items-center gap-1.5">
+    <section>
+      <div className="p-3 max-w-screen-xl mx-auto">
+        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl">
+          {t('createservice')}
+        </h1>
+        <p className="leading-7 [&:not(:first-child)]:mt-6">
+          {t('createservice2')}
+        </p>
+        <form onSubmit={handleSubmit} className="space-y-4 mt-8">
+          <div className="max-w-screen-xl  items-center gap-1.5">
             <Label htmlFor="name" className="ml-1">
               {t('name')}
             </Label>
@@ -205,7 +218,20 @@ const CreateService = () => {
               value={formData.name}
             />
           </div>
-          <div className="grid w-full max-w-sm items-center gap-1.5">
+          <div className="max-w-screen-xl items-center gap-1.5">
+            <Label htmlFor="title" className="ml-1">
+              {t('title')}
+            </Label>
+            <Input
+              type="title"
+              placeholder={t('title1')}
+              id="title"
+              required
+              onChange={handleChange}
+              value={formData.title}
+            />
+          </div>
+          <div className="max-w-screen-xl items-center gap-1.5">
             <Label htmlFor="select" className="ml-1">
               {t('city')}
             </Label>
@@ -235,51 +261,7 @@ const CreateService = () => {
               <option value="Matola">Matola</option>
             </select>
           </div>
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="phone" className="ml-1">
-              {t('phone')}
-            </Label>
-            <Input
-              type="phone"
-              placeholder={t('whatsaap')}
-              id="phone"
-              required
-              onChange={handleChange}
-              value={formData.phone}
-            />
-          </div>
-
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="description" className="ml-1">
-              {t('description')}
-            </Label>
-            <Textarea
-              type="text"
-              placeholder={t('description1')}
-              id="description"
-              rows="6"
-              required
-              onChange={handleChange}
-              value={formData.description}
-            />
-          </div>
-        </div>
-        <div className="flex flex-col flex-1 gap-4">
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="title" className="ml-1">
-              {t('title')}
-            </Label>
-            <Input
-              type="title"
-              placeholder={t('title1')}
-              id="title"
-              required
-              onChange={handleChange}
-              value={formData.title}
-            />
-          </div>
-
-          <div className="grid w-full max-w-sm items-center gap-1.5">
+          <div className="max-w-screen-xl items-center gap-1.5">
             <Label htmlFor="category" className="ml-1">
               {t('category')}
             </Label>
@@ -301,30 +283,51 @@ const CreateService = () => {
               <option value="Serviços Domésticos">{t('homeservices')}</option>
             </select>
           </div>
+          <div className="max-w-screen-xl items-center gap-1.5">
+            <Label htmlFor="phone" className="ml-1">
+              {t('phone')}
+            </Label>
+            <Input
+              type="phone"
+              placeholder={t('whatsaap')}
+              id="phone"
+              required
+              onChange={handleChange}
+              value={formData.phone}
+            />
+          </div>
 
-          <div className="grid w-full max-w-sm items-center gap-1.5">
+          <div className="max-w-screen-xl items-center gap-1.5">
+            <Label htmlFor="description" className="ml-1">
+              {t('description')}
+            </Label>
+            <Textarea
+              type="text"
+              placeholder={t('description1')}
+              id="description"
+              rows="6"
+              required
+              onChange={handleChange}
+              value={formData.description}
+            />
+          </div>
+
+          <div className="max-w-screen-xl items-center gap-1.5">
             <Label htmlFor="cover" className="ml-1">
               {t('coverimg')}
             </Label>
-            <div className="flex gap-2">
+            <div className="flex gap-2 mb-2">
               <Input
-                onChange={(e) => setFiles(e.target.files)}
+                onChange={handleCoverImageChange}
                 id="cover"
                 type="file"
                 accept="image/*"
               />
-              <Button
-                type="button"
-                disabled={coverUploading}
-                onClick={handleCoverImageSubmit}
-              >
-                {coverUploading ? 'Uploading...' : 'Upload'}
-              </Button>
             </div>
             {coverUploading && <Progress value={progress} />}
           </div>
 
-          <div className="grid w-full max-w-sm items-center gap-1.5">
+          <div className="max-w-screen-xl items-center gap-1.5">
             <p className="text-red-700 text-sm">
               {imageUploadError && imageUploadError}
             </p>
@@ -346,30 +349,23 @@ const CreateService = () => {
             )}
           </div>
 
-          <div className="grid w-full max-w-sm items-center gap-1.5">
+          <div className="max-w-screen-xl items-center gap-1.5">
             <Label htmlFor="images" className="ml-1">
               {t('galleryimgs')}
             </Label>
-            <div className="flex gap-2">
+            <div className="flex gap-2 mb-2">
               <Input
-                onChange={(e) => setFiles(e.target.files)}
+                onChange={handleGalleryImagesChange}
                 type="file"
                 id="images"
                 accept="image/*"
                 multiple
               />
-              <Button
-                type="button"
-                disabled={uploading}
-                onClick={handleImageSubmit}
-              >
-                {uploading ? 'Uploading...' : 'Upload'}
-              </Button>
             </div>
             {uploading && <Progress value={progress} />}
           </div>
 
-          <div className="grid w-full max-w-sm items-center gap-1.5">
+          <div className="max-w-screen-xl items-center gap-1.5">
             <p className="text-red-700 text-sm">
               {imageUploadError && imageUploadError}
             </p>
@@ -394,14 +390,14 @@ const CreateService = () => {
                 </div>
               ))}
 
-            <Button disabled={loading || uploading} className="mt-7">
+            <Button disabled={loading || uploading} className="mt-7 ">
               {loading ? `${t('creating')}` : `${t('createservice')}`}
             </Button>
             {error && <p className="text-red-700 text-sm">{error}</p>}
           </div>
-        </div>
-      </form>
-    </main>
+        </form>
+      </div>
+    </section>
   );
 };
 

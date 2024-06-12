@@ -82,7 +82,7 @@
         "gallery": "Gallery",
         "reviews": "Reviews",
         "yourmessage": "Enter your message here",
-        "isApproved": "To obtain approval, update all your profile data and the gallery with photos of recent work.",
+        "isApproved": "Your service has been created successfully. We will review and approve within 24 hours.",
         "pleasewait": "Please wait...",
         "book": "Book Now",
         "aboutp1": "GetServices is an online platform developed especially for help Mozambicans advertise and find services from different areas. This way, customers can quickly find ideal service providers for your needs, so practical and efficient.",
@@ -109,6 +109,10 @@
         "booking2": " Our platform makes it simple to search for and book services from trusted providers in your area. Just a few clicks and you're on your way to getting the help you need.",
         "register": "How to Register a Service?",
         "register2": "Showcase Your Services to Potential Customers",
-        "register3": "Our platform makes it easy for service providers to create a profile and showcase their offerings. Reach a wider audience and connect with more customers than ever before."
+        "register3": "Our platform makes it easy for service providers to create a profile and showcase their offerings. Reach a wider audience and connect with more customers than ever before.",
+        "createservice2": "Fill out the form to register your service.",
+        "uploaderror": "Image upload failed (4 MB max per image).",
+        "uploaderror2": "You can only upload 1 image for the cover.",
+        "uploaderror3": "You can only upload 6 images per service."
     }
 }

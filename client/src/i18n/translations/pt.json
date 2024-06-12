@@ -58,8 +58,8 @@
         "title1": "Ex: Electricista",
         "category": "Categoria",
         "selectcategory": "Selecione a Categoria",
-        "coverimg": "Imagem de Capa",
-        "galleryimgs": "Imagens da Galeria de Serviço",
+        "coverimg": "Imagem de Capa ",
+        "galleryimgs": "Imagens da Galeria de Serviço (max 6)",
         "creating": "Criando...",
         "signout": "Sair",
         "updateservice": "Atualizar Serviço",
@@ -82,7 +82,7 @@
         "gallery": "Galeria",
         "reviews": "Avaliações",
         "yourmessage": "Digite sua mensagem aqui",
-        "isApproved": "Para obter aprovação, atualize todos os dados do seu serviço e a galeria com fotografias de trabalhos recentes.",
+        "isApproved": "O seu serviço foi criado com sucesso. Nós iremos analisar e aprovar dentro de 24 horas.",
         "pleasewait": "Aguarde...",
         "book": "Agendar",
         "aboutp1": "GetServices é uma plataforma online desenvolvida especialmente para ajudar os moçambicanos a anunciar e encontrar serviços de diversas áreas. Dessa forma, os clientes podem encontrar rapidamente os prestadores de serviços ideais para suas necessidades, de maneira prática e eficiente.",
@@ -109,6 +109,10 @@
         "booking2": "Nossa plataforma simplifica a busca e reserva de serviços de fornecedores confiáveis ​​em sua área. Apenas alguns cliques e você estará no caminho certo para obter a ajuda necessária.",
         "register": "Como Cadastrar um Serviço?",
         "register2": "Mostre seus serviços para potenciais clientes",
-        "register3": "Nossa plataforma torna mais fácil para os provedores de serviços criarem um perfil e apresentarem suas ofertas. Alcance um público mais amplo e conecte-se com mais clientes do que nunca."
+        "register3": "Nossa plataforma torna mais fácil para os provedores de serviços criarem um perfil e apresentarem suas ofertas. Alcance um público mais amplo e conecte-se com mais clientes do que nunca.",
+        "createservice2": "Preencha o formulário para cadastrar o seu serviço.",
+        "uploaderror": "Falha no upload da imagem (máximo de 4 MB por imagem).",
+        "uploaderror2": "Você só pode fazer upload de 1 imagem para a capa.",
+        "uploaderror3": "Você só pode fazer upload de 6 imagens da galeria por serviço."
     }
 }
