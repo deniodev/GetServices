@@ -113,6 +113,7 @@
         "createservice2": "Fill out the form to register your service.",
         "uploaderror": "Image upload failed (4 MB max per image).",
         "uploaderror2": "You can only upload 1 image for the cover.",
-        "uploaderror3": "You can only upload 6 images per service."
+        "uploaderror3": "You can only upload 6 images per service.",
+        "other": "Others"
     }
 }
