@@ -114,6 +114,7 @@
         "uploaderror": "Falha no upload da imagem (máximo de 4 MB por imagem).",
         "uploaderror2": "Você só pode fazer upload de 1 imagem para a capa.",
         "uploaderror3": "Você só pode fazer upload de 6 imagens da galeria por serviço.",
-        "other": "Outros"
+        "other": "Outros",
+        "updateservice2": "Preencha o formulário para atualizar o seu serviço."
     }
 }

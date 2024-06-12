@@ -215,7 +215,7 @@ const UpdateService = () => {
           {t('updateservice')}
         </h1>
         <p className="leading-7 [&:not(:first-child)]:mt-6">
-          {t('createservice2')}
+          {t('updateservice2')}
         </p>
         <form onSubmit={handleSubmit} className="space-y-4 mt-8">
           <div className="max-w-screen-xl  items-center gap-1.5">
