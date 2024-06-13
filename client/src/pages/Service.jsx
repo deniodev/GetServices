@@ -86,7 +86,7 @@ const Service = () => {
     try {
       if (!rating || !reviewText) {
         setLoading(false);
-        return toast.error('Rating & Review Fields are required');
+        return toast.error(`${t('rating1')}`);
       }
 
       const res = await fetch(`/api/service/${serviceId}/reviews`, {

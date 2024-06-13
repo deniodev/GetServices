@@ -97,7 +97,7 @@ const Profile = () => {
       }
 
       dispatch(updateUserSuccess(data));
-      toast.success('Profile Updated!');
+      toast.success(`${t('profile1')}`);
     } catch (error) {
       dispatch(updateUserFailure(error.message));
       toast.error(error.message);

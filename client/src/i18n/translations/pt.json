@@ -115,6 +115,10 @@
         "uploaderror2": "Você só pode fazer upload de 1 imagem para a capa.",
         "uploaderror3": "Você só pode fazer upload de 6 imagens da galeria por serviço.",
         "other": "Outros",
-        "updateservice2": "Preencha o formulário para atualizar o seu serviço."
+        "updateservice2": "Preencha o formulário para atualizar o seu serviço.",
+        "cservicetoast1": "Serviço Criado!",
+        "profile1": "Perfil Atualizado!",
+        "rating1": "Os campos de classificação e revisão são obrigatórios",
+        "updateservicetoast": "Serviço Atualizado!"
     }
 }
