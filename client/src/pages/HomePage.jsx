@@ -171,7 +171,7 @@ const HomePage = () => {
               </div>
               <div className="aspect-video w-full overflow-hidden rounded-xl">
                 <iframe
-                  src="https://www.youtube.com/embed/sNb9g7cL6hY?si=yzt-a8e_vmwN91GY"
+                  src="https://www.youtube.com/embed/ujA1uBUa88Q?si=_Tzqt8zUiZ5JDtY0"
                   title="How to Book a Service"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -184,7 +184,7 @@ const HomePage = () => {
             <div className="container grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
               <div className="order-last lg:order-first aspect-video w-full overflow-hidden rounded-xl">
                 <iframe
-                  src="https://www.youtube.com/embed/7m2TMujoxx4?si=AF2kazbdzizaZhSJ"
+                  src="https://www.youtube.com/embed/p9Eqi2TwEtQ?si=IbganteWbqCmt5Tp"
                   title="How to Register a Service"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
