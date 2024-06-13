@@ -1,7 +1,6 @@
 import { Menu, CircleUserRound } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from './ui/sheet';
@@ -13,24 +12,6 @@ import logoBlack from '../assets/logo-black.png';
 export default function Header() {
   const { t } = useTranslation();
   const { currentUser } = useSelector((state) => state.user);
-  const [searchTerm, setSearchTerm] = useState('');
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set('searchTerm', searchTerm);
-    const searchQuery = urlParams.toString();
-    navigate(`/search?${searchQuery}`);
-  };
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const searchTermFromUrl = urlParams.get('searchTerm');
-    if (searchTermFromUrl) {
-      setSearchTerm(searchTermFromUrl);
-    }
-  }, []);
 
   return (
     <div className="border-b">
@@ -100,16 +81,13 @@ export default function Header() {
           </SheetContent>
         </Sheet>
         <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-          <form
-            onSubmit={handleSubmit}
-            className="ml-auto flex-1 sm:flex-initial"
-          >
+          <div className="ml-auto flex-1 sm:flex-initial">
             <Link to="/create-service">
-              <Button className="uppercase font-bold" variant="ringHover">
+              <Button className="uppercase font-semibold" variant="ringHover">
                 {t('createservice')}
               </Button>
             </Link>
-          </form>
+          </div>
           <LanguageSwitcher />
           <ModeToggle />
           <Link to="/profile">
