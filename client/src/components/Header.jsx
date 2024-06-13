@@ -83,7 +83,7 @@ export default function Header() {
         <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
           <div className="ml-auto flex-1 sm:flex-initial">
             <Link to="/create-service">
-              <Button className="uppercase font-semibold" variant="ringHover">
+              <Button className="font-bold" variant="ringHover">
                 {t('createservice')}
               </Button>
             </Link>
