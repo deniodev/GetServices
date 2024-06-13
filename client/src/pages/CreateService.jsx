@@ -185,7 +185,7 @@ const CreateService = () => {
       if (data.success === false) {
         setError(data.message);
       }
-      toast.success('Service Created!');
+      toast.success(`${t('cservicetoast1')}`);
       navigate(`/service/${data._id}`);
     } catch (error) {
       setError(error.message);

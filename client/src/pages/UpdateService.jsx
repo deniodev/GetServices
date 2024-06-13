@@ -200,7 +200,7 @@ const UpdateService = () => {
       if (data.success === false) {
         setError(data.message);
       }
-      toast.success('Service Updated!');
+      toast.success(`${t('updateservicetoast')}`);
       navigate(`/service/${data._id}`);
     } catch (error) {
       setError(error.message);
