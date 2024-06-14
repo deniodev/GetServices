@@ -32,9 +32,9 @@
 
 # 📖 GetServices <a name="about-project"></a>
 
-**GetServices:** is an online platform developed especially for help Mozambicans advertise and find services from different areas. This way, customers can quickly find ideal service providers for your needs, so practical and efficient.
+**GetServices** is an online platform developed especially to help Mozambicans advertise and find services from different areas. This way, customers can quickly find ideal service providers for their needs, so practical and efficient.
 
-In addition to facilitating meetings between customers and service providers in Mozambique, GetServices also offers several tools to so professionals can manage their ads and improve their visibility. With an intuitive and easy-to-navigate system, platform allows users to find information necessary in an agile manner, increasing satisfaction and confidence in the time to hire a service.
+In addition to facilitating meetings between customers and service providers in Mozambique, GetServices also offers several tools so professionals can manage their ads and improve their visibility. With an intuitive and easy-to-navigate system, the platform allows users to find information necessary in an agile manner, increasing satisfaction and confidence in the time to hire a service.
 
 Another advantage of GetServices is the possibility for customers to evaluate and leave comments about the services provided. This creates an environment of transparency and trustworthiness, where top-rated professionals can stand out and win more clients, while clients can make informed decisions based on other users' experiences. With GetServices, Mozambicans have a powerful tool at their disposal to facilitate and improve the search for quality services in the country.
 
