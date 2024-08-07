@@ -158,7 +158,6 @@ To run tests, run the following command:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- **Migrate to TypeScript**
 - **Admin Dashboard**
 - **Contributing Guide**
 
